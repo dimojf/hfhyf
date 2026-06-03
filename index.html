@@ -3,59 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testpunks - NFT Color Filter & Batch Downloader</title>
+    <title>Testpunks - Pro NFT Filter Studio</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
-<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center py-10 px-4">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col items-center py-10 px-4">
 
-    <div class="max-w-3xl w-full bg-gray-800 rounded-xl p-8 shadow-2xl border border-gray-700">
-        <h1 class="text-3xl font-extrabold text-center mb-2 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-            Testpunks NFT Filter Studio
+    <div class="max-w-4xl w-full bg-slate-900 rounded-2xl p-8 shadow-2xl border border-slate-800">
+        <h1 class="text-4xl font-black text-center mb-2 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent tracking-wide">
+            Testpunks Pro Filter Studio
         </h1>
-        <p class="text-gray-400 text-center mb-8 text-sm">Upload your NFT ZIP or images, apply an on-chain style color filter, and download instantly.</p>
+        <p class="text-slate-400 text-center mb-8 text-sm">Upload your NFT collection, apply 20+ advanced on-chain filters, and batch download instantly.</p>
 
-        <div class="border-2 border-dashed border-gray-600 hover:border-purple-500 rounded-lg p-8 text-center cursor-pointer transition bg-gray-850 mb-6 relative">
+        <div class="border-2 border-dashed border-slate-700 hover:border-cyan-500 rounded-xl p-10 text-center cursor-pointer transition-all duration-300 bg-slate-900/50 mb-6 relative group">
             <input type="file" id="imageInput" accept="image/*" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-            <div class="space-y-2">
-                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4-4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                <p class="text-lg font-medium">Select NFT Images</p>
-                <p class="text-xs text-gray-500">Supports PNG, JPG (Batch selection allowed)</p>
+            <div class="space-y-3">
+                <div class="mx-auto h-14 w-14 text-slate-500 group-hover:text-cyan-400 transition-colors duration-300 flex items-center justify-center bg-slate-800 rounded-full">
+                    <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                    </svg>
+                </div>
+                <p class="text-xl font-semibold text-slate-300">Select NFT Images / Folder</p>
+                <p class="text-xs text-slate-500">Supports batch selection of PNG, JPG, WEBP</p>
             </div>
         </div>
 
-        <div class="bg-gray-750 p-4 rounded-lg border border-gray-700 mb-6 flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div>
-                <label for="filterType" class="block text-sm font-medium text-gray-400 mb-1">Choose Color Filter Effect:</label>
-                <select id="filterType" class="bg-gray-700 text-white rounded px-3 py-2 border border-gray-600 focus:outline-none focus:border-purple-500 w-64">
-                    <option value="hue120">Greenish to Purple / Hue Shift 120°</option>
-                    <option value="hue240">Red/Green to Blue / Hue Shift 240°</option>
-                    <option value="invert">Invert Colors (Cyberpunk Look)</option>
-                    <option value="grayscale">Grayscale (Classic Black & White)</option>
+        <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-800 mb-6 flex flex-col md:flex-row gap-5 items-end justify-between">
+            <div class="w-full md:w-2/3">
+                <label for="filterType" class="block text-sm font-semibold text-slate-400 mb-2">🚀 Choose Advanced Color Filter (20+ Options):</label>
+                <select id="filterType" class="bg-slate-800 text-slate-200 rounded-lg px-4 py-3 border border-slate-700 focus:outline-none focus:border-cyan-500 w-full font-medium cursor-pointer">
+                    <optgroup label="🌈 Color Rotation (Hue Shifts)">
+                        <option value="hue60">Hue Shift 60° (Warm Swap)</option>
+                        <option value="hue120">Hue Shift 120° (Greenish / Purple)</option>
+                        <option value="hue180">Hue Shift 180° (Perfect Opposite)</option>
+                        <option value="hue240">Hue Shift 240° (Blue / Pink Vibe)</option>
+                        <option value="hue300">Hue Shift 300° (Magenta Punch)</option>
+                    </optgroup>
+                    <optgroup label="🔥 Cyberpunk & Future Trends">
+                        <option value="cyberpunk">Cyberpunk Neon (Cyan/Pink Boost)</option>
+                        <option value="matrix">The Matrix (Digital Green Acid)</option>
+                        <option value="infrared">Infrared Thermal (Predator Vision)</option>
+                        <option value="tokyo">Tokyo Night (Deep Blues & Purples)</option>
+                        <option value="toxic">Toxic Waste (Radioactive Lime)</option>
+                    </optgroup>
+                    <optgroup label="🎭 Vintage & Aesthetic">
+                        <option value="invert">Invert Colors (Negative Art)</option>
+                        <option value="grayscale">Pure Grayscale (Classic B&W)</option>
+                        <option value="sepia">Warm Sepia (Vintage Rare)</option>
+                        <option value="vintage">90s Comic (High Contrast Sepia)</option>
+                        <option value="monochromeBlue">Monochrome Blue (Ice Crypto)</option>
+                    </optgroup>
+                    <optgroup label="👑 Premium & Rare Filters">
+                        <option value="gold">Liquid Gold (Metallic Treasure)</option>
+                        <option value="sunset">Solana Sunset (Orange/Purple Fade)</option>
+                        <option value="ghost">Ghost Mint (High Exposure White)</option>
+                        <option value="psychedelic">Psychedelic Trip (Max Saturation)</option>
+                        <option value="darkKnight">Dark Knight (Deep Shadow Noir)</option>
+                        <option value="glitchVibe">Glitch Tint (Distorted Contrast)</option>
+                        <option value="solarize">Solarized (Surreal Abstract)</option>
+                    </optgroup>
                 </select>
             </div>
 
-            <button id="processBtn" class="w-full md:w-auto bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-bold py-2.5 px-6 rounded-lg transition shadow-lg disabled:opacity-50" disabled>
-                Apply Filter
+            <button id="processBtn" class="w-full md:w-1/3 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg disabled:opacity-40 disabled:cursor-not-allowed" disabled>
+                ✨ Apply Filter to All
             </button>
         </div>
 
-        <div id="statusSection" class="hidden bg-gray-750 p-4 rounded-lg border border-gray-700 text-center mb-6">
-            <p id="statusText" class="text-sm font-medium text-purple-400 mb-2">Processing images...</p>
-            <div class="w-full bg-gray-700 rounded-full h-2.5 mb-4">
-                <div id="progressBar" class="bg-purple-500 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+        <div id="statusSection" class="hidden bg-slate-900/90 p-5 rounded-xl border border-slate-800 text-center mb-6">
+            <p id="statusText" class="text-sm font-semibold text-cyan-400 mb-3">Processing images...</p>
+            <div class="w-full bg-slate-800 rounded-full h-3 mb-5 overflow-hidden">
+                <div id="progressBar" class="bg-gradient-to-r from-cyan-400 to-purple-500 h-full transition-all duration-300" style="width: 0%"></div>
             </div>
-            <button id="downloadBtn" class="hidden mx-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 px-8 rounded-lg transition shadow-lg flex items-center gap-2">
-                📥 Download Filtered ZIP (1 Click)
+            <button id="downloadBtn" class="hidden mx-auto bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-3 px-10 rounded-lg transition-all duration-300 shadow-lg shadow-emerald-900/30 items-center gap-2 text-lg transform hover:scale-105">
+                📥 Download Filtered ZIP (1-Click)
             </button>
         </div>
 
         <div>
-            <h3 class="text-lg font-semibold mb-3 text-gray-300">Live Preview (First few items):</h3>
+            <h3 class="text-md font-bold mb-3 text-slate-400 tracking-wider uppercase text-xs">Live Preview (First 4 Files):</h3>
             <div id="previewGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <p class="text-gray-500 text-sm col-span-full italic">No images uploaded yet.</p>
+                <p class="text-slate-600 text-sm col-span-full italic py-4 text-center">No images uploaded yet.</p>
             </div>
         </div>
     </div>
@@ -71,24 +99,22 @@
         const progressBar = document.getElementById('progressBar');
 
         let uploadedFiles = [];
-        let processedImages = []; // Stores { name, blob }
+        let processedImages = [];
 
-        // Trigger when files are selected
         imageInput.addEventListener('change', (e) => {
             uploadedFiles = Array.from(e.target.files);
             if (uploadedFiles.length > 0) {
                 processBtn.disabled = false;
                 previewGrid.innerHTML = '';
                 
-                // Show preview of first 4 images
                 uploadedFiles.slice(0, 4).forEach(file => {
                     const reader = new FileReader();
                     reader.onload = (event) => {
                         const div = document.createElement('div');
-                        div.className = 'bg-gray-700 p-2 rounded border border-gray-600 flex flex-col items-center';
+                        div.className = 'bg-slate-800 p-2 rounded-lg border border-slate-700 flex flex-col items-center';
                         div.innerHTML = `
-                            <img src="${event.target.result}" class="w-full h-24 object-cover rounded mb-1">
-                            <span class="text-xs text-gray-400 truncate w-full text-center">${file.name}</span>
+                            <img src="${event.target.result}" class="w-full h-28 object-cover rounded-md mb-2">
+                            <span class="text-xs text-slate-400 truncate w-full text-center font-mono">${file.name}</span>
                         `;
                         previewGrid.appendChild(div);
                     };
@@ -96,14 +122,13 @@
                 });
                 if(uploadedFiles.length > 4) {
                     const moreText = document.createElement('p');
-                    moreText.className = 'text-xs text-gray-500 col-span-full mt-1';
-                    moreText.innerText = `+ ${uploadedFiles.length - 4} more files loaded.`;
+                    moreText.className = 'text-xs text-slate-500 col-span-full mt-2 italic text-center';
+                    moreText.innerText = `+ ${uploadedFiles.length - 4} more files loaded safely.`;
                     previewGrid.appendChild(moreText);
                 }
             }
         });
 
-        // Process Images Function
         processBtn.addEventListener('click', async () => {
             if (uploadedFiles.length === 0) return;
 
@@ -118,42 +143,64 @@
 
             for (let i = 0; i < uploadedFiles.length; i++) {
                 const file = uploadedFiles[i];
-                statusText.innerText = `Filtering image: ${file.name} (${i + 1}/${uploadedFiles.length})`;
+                statusText.innerText = `⚡ Filtering: ${file.name} (${i + 1}/${uploadedFiles.length})`;
                 
                 const img = await loadImage(file);
                 canvas.width = img.width;
                 canvas.height = img.height;
                 
-                // Apply Filter via Canvas Context before drawing
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 
-                if (selectedFilter === 'hue120') {
-                    ctx.filter = 'hue-rotate(120deg)';
-                } else if (selectedFilter === 'hue240') {
-                    ctx.filter = 'hue-rotate(240deg)';
-                } else if (selectedFilter === 'invert') {
-                    ctx.filter = 'invert(1)';
-                } else if (selectedFilter === 'grayscale') {
-                    ctx.filter = 'grayscale(1)';
-                }
-
+                // Advanced Canvas Context Filters Setup
+                applyFilterToContext(ctx, selectedFilter, canvas.width, canvas.height);
                 ctx.drawImage(img, 0, 0);
 
-                // Convert Canvas back to file blob
+                // Reset filter to avoid bleeding into other canvas layers if needed
+                ctx.filter = 'none';
+
                 const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
                 processedImages.push({ name: file.name, blob: blob });
 
-                // Update Progress Bar
                 const percent = Math.round(((i + 1) / uploadedFiles.length) * 100);
                 progressBar.style.width = `${percent}%`;
             }
 
-            statusText.innerText = `🎉 All ${uploadedFiles.length} images filtered successfully! Ready to download.`;
+            statusText.innerText = `🎉 Successfully processed ${uploadedFiles.length} NFTs with the chosen style!`;
             downloadBtn.classList.remove('hidden');
+            downloadBtn.style.display = 'flex';
             processBtn.disabled = false;
         });
 
-        // Helper function to load image safely
+        function applyFilterToContext(ctx, filter, w, h) {
+            // Standard CSS/Canvas Filters Mapping
+            const filters = {
+                hue60: 'hue-rotate(60deg)',
+                hue120: 'hue-rotate(120deg)',
+                hue180: 'hue-rotate(180deg)',
+                hue240: 'hue-rotate(240deg)',
+                hue300: 'hue-rotate(300deg)',
+                invert: 'invert(1)',
+                grayscale: 'grayscale(1)',
+                sepia: 'sepia(1)',
+                cyberpunk: 'hue-rotate(140deg) saturate(2.5) contrast(1.2)',
+                matrix: 'grayscale(0.5) hue-rotate(90deg) saturate(3) brightness(0.9)',
+                infrared: 'invert(1) hue-rotate(280deg) saturate(3)',
+                tokyo: 'hue-rotate(250deg) contrast(1.3) brightness(0.8)',
+                toxic: 'hue-rotate(70deg) saturate(4) contrast(1.4)',
+                vintage: 'sepia(0.8) contrast(1.5) brightness(0.95)',
+                monochromeBlue: 'grayscale(1) sepia(1) hue-rotate(170deg) saturate(3)',
+                gold: 'grayscale(0.3) sepia(1) hue-rotate(5deg) saturate(3) contrast(1.2) brightness(1.05)',
+                sunset: 'hue-rotate(330deg) saturate(2) contrast(1.1)',
+                ghost: 'brightness(2) contrast(1.8) grayscale(0.2)',
+                psychedelic: 'saturate(5) contrast(1.8) hue-rotate(45deg)',
+                darkKnight: 'brightness(0.5) contrast(1.5) saturate(0.7)',
+                glitchVibe: 'contrast(2) saturate(1.5) hue-rotate(210deg)',
+                solarize: 'difference invert(0.3) contrast(1.2)'
+            };
+
+            ctx.filter = filters[filter] || 'none';
+        }
+
         function loadImage(file) {
             return new Promise((resolve) => {
                 const reader = new FileReader();
@@ -166,23 +213,20 @@
             });
         }
 
-        // Zip and Download Function
         downloadBtn.addEventListener('click', () => {
             const zip = new JSZip();
-            
-            // Add all processed images to the zip file
             processedImages.forEach(item => {
                 zip.file(item.name, item.blob);
             });
 
-            statusText.innerText = "Generating ZIP file... Please wait.";
+            statusText.innerText = "⚡ Packing your collection into ZIP... Please wait.";
 
             zip.generateAsync({ type: 'blob' }).then((content) => {
                 const link = document.createElement('a');
                 link.href = URL.createObjectURL(content);
-                link.download = "Testpunks_Filtered_NFTs.zip";
+                link.download = "Testpunks_Pro_Filtered_NFTs.zip";
                 link.click();
-                statusText.innerText = "🎉 Download Completed!";
+                statusText.innerText = "🚀 ZIP File Downloaded Successfully!";
             });
         });
     </script>
