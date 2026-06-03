@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testpunks - NFT Color Filter & Batch Downloader</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center py-10 px-4">
+
+    <div class="max-w-3xl w-full bg-gray-800 rounded-xl p-8 shadow-2xl border border-gray-700">
+        <h1 class="text-3xl font-extrabold text-center mb-2 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+            Testpunks NFT Filter Studio
+        </h1>
+        <p class="text-gray-400 text-center mb-8 text-sm">Upload your NFT ZIP or images, apply an on-chain style color filter, and download instantly.</p>
+
+        <div class="border-2 border-dashed border-gray-600 hover:border-purple-500 rounded-lg p-8 text-center cursor-pointer transition bg-gray-850 mb-6 relative">
+            <input type="file" id="imageInput" accept="image/*" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+            <div class="space-y-2">
+                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4-4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <p class="text-lg font-medium">Select NFT Images</p>
+                <p class="text-xs text-gray-500">Supports PNG, JPG (Batch selection allowed)</p>
+            </div>
+        </div>
+
+        <div class="bg-gray-750 p-4 rounded-lg border border-gray-700 mb-6 flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div>
+                <label for="filterType" class="block text-sm font-medium text-gray-400 mb-1">Choose Color Filter Effect:</label>
+                <select id="filterType" class="bg-gray-700 text-white rounded px-3 py-2 border border-gray-600 focus:outline-none focus:border-purple-500 w-64">
+                    <option value="hue120">Greenish to Purple / Hue Shift 120°</option>
+                    <option value="hue240">Red/Green to Blue / Hue Shift 240°</option>
+                    <option value="invert">Invert Colors (Cyberpunk Look)</option>
+                    <option value="grayscale">Grayscale (Classic Black & White)</option>
+                </select>
+            </div>
+
+            <button id="processBtn" class="w-full md:w-auto bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-bold py-2.5 px-6 rounded-lg transition shadow-lg disabled:opacity-50" disabled>
+                Apply Filter
+            </button>
+        </div>
+
+        <div id="statusSection" class="hidden bg-gray-750 p-4 rounded-lg border border-gray-700 text-center mb-6">
+            <p id="statusText" class="text-sm font-medium text-purple-400 mb-2">Processing images...</p>
+            <div class="w-full bg-gray-700 rounded-full h-2.5 mb-4">
+                <div id="progressBar" class="bg-purple-500 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+            <button id="downloadBtn" class="hidden mx-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 px-8 rounded-lg transition shadow-lg flex items-center gap-2">
+                📥 Download Filtered ZIP (1 Click)
+            </button>
+        </div>
+
+        <div>
+            <h3 class="text-lg font-semibold mb-3 text-gray-300">Live Preview (First few items):</h3>
+            <div id="previewGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <p class="text-gray-500 text-sm col-span-full italic">No images uploaded yet.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const filterType = document.getElementById('filterType');
+        const processBtn = document.getElementById('processBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const previewGrid = document.getElementById('previewGrid');
+        const statusSection = document.getElementById('statusSection');
+        const statusText = document.getElementById('statusText');
+        const progressBar = document.getElementById('progressBar');
+
+        let uploadedFiles = [];
+        let processedImages = []; // Stores { name, blob }
+
+        // Trigger when files are selected
+        imageInput.addEventListener('change', (e) => {
+            uploadedFiles = Array.from(e.target.files);
+            if (uploadedFiles.length > 0) {
+                processBtn.disabled = false;
+                previewGrid.innerHTML = '';
+                
+                // Show preview of first 4 images
+                uploadedFiles.slice(0, 4).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const div = document.createElement('div');
+                        div.className = 'bg-gray-700 p-2 rounded border border-gray-600 flex flex-col items-center';
+                        div.innerHTML = `
+                            <img src="${event.target.result}" class="w-full h-24 object-cover rounded mb-1">
+                            <span class="text-xs text-gray-400 truncate w-full text-center">${file.name}</span>
+                        `;
+                        previewGrid.appendChild(div);
+                    };
+                    reader.readAsDataURL(file);
+                });
+                if(uploadedFiles.length > 4) {
+                    const moreText = document.createElement('p');
+                    moreText.className = 'text-xs text-gray-500 col-span-full mt-1';
+                    moreText.innerText = `+ ${uploadedFiles.length - 4} more files loaded.`;
+                    previewGrid.appendChild(moreText);
+                }
+            }
+        });
+
+        // Process Images Function
+        processBtn.addEventListener('click', async () => {
+            if (uploadedFiles.length === 0) return;
+
+            statusSection.classList.remove('hidden');
+            downloadBtn.classList.add('hidden');
+            processBtn.disabled = true;
+            processedImages = [];
+
+            const selectedFilter = filterType.value;
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            for (let i = 0; i < uploadedFiles.length; i++) {
+                const file = uploadedFiles[i];
+                statusText.innerText = `Filtering image: ${file.name} (${i + 1}/${uploadedFiles.length})`;
+                
+                const img = await loadImage(file);
+                canvas.width = img.width;
+                canvas.height = img.height;
+                
+                // Apply Filter via Canvas Context before drawing
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                if (selectedFilter === 'hue120') {
+                    ctx.filter = 'hue-rotate(120deg)';
+                } else if (selectedFilter === 'hue240') {
+                    ctx.filter = 'hue-rotate(240deg)';
+                } else if (selectedFilter === 'invert') {
+                    ctx.filter = 'invert(1)';
+                } else if (selectedFilter === 'grayscale') {
+                    ctx.filter = 'grayscale(1)';
+                }
+
+                ctx.drawImage(img, 0, 0);
+
+                // Convert Canvas back to file blob
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+                processedImages.push({ name: file.name, blob: blob });
+
+                // Update Progress Bar
+                const percent = Math.round(((i + 1) / uploadedFiles.length) * 100);
+                progressBar.style.width = `${percent}%`;
+            }
+
+            statusText.innerText = `🎉 All ${uploadedFiles.length} images filtered successfully! Ready to download.`;
+            downloadBtn.classList.remove('hidden');
+            processBtn.disabled = false;
+        });
+
+        // Helper function to load image safely
+        function loadImage(file) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => resolve(img);
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Zip and Download Function
+        downloadBtn.addEventListener('click', () => {
+            const zip = new JSZip();
+            
+            // Add all processed images to the zip file
+            processedImages.forEach(item => {
+                zip.file(item.name, item.blob);
+            });
+
+            statusText.innerText = "Generating ZIP file... Please wait.";
+
+            zip.generateAsync({ type: 'blob' }).then((content) => {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(content);
+                link.download = "Testpunks_Filtered_NFTs.zip";
+                link.click();
+                statusText.innerText = "🎉 Download Completed!";
+            });
+        });
+    </script>
+</body>
+</html>
