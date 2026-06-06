@@ -33,6 +33,10 @@
                 <label for="filterType" class="block text-sm font-semibold text-slate-400 mb-2">🚀 Choose Advanced Color Filter (50+ Options):</label>
                 <select id="filterType" class="bg-slate-800 text-slate-200 rounded-lg px-4 py-3 border border-slate-700 focus:outline-none focus:border-cyan-500 w-full font-medium cursor-pointer">
                     
+                    <optgroup label="👾 Custom Web3 Anti-Detection Filters">
+                        <option value="monoBlueGlitch">Monochrome Blue Glitch (Ice Cyan + Multi-Color Outline & Random BG)</option>
+                    </optgroup>
+
                     <optgroup label="🌈 Color Rotation (Standard Hue Shifts)">
                         <option value="hue30">Hue Shift 30° (Subtle Warmth)</option>
                         <option value="hue60">Hue Shift 60° (Gold-Orange Swap)</option>
@@ -187,8 +191,15 @@
                 canvas.height = img.height;
                 
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                applyFilterToContext(ctx, selectedFilter, canvas.width, canvas.height);
-                ctx.drawImage(img, 0, 0);
+                
+                if (selectedFilter === 'monoBlueGlitch') {
+                    ctx.drawImage(img, 0, 0);
+                    // নতুন অ্যাডভান্সড মাল্টি-এলিমেন্ট প্রো ফিল্টার ইঞ্জিন
+                    applyAdvancedIceGlitchFilter(ctx, canvas.width, canvas.height);
+                } else {
+                    applyFilterToContext(ctx, selectedFilter, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+                }
 
                 ctx.filter = 'none';
 
@@ -206,9 +217,7 @@
         });
 
         function applyFilterToContext(ctx, filter, w, h) {
-            // ৫২টি অ্যাডভান্সড সিএসএস ফিল্টার ম্যাপিং ডিকশনারি
             const filters = {
-                // Hue Rotations
                 hue30: 'hue-rotate(30deg)',
                 hue60: 'hue-rotate(60deg)',
                 hue90: 'hue-rotate(90deg)',
@@ -221,8 +230,6 @@
                 hue300: 'hue-rotate(300deg)',
                 hue330: 'hue-rotate(330deg)',
                 hue345: 'hue-rotate(345deg)',
-
-                // Cyberpunk & Future
                 cyberpunk: 'hue-rotate(140deg) saturate(2.5) contrast(1.2)',
                 matrix: 'grayscale(0.3) hue-rotate(90deg) saturate(3) brightness(0.95) contrast(1.1)',
                 infrared: 'invert(1) hue-rotate(280deg) saturate(3.5)',
@@ -233,8 +240,6 @@
                 quantum: 'hue-rotate(280deg) saturate(1.8) brightness(0.7) contrast(1.4)',
                 laserTag: 'contrast(1.8) saturate(2) hue-rotate(190deg) brightness(1.1)',
                 metaverse: 'hue-rotate(120deg) invert(0.1) saturate(2) brightness(1.05)',
-
-                // Precious Metals & Gems
                 gold: 'grayscale(0.2) sepia(1) hue-rotate(10deg) saturate(3.5) contrast(1.25) brightness(1.05)',
                 silver: 'grayscale(1) brightness(1.2) contrast(1.3)',
                 bronze: 'sepia(0.8) hue-rotate(350deg) saturate(2) contrast(1.1) brightness(0.9)',
@@ -245,8 +250,6 @@
                 platinum: 'grayscale(1) brightness(1.4) contrast(1.5) saturate(0.5)',
                 diamond: 'contrast(2) brightness(1.3) grayscale(0.5)',
                 obsidian: 'brightness(0.35) contrast(1.8) grayscale(0.3)',
-
-                // Multi-Tone Mixed
                 sunset: 'hue-rotate(340deg) saturate(2.5) contrast(1.15)',
                 frozen: 'hue-rotate(180deg) saturate(1.5) brightness(1.1) contrast(1.2)',
                 mars: 'sepia(0.5) hue-rotate(330deg) saturate(3) contrast(1.4) brightness(0.85)',
@@ -257,8 +260,6 @@
                 candy: 'hue-rotate(160deg) saturate(3) contrast(1.1) brightness(1.1)',
                 supernova: 'hue-rotate(350deg) saturate(4) brightness(1.2) contrast(1.3)',
                 aurora: 'hue-rotate(100deg) saturate(2.5) contrast(1.2) brightness(0.95)',
-
-                // Vintage & Photo Art
                 invert: 'invert(1)',
                 grayscale: 'grayscale(1)',
                 sepia: 'sepia(1)',
@@ -272,6 +273,110 @@
             };
 
             ctx.filter = filters[filter] || 'none';
+        }
+
+        // কাস্টম ফিল্টার ইঞ্জিন: Ice Cyan + Multi-Color Edge Detection + Random Dynamic Background
+        function applyAdvancedIceGlitchFilter(ctx, w, h) {
+            const imgData = ctx.getImageData(0, 0, w, h);
+            const data = imgData.data;
+
+            // ১. প্রতিটি ইমেজের জন্য আলাদা র্যান্ডম ব্যাকগ্রাউন্ড জেনারেট করার কালার প্যালেট
+            const randomH = Math.floor(Math.random() * 360);
+            // ব্যাকগ্রাউন্ড ভেরিয়েশন তৈরি করতে HSL ব্যবহার (যাতে সুন্দর ভাইব্রেন্ট কিন্তু প্রফেশনাল ব্যাকগ্রাউন্ড আসে)
+            const bgR = hslToRgb(randomH / 360, 0.65, 0.25)[0];
+            const bgG = hslToRgb(randomH / 360, 0.65, 0.25)[1];
+            const bgB = hslToRgb(randomH / 360, 0.65, 0.25)[2];
+
+            // প্রথম ক্যারেক্টার পিক্সেল ডিটেক্ট করে ব্যাকগ্রাউন্ড আইডেন্টিফাই করার লজিক
+            const baseBG_R = data[0];
+            const baseBG_G = data[1];
+            const baseBG_B = data[2];
+
+            for (let i = 0; i < data.length; i += 4) {
+                let r = data[i];
+                let g = data[i + 1];
+                let b = data[i + 2];
+                let a = data[i + 3];
+
+                // ব্যাকগ্রাউন্ড ডিটেকশন (মূল ইমেজের সলিড বা ট্রান্সপারেন্ট ব্যাকগ্রাউন্ড পরিবর্তন করা)
+                let isBackground = (Math.abs(r - baseBG_R) < 15 && Math.abs(g - baseBG_G) < 15 && Math.abs(b - baseBG_B) < 15) || (a < 50);
+
+                if (isBackground) {
+                    // র্যান্ডম কালার ব্যাকগ্রাউন্ড সেটআপ
+                    data[i] = bgR;
+                    data[i + 1] = bgG;
+                    data[i + 2] = bgB;
+                    data[i + 3] = 255;
+                } else {
+                    // ক্যারেক্টার বডি ডিটেকশন
+
+                    // ২. ব্ল্যাক আউটলাইন ট্র্যাকিং ও মাল্টি-কালার মিক্সিং লজিক
+                    // ক্রিপ্টোপ্লাঙ্কের বর্ডার সাধারণত খুব ডার্ক বা ব্ল্যাক (RGB < 45) হয়
+                    if (r < 45 && g < 45 && b < 45) {
+                        // আউটলাইনের প্রতি পিক্সেল র্যান্ডম কালার ডিস্ট্রিবিউশন (সব ধরনের রঙের মিক্সচার)
+                        let randColorType = Math.random();
+                        if (randColorType < 0.25) {
+                            data[i] = 255; data[i + 1] = 50; data[i + 2] = 120; // নিয়ল পিঙ্ক
+                        } else if (randColorType < 0.50) {
+                            data[i] = 50; data[i + 1] = 255; data[i + 2] = 150;  // লাইম গ্রিন
+                        } else if (randColorType < 0.75) {
+                            data[i] = 255; data[i + 1] = 200; data[i + 2] = 0;   // সাইবার গোল্ড
+                        } else {
+                            data[i] = 200; data[i + 1] = 50; data[i + 2] = 255;  // পার্পল ভাইব
+                        }
+                    } else {
+                        // ৩. ক্যারেক্টার বডি কালার পরিবর্তন (Ice Cyan / হালকা আকাশী টাইপ)
+                        let brightness = (r * 0.299 + g * 0.587 + b * 0.114);
+
+                        data[i] = Math.min(200, brightness * 0.4 + 20);     // হালকা রেড (আকাশী করার স্বার্থে কম রাখা হয়েছে)
+                        data[i + 1] = Math.min(240, brightness * 0.95 + 60);  // উজ্জ্বল গ্রিন কম্পোনেন্ট
+                        data[i + 2] = Math.min(255, brightness * 1.3 + 120);  // হাইভোল্টেজ ক্রিস্টাল স্কাই ব্লু
+
+                        // ৪. রিয়ালিস্টিক জমাট বাঁধা ফ্রস্ট ইফেক্ট (ওভারলে ফগ)
+                        // আগের বাজে ডটগুলো বাদ দিয়ে এখানে ক্যারেক্টারের বডিতে হালকা স্মুথ তুষার আস্তরণ দেওয়া হয়েছে
+                        data[i] = Math.min(255, data[i] + 15);
+                        data[i + 1] = Math.min(255, data[i + 1] + 25);
+                        data[i + 2] = Math.min(255, data[i + 2] + 20);
+                    }
+                }
+            }
+            ctx.putImageData(imgData, 0, 0);
+
+            // ৫. হরিজন্টাল স্লাইস গ্লিচ (আউটলাইন ও পিক্সেল শিফটিং মিক্সার)
+            const numGlitches = Math.floor(Math.random() * 5) + 5; 
+            for (let g = 0; g < numGlitches; g++) {
+                let sliceY = Math.floor(Math.random() * h);
+                let sliceHeight = Math.floor(Math.random() * 5) + 2; 
+                let shiftX = (Math.random() > 0.5 ? 1 : -1) * (Math.floor(Math.random() * 10) + 4); 
+
+                if (sliceY + sliceHeight < h) {
+                    let sliceData = ctx.getImageData(0, sliceY, w, sliceHeight);
+                    ctx.putImageData(sliceData, shiftX, sliceY);
+                }
+            }
+        }
+
+        // HSL থেকে RGB কনভার্ট করার হেল্পার ফাংশন (ডায়নামিক ব্যাকগ্রাউন্ডের জন্য)
+        function hslToRgb(h, s, l) {
+            let r, g, b;
+            if (s == 0) {
+                r = g = b = l;
+            } else {
+                const hue2rgb = (p, q, t) => {
+                    if (t < 0) t += 1;
+                    if (t > 1) t -= 1;
+                    if (t < 1/6) return p + (q - p) * 6 * t;
+                    if (t < 1/2) return q;
+                    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                    return p;
+                }
+                const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                const p = 2 * l - q;
+                r = hue2rgb(p, q, h + 1/3);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1/3);
+            }
+            return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
         }
 
         function loadImage(file) {
