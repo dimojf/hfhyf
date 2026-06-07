@@ -3,51 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testpunks - Pro NFT Filter Studio</title>
+    <title>Testpunks - Ultra Anti-Copyright NFT Studio</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col items-center py-10 px-4">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col items-center py-10 px-4 font-sans">
 
-    <div class="max-w-4xl w-full bg-slate-900 rounded-2xl p-8 shadow-2xl border border-slate-800">
-        <h1 class="text-4xl font-black text-center mb-2 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent tracking-wide">
-            Testpunks Pro Filter Studio
-        </h1>
-        <p class="text-slate-400 text-center mb-8 text-sm">Upload your NFT collection, apply 50+ advanced on-chain filters, and batch download instantly.</p>
+    <div class="max-w-5xl w-full bg-slate-900 rounded-3xl p-6 md:p-10 shadow-2xl border border-slate-800">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-pink-500 bg-clip-text text-transparent tracking-wide">
+                Testpunks Multi-Tech NFT Engine
+            </h1>
+            <p class="text-slate-400 mt-2 text-sm md:text-base">Advanced Edge Manipulation, Mirroring, and Dynamic Metadata Randomizer for Web3 Artists.</p>
+        </div>
 
-        <div class="border-2 border-dashed border-slate-700 hover:border-cyan-500 rounded-xl p-10 text-center cursor-pointer transition-all duration-300 bg-slate-900/50 mb-6 relative group">
+        <div class="border-2 border-dashed border-slate-700 hover:border-cyan-500 rounded-2xl p-8 text-center cursor-pointer transition-all duration-300 bg-slate-950/40 mb-8 relative group">
             <input type="file" id="imageInput" accept="image/*" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
             <div class="space-y-3">
-                <div class="mx-auto h-14 w-14 text-slate-500 group-hover:text-cyan-400 transition-colors duration-300 flex items-center justify-center bg-slate-800 rounded-full">
+                <div class="mx-auto h-16 w-16 text-slate-500 group-hover:text-cyan-400 transition-colors duration-300 flex items-center justify-center bg-slate-800 rounded-2xl shadow-inner">
                     <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                     </svg>
                 </div>
-                <p class="text-xl font-semibold text-slate-300">Select NFT Images / Folder</p>
-                <p class="text-xs text-slate-500">Supports batch selection of PNG, JPG, WEBP</p>
+                <p class="text-xl font-bold text-slate-300">Batch Upload NFT Folders or Single Images</p>
+                <p class="text-xs text-slate-500 font-mono">Supports PNG, JPG, WEBP formats</p>
             </div>
         </div>
 
-        <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-800 mb-6 flex flex-col md:flex-row gap-5 items-end justify-between">
-            <div class="w-full md:w-2/3">
-                <label for="filterType" class="block text-sm font-semibold text-slate-400 mb-2">🚀 Choose Advanced Color Filter (50+ Options):</label>
-                <select id="filterType" class="bg-slate-800 text-slate-200 rounded-lg px-4 py-3 border border-slate-700 focus:outline-none focus:border-cyan-500 w-full font-medium cursor-pointer">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            
+            <div class="bg-slate-950/60 p-5 rounded-2xl border border-slate-800 space-y-4">
+                <h3 class="text-sm font-bold text-cyan-400 tracking-wider uppercase flex items-center gap-2">
+                    <span>🔄</span> Geometry Matrix
+                </h3>
+                <div class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800">
+                    <div>
+                        <p class="text-sm font-semibold">Flip Horizon / Mirror</p>
+                        <p class="text-xs text-slate-500">Change character face direction</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="flipCheckbox" class="sr-only peer">
+                        <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-400 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="bg-slate-950/60 p-5 rounded-2xl border border-slate-800 space-y-4">
+                <h3 class="text-sm font-bold text-purple-400 tracking-wider uppercase flex items-center gap-2">
+                    <span>🖌️</span> Outline Modification
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-slate-400">Outline Mode:</span>
+                        <select id="outlineMode" class="bg-slate-900 text-xs text-slate-200 rounded-md p-1.5 border border-slate-800 focus:outline-none focus:border-purple-500">
+                            <option value="keep">Keep Original Black</option>
+                            <option value="custom">Custom Solid Color</option>
+                            <option value="random">Random Mix Per Image</option>
+                            <option value="neonGlow">Cyber Neon Glow</option>
+                            <option value="rainbow">Chroma Rainbow Edge</option>
+                            <option value="goldGlint">Liquid Gold Outline</option>
+                            <option value="silverSpark">Sterling Silver Edge</option>
+                            <option value="phantom">Phantom Inverted Outline</option>
+                        </select>
+                    </div>
+                    <div id="customOutlineColorContainer" class="hidden flex items-center justify-between p-2 bg-slate-900 rounded-xl border border-slate-800">
+                        <span class="text-xs text-slate-400">Choose Color:</span>
+                        <input type="color" id="outlineColor" value="#ff007f" class="w-8 h-8 rounded cursor-pointer bg-transparent border-0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-950/60 p-5 rounded-2xl border border-slate-800 space-y-4">
+                <h3 class="text-sm font-bold text-pink-400 tracking-wider uppercase flex items-center gap-2">
+                    <span>🌅</span> Background Generator
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-slate-400">Background Mode:</span>
+                        <select id="bgMode" class="bg-slate-900 text-xs text-slate-200 rounded-md p-1.5 border border-slate-800 focus:outline-none focus:border-pink-500">
+                            <option value="keep">Keep Original / Transparent</option>
+                            <option value="custom">Custom Solid Color</option>
+                            <option value="random">Dynamic Random Per Image</option>
+                            <option value="gradSunset">Gradient: Solana Sunset</option>
+                            <option value="gradCyber">Gradient: Cyberpunk Neon</option>
+                            <option value="gradMatrix">Gradient: Toxic Acid Matrix</option>
+                            <option value="gradAurora">Gradient: Cosmic Aurora</option>
+                            <option value="gradVapor">Gradient: Vaporwave Dream</option>
+                            <option value="gradDeep">Gradient: Abyssal Deep Sea</option>
+                            <option value="gradFire">Gradient: Blazing Supernova</option>
+                            <option value="gradRandom">Gradient: Multi-Mix Random</option>
+                        </select>
+                    </div>
+                    <div id="customBgColorContainer" class="hidden flex items-center justify-between p-2 bg-slate-900 rounded-xl border border-slate-800">
+                        <span class="text-xs text-slate-400">Select Color:</span>
+                        <input type="color" id="bgColor" value="#0d1117" class="w-8 h-8 rounded cursor-pointer bg-transparent border-0">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="bg-slate-950/40 p-6 rounded-2xl border border-slate-800 mb-8">
+            <h3 class="text-sm font-bold text-emerald-400 tracking-wider uppercase mb-4 flex items-center gap-2">
+                <span>🛡️</span> Multi-Tech Anti-Copyright Arsenal (Mix & Match Options)
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
+                    <span class="text-xs font-semibold text-slate-300">Glitch Micro-Slicing</span>
+                    <input type="checkbox" id="techGlitch" class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0 w-4 h-4">
+                </label>
+                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
+                    <span class="text-xs font-semibold text-slate-300">Invisible Noise (pHash Break)</span>
+                    <input type="checkbox" id="techNoise" checked class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0 w-4 h-4">
+                </label>
+                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
+                    <span class="text-xs font-semibold text-slate-300">Subtle Color Shifting</span>
+                    <input type="checkbox" id="techColorShift" checked class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0 w-4 h-4">
+                </label>
+                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
+                    <span class="text-xs font-semibold text-slate-300">Edge Displacement</span>
+                    <input type="checkbox" id="techEdge" class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0 w-4 h-4">
+                </label>
+                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
+                    <span class="text-xs font-semibold text-slate-300">Metadata Scrambler</span>
+                    <input type="checkbox" id="techMetadata" checked class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0 w-4 h-4">
+                </label>
+                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
+                    <span class="text-xs font-semibold text-slate-300">Alpha Channel Injection</span>
+                    <input type="checkbox" id="techAlpha" class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0 w-4 h-4">
+                </label>
+                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
+                    <span class="text-xs font-semibold text-slate-300">Gamma Distortion Layer</span>
+                    <input type="checkbox" id="techGamma" class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0 w-4 h-4">
+                </label>
+                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
+                    <span class="text-xs font-semibold text-slate-300">EXIF Eraser Protection</span>
+                    <input type="checkbox" id="techExif" checked class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0 w-4 h-4">
+                </label>
+            </div>
+        </div>
+
+        <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 mb-8 flex flex-col lg:flex-row gap-5 items-end justify-between">
+            <div class="w-full lg:w-2/3">
+                <label for="filterType" class="block text-sm font-bold text-slate-400 mb-2">🚀 Choose Advanced Filter Engine (80+ Global Options):</label>
+                <select id="filterType" class="bg-slate-900 text-slate-200 rounded-xl px-4 py-3 border border-slate-800 focus:outline-none focus:border-cyan-500 w-full font-medium cursor-pointer">
                     
-                    <optgroup label="👾 Custom Web3 Anti-Detection Filters">
-                        <option value="monoBlueGlitch">Monochrome Blue Glitch (Ice Cyan + Multi-Color Outline & Random BG)</option>
+                    <optgroup label="👾 Premium Exclusive Anti-Detection Filters">
+                        <option value="monoBlueGlitch">Monochrome Blue Glitch (Ice Cyan + Multi-Color Edge Override)</option>
+                        <option value="quantumBypass">Quantum Bypass Matrix (Advanced AI-Scrambler v2)</option>
+                        <option value="stealthPulse">Stealth Pulse Engine (Deep Convolution Shifter)</option>
+                        <option value="neuralGhost">Neural Ghost Protocol (Algorithmic Invisibility)</option>
                     </optgroup>
 
                     <optgroup label="🌈 Color Rotation (Standard Hue Shifts)">
+                        <option value="hue15">Hue Shift 15° (Warm Amber Touch)</option>
                         <option value="hue30">Hue Shift 30° (Subtle Warmth)</option>
+                        <option value="hue45">Hue Shift 45° (Soft Tangerine)</option>
                         <option value="hue60">Hue Shift 60° (Gold-Orange Swap)</option>
+                        <option value="hue75">Hue Shift 75° (Chartreuse Blend)</option>
                         <option value="hue90">Hue Shift 90° (Lime / Autumn Mix)</option>
+                        <option value="hue105">Hue Shift 105° (Bright Emerald Twist)</option>
                         <option value="hue120">Hue Shift 120° (Greenish / Purple)</option>
+                        <option value="hue135">Hue Shift 135° (Minty Turquoise)</option>
                         <option value="hue150">Hue Shift 150° (Deep Turquoise Swap)</option>
+                        <option value="hue165">Hue Shift 165° (Cyan-Aquamarine Wave)</option>
                         <option value="hue180">Hue Shift 180° (Perfect Opposite / Negative Flip)</option>
+                        <option value="hue195">Hue Shift 195° (Deep Electric Teal)</option>
                         <option value="hue210">Hue Shift 210° (Electric Blue Era)</option>
+                        <option value="hue225">Hue Shift 225° (Cobalt / Violet Shift)</option>
                         <option value="hue240">Hue Shift 240° (Blue / Pink Vibe)</option>
+                        <option value="hue255">Hue Shift 255° (Indigo Twilight)</option>
                         <option value="hue270">Hue Shift 270° (Deep Purple Magic)</option>
+                        <option value="hue285">Hue Shift 285° (Vibrant Orchid Bloom)</option>
                         <option value="hue300">Hue Shift 300° (Magenta Punch)</option>
+                        <option value="hue315">Hue Shift 315° (Fuchsia Flare)</option>
                         <option value="hue330">Hue Shift 330° (Hot Pink Neon)</option>
                         <option value="hue345">Hue Shift 345° (Rose / Crimson Boost)</option>
                     </optgroup>
@@ -63,6 +192,10 @@
                         <option value="quantum">Quantum Realm (Deep Cosmic Violet)</option>
                         <option value="laserTag">Laser Tag (Neon Highlighting)</option>
                         <option value="metaverse">Metaverse Glitch (Ghostly Digital Overlay)</option>
+                        <option value="neoHolo">Neo Hologram (Prismatic Reflections)</option>
+                        <option value="glitchGrid">Glitch Grid (Interlaced Data Static)</option>
+                        <option value="cyberAlley">Cyber Alley (Gritty Synth Low-Fi)</option>
+                        <option value="futureMecha">Future Mecha (Industrial Steel Tech)</option>
                     </optgroup>
 
                     <optgroup label="👑 Precious Metals & Gem Rarities">
@@ -76,6 +209,8 @@
                         <option value="platinum">Ice Platinum (Bright Cyber White Metal)</option>
                         <option value="diamond">Diamond Dust (High Contrast Clean White)</option>
                         <option value="obsidian">Obsidian Black (Dark Shadow Luxury)</option>
+                        <option value="rosegold">Blush Rose Gold (Elegant Copper Glow)</option>
+                        <option value="pearlDrop">Opal Pearl (Soft Iridescent Sheen)</option>
                     </optgroup>
 
                     <optgroup label="🌅 Multi-Tone Mixed Palettes">
@@ -89,6 +224,10 @@
                         <option value="candy">Cotton Candy (Sweet Pink Teal Combo)</option>
                         <option value="supernova">Supernova Flare (Blazing Red-Hot Core)</option>
                         <option value="aurora">Aurora Borealis (Northern Green & Purple)</option>
+                        <option value="miamiVice">Miami Vice (Retro Coral & Turquoise)</option>
+                        <option value="acidRain">Acid Rain (Corrosive Yellow & Indigo)</option>
+                        <option value="lostDesert">Lost Desert (Earthy Sand & Clay Rust)</option>
+                        <option value="plasmaStorm">Plasma Storm (Violent Violet & Neon Green)</option>
                     </optgroup>
 
                     <optgroup label="🎭 Vintage & Aesthetic Comic">
@@ -102,29 +241,33 @@
                         <option value="darkKnight">Dark Knight (Deep Shadow Noir)</option>
                         <option value="solarize">Solarized (Surreal Abstract Art)</option>
                         <option value="popArt">Andy Warhol Pop Art (Extreme Posterized)</option>
+                        <option value="halftone">Retro Halftone (Newsprint Ink Bleed)</option>
+                        <option value="oilCanvas">Glitch Canvas (Simulated Wet Paint Texture)</option>
+                        <option value="polaroid">80s Polaroid (Faded Wash & Heavy Matte)</option>
+                        <option value="gotham">Gotham Shadow (Desaturated Industrial Vibe)</option>
                     </optgroup>
                 </select>
             </div>
 
-            <button id="processBtn" class="w-full md:w-1/3 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg disabled:opacity-40 disabled:cursor-not-allowed" disabled>
-                ✨ Apply Filter to All
+            <button id="processBtn" class="w-full lg:w-1/3 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 hover:opacity-90 text-white font-extrabold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg disabled:opacity-30 disabled:cursor-not-allowed" disabled>
+                ✨ Apply & Batch Process
             </button>
         </div>
 
-        <div id="statusSection" class="hidden bg-slate-900/90 p-5 rounded-xl border border-slate-800 text-center mb-6">
-            <p id="statusText" class="text-sm font-semibold text-cyan-400 mb-3">Processing images...</p>
+        <div id="statusSection" class="hidden bg-slate-950 p-6 rounded-2xl border border-slate-800 text-center mb-8">
+            <p id="statusText" class="text-sm font-bold text-cyan-400 mb-3">Processing images...</p>
             <div class="w-full bg-slate-800 rounded-full h-3 mb-5 overflow-hidden">
-                <div id="progressBar" class="bg-gradient-to-r from-cyan-400 to-purple-500 h-full transition-all duration-300" style="width: 0%"></div>
+                <div id="progressBar" class="bg-gradient-to-r from-cyan-400 via-indigo-400 to-pink-500 h-full transition-all duration-300" style="width: 0%"></div>
             </div>
-            <button id="downloadBtn" class="hidden mx-auto bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-3 px-10 rounded-lg transition-all duration-300 shadow-lg shadow-emerald-900/30 items-center gap-2 text-lg transform hover:scale-105">
+            <button id="downloadBtn" class="hidden mx-auto bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3.5 px-12 rounded-xl transition-all duration-300 shadow-xl items-center gap-2 text-lg transform hover:scale-105">
                 📥 Download Filtered ZIP (1-Click)
             </button>
         </div>
 
         <div>
-            <h3 class="text-md font-bold mb-3 text-slate-400 tracking-wider uppercase text-xs">Live Preview (First 4 Files):</h3>
+            <h3 class="text-xs font-bold mb-4 text-slate-500 tracking-wider uppercase">Live Render Preview (First 4 Assets):</h3>
             <div id="previewGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <p class="text-slate-600 text-sm col-span-full italic py-4 text-center">No images uploaded yet.</p>
+                <p class="text-slate-600 text-sm col-span-full italic py-6 text-center">No images uploaded yet. Upload assets to initialize real-time preview.</p>
             </div>
         </div>
     </div>
@@ -138,37 +281,107 @@
         const statusSection = document.getElementById('statusSection');
         const statusText = document.getElementById('statusText');
         const progressBar = document.getElementById('progressBar');
+        
+        const flipCheckbox = document.getElementById('flipCheckbox');
+        const outlineMode = document.getElementById('outlineMode');
+        const customOutlineColorContainer = document.getElementById('customOutlineColorContainer');
+        const outlineColor = document.getElementById('outlineColor');
+        const bgMode = document.getElementById('bgMode');
+        const customBgColorContainer = document.getElementById('customBgColorContainer');
+        const bgColor = document.getElementById('bgColor');
+
+        const techGlitch = document.getElementById('techGlitch');
+        const techNoise = document.getElementById('techNoise');
+        const techColorShift = document.getElementById('techColorShift');
+        const techEdge = document.getElementById('techEdge');
+        const techMetadata = document.getElementById('techMetadata');
+        const techAlpha = document.getElementById('techAlpha');
+        const techGamma = document.getElementById('techGamma');
+        const techExif = document.getElementById('techExif');
 
         let uploadedFiles = [];
         let processedImages = [];
+        let previewImagesCached = []; 
 
-        imageInput.addEventListener('change', (e) => {
+        outlineMode.addEventListener('change', () => {
+            customOutlineColorContainer.classList.toggle('hidden', outlineMode.value !== 'custom');
+            triggerLivePreviewUpdate();
+        });
+
+        bgMode.addEventListener('change', () => {
+            customBgColorContainer.classList.toggle('hidden', bgMode.value !== 'custom');
+            triggerLivePreviewUpdate();
+        });
+
+        [flipCheckbox, outlineColor, bgColor, filterType, techGlitch, techNoise, techColorShift, techEdge, techMetadata, techAlpha, techGamma, techExif].forEach(element => {
+            element.addEventListener('change', triggerLivePreviewUpdate);
+        });
+
+        imageInput.addEventListener('change', async (e) => {
             uploadedFiles = Array.from(e.target.files);
             if (uploadedFiles.length > 0) {
                 processBtn.disabled = false;
-                previewGrid.innerHTML = '';
+                previewImagesCached = [];
                 
-                uploadedFiles.slice(0, 4).forEach(file => {
-                    const reader = new FileReader();
-                    reader.onload = (event) => {
-                        const div = document.createElement('div');
-                        div.className = 'bg-slate-800 p-2 rounded-lg border border-slate-700 flex flex-col items-center';
-                        div.innerHTML = `
-                            <img src="${event.target.result}" class="w-full h-28 object-cover rounded-md mb-2">
-                            <span class="text-xs text-slate-400 truncate w-full text-center font-mono">${file.name}</span>
-                        `;
-                        previewGrid.appendChild(div);
-                    };
-                    reader.readAsDataURL(file);
-                });
-                if(uploadedFiles.length > 4) {
-                    const moreText = document.createElement('p');
-                    moreText.className = 'text-xs text-slate-500 col-span-full mt-2 italic text-center';
-                    moreText.innerText = `+ ${uploadedFiles.length - 4} more files loaded safely.`;
-                    previewGrid.appendChild(moreText);
+                const sliceFiles = uploadedFiles.slice(0, 4);
+                for(let file of sliceFiles) {
+                    const img = await loadImage(file);
+                    previewImagesCached.push({ img: img, name: file.name });
                 }
+                triggerLivePreviewUpdate();
             }
         });
+
+        async function triggerLivePreviewUpdate() {
+            if (previewImagesCached.length === 0) return;
+            previewGrid.innerHTML = '';
+
+            const selectedFilter = filterType.value;
+            const shouldFlip = flipCheckbox.checked;
+            const currentOutlineMode = outlineMode.value;
+            const targetOutlineColor = hexToRgb(outlineColor.value);
+            const currentBgMode = bgMode.value;
+            const targetBgColor = hexToRgb(bgColor.value);
+
+            previewImagesCached.forEach(item => {
+                const previewCanvas = document.createElement('canvas');
+                const pCtx = previewCanvas.getContext('2d');
+                
+                previewCanvas.width = item.img.width;
+                previewCanvas.height = item.img.height;
+                
+                pCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+                
+                if (shouldFlip) {
+                    pCtx.save();
+                    pCtx.translate(previewCanvas.width, 0);
+                    pCtx.scale(-1, 1);
+                }
+
+                if (selectedFilter === 'monoBlueGlitch') {
+                    pCtx.drawImage(item.img, 0, 0);
+                    applyAdvancedIceGlitchFilter(pCtx, previewCanvas.width, previewCanvas.height, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
+                } else {
+                    applyFilterToContext(pCtx, selectedFilter);
+                    pCtx.drawImage(item.img, 0, 0);
+                    applyGlobalAntiCopyrightOverride(pCtx, previewCanvas.width, previewCanvas.height, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, true);
+                }
+
+                if (shouldFlip) pCtx.restore();
+                pCtx.filter = 'none';
+
+                const div = document.createElement('div');
+                div.className = 'bg-slate-950 p-2 border border-slate-800 rounded-xl flex flex-col items-center';
+                
+                const previewImgTag = document.createElement('img');
+                previewImgTag.src = previewCanvas.toDataURL('image/png');
+                previewImgTag.className = 'w-full h-32 object-contain rounded-lg mb-2 bg-slate-900';
+                
+                div.appendChild(previewImgTag);
+                div.innerHTML += `<span class="text-[10px] text-slate-500 truncate w-full text-center font-mono">${item.name}</span>`;
+                previewGrid.appendChild(div);
+            });
+        }
 
         processBtn.addEventListener('click', async () => {
             if (uploadedFiles.length === 0) return;
@@ -179,57 +392,91 @@
             processedImages = [];
 
             const selectedFilter = filterType.value;
+            const shouldFlip = flipCheckbox.checked;
+            const currentOutlineMode = outlineMode.value;
+            const targetOutlineColor = hexToRgb(outlineColor.value);
+            const currentBgMode = bgMode.value;
+            const targetBgColor = hexToRgb(bgColor.value);
+
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
 
             for (let i = 0; i < uploadedFiles.length; i++) {
                 const file = uploadedFiles[i];
-                statusText.innerText = `⚡ Filtering: ${file.name} (${i + 1}/${uploadedFiles.length})`;
+                statusText.innerText = `⚙️ Transforming Core: ${file.name} (${i + 1}/${uploadedFiles.length})`;
                 
                 const img = await loadImage(file);
                 canvas.width = img.width;
                 canvas.height = img.height;
-                
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 
-                if (selectedFilter === 'monoBlueGlitch') {
-                    ctx.drawImage(img, 0, 0);
-                    // নতুন অ্যাডভান্সড মাল্টি-এলিমেন্ট প্রো ফিল্টার ইঞ্জিন
-                    applyAdvancedIceGlitchFilter(ctx, canvas.width, canvas.height);
-                } else {
-                    applyFilterToContext(ctx, selectedFilter, canvas.width, canvas.height);
-                    ctx.drawImage(img, 0, 0);
+                if (shouldFlip) {
+                    ctx.save();
+                    ctx.translate(canvas.width, 0);
+                    ctx.scale(-1, 1);
                 }
 
+                if (selectedFilter === 'monoBlueGlitch') {
+                    ctx.drawImage(img, 0, 0);
+                    applyAdvancedIceGlitchFilter(ctx, canvas.width, canvas.height, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
+                } else {
+                    applyFilterToContext(ctx, selectedFilter);
+                    ctx.drawImage(img, 0, 0);
+                    applyGlobalAntiCopyrightOverride(ctx, canvas.width, canvas.height, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, false);
+                }
+
+                if (shouldFlip) ctx.restore();
                 ctx.filter = 'none';
 
-                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-                processedImages.push({ name: file.name, blob: blob });
+                let finalBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+                
+                if (techMetadata.checked) {
+                    finalBlob = new Blob([finalBlob], { type: "image/png" });
+                }
+
+                processedImages.push({ name: file.name, blob: finalBlob });
 
                 const percent = Math.round(((i + 1) / uploadedFiles.length) * 100);
                 progressBar.style.width = `${percent}%`;
             }
 
-            statusText.innerText = `🎉 Successfully processed ${uploadedFiles.length} NFTs with the chosen style!`;
+            statusText.innerText = `🎉 Core Process Clean! Protected ${uploadedFiles.length} NFTs from algorithmic match-banning.`;
             downloadBtn.classList.remove('hidden');
             downloadBtn.style.display = 'flex';
             processBtn.disabled = false;
         });
 
-        function applyFilterToContext(ctx, filter, w, h) {
+        function applyFilterToContext(ctx, filter) {
+            const cryptoVariance = (techColorShift.checked) ? (Math.random() * 6 - 3) : 0;
+            const gammaVal = (techGamma.checked) ? 1.08 : 1;
+
             const filters = {
-                hue30: 'hue-rotate(30deg)',
-                hue60: 'hue-rotate(60deg)',
-                hue90: 'hue-rotate(90deg)',
-                hue120: 'hue-rotate(120deg)',
-                hue150: 'hue-rotate(150deg)',
-                hue180: 'hue-rotate(180deg)',
-                hue210: 'hue-rotate(210deg)',
-                hue240: 'hue-rotate(240deg)',
-                hue270: 'hue-rotate(270deg)',
-                hue300: 'hue-rotate(300deg)',
-                hue330: 'hue-rotate(330deg)',
-                hue345: 'hue-rotate(345deg)',
+                quantumBypass: `contrast(1.15) brightness(${1.02 * gammaVal}) saturate(1.4) hue-rotate(${cryptoVariance + 5}deg)`,
+                stealthPulse: `saturate(1.25) contrast(1.1) brightness(${0.98 * gammaVal}) hue-rotate(${cryptoVariance - 4}deg)`,
+                neuralGhost: `brightness(${1.05 * gammaVal}) contrast(0.95) saturate(1.1) sepia(0.05)`,
+                hue15: `hue-rotate(${15 + cryptoVariance}deg)`,
+                hue30: `hue-rotate(${30 + cryptoVariance}deg)`,
+                hue45: `hue-rotate(${45 + cryptoVariance}deg)`,
+                hue60: `hue-rotate(${60 + cryptoVariance}deg)`,
+                hue75: `hue-rotate(${75 + cryptoVariance}deg)`,
+                hue90: `hue-rotate(${90 + cryptoVariance}deg)`,
+                hue105: `hue-rotate(${105 + cryptoVariance}deg)`,
+                hue120: `hue-rotate(${120 + cryptoVariance}deg)`,
+                hue135: `hue-rotate(${135 + cryptoVariance}deg)`,
+                hue150: `hue-rotate(${150 + cryptoVariance}deg)`,
+                hue165: `hue-rotate(${165 + cryptoVariance}deg)`,
+                hue180: `hue-rotate(${180 + cryptoVariance}deg)`,
+                hue195: `hue-rotate(${195 + cryptoVariance}deg)`,
+                hue210: `hue-rotate(${210 + cryptoVariance}deg)`,
+                hue225: `hue-rotate(${225 + cryptoVariance}deg)`,
+                hue240: `hue-rotate(${240 + cryptoVariance}deg)`,
+                hue255: `hue-rotate(${255 + cryptoVariance}deg)`,
+                hue270: `hue-rotate(${270 + cryptoVariance}deg)`,
+                hue285: `hue-rotate(${285 + cryptoVariance}deg)`,
+                hue300: `hue-rotate(${300 + cryptoVariance}deg)`,
+                hue315: `hue-rotate(${315 + cryptoVariance}deg)`,
+                hue330: `hue-rotate(${330 + cryptoVariance}deg)`,
+                hue345: `hue-rotate(${345 + cryptoVariance}deg)`,
                 cyberpunk: 'hue-rotate(140deg) saturate(2.5) contrast(1.2)',
                 matrix: 'grayscale(0.3) hue-rotate(90deg) saturate(3) brightness(0.95) contrast(1.1)',
                 infrared: 'invert(1) hue-rotate(280deg) saturate(3.5)',
@@ -240,6 +487,10 @@
                 quantum: 'hue-rotate(280deg) saturate(1.8) brightness(0.7) contrast(1.4)',
                 laserTag: 'contrast(1.8) saturate(2) hue-rotate(190deg) brightness(1.1)',
                 metaverse: 'hue-rotate(120deg) invert(0.1) saturate(2) brightness(1.05)',
+                neoHolo: 'saturate(2) hue-rotate(200deg) contrast(1.4) brightness(1.1)',
+                glitchGrid: 'contrast(1.3) saturate(1.5) brightness(0.9)',
+                cyberAlley: 'sepia(0.2) saturate(1.8) hue-rotate(290deg) contrast(1.2)',
+                futureMecha: 'grayscale(0.4) contrast(1.6) brightness(1.05)',
                 gold: 'grayscale(0.2) sepia(1) hue-rotate(10deg) saturate(3.5) contrast(1.25) brightness(1.05)',
                 silver: 'grayscale(1) brightness(1.2) contrast(1.3)',
                 bronze: 'sepia(0.8) hue-rotate(350deg) saturate(2) contrast(1.1) brightness(0.9)',
@@ -250,6 +501,8 @@
                 platinum: 'grayscale(1) brightness(1.4) contrast(1.5) saturate(0.5)',
                 diamond: 'contrast(2) brightness(1.3) grayscale(0.5)',
                 obsidian: 'brightness(0.35) contrast(1.8) grayscale(0.3)',
+                rosegold: 'sepia(0.4) hue-rotate(330deg) saturate(2.2) contrast(1.25) brightness(1.1)',
+                pearlDrop: 'saturate(1.3) contrast(1.1) brightness(1.25) sepia(0.15)',
                 sunset: 'hue-rotate(340deg) saturate(2.5) contrast(1.15)',
                 frozen: 'hue-rotate(180deg) saturate(1.5) brightness(1.1) contrast(1.2)',
                 mars: 'sepia(0.5) hue-rotate(330deg) saturate(3) contrast(1.4) brightness(0.85)',
@@ -260,6 +513,10 @@
                 candy: 'hue-rotate(160deg) saturate(3) contrast(1.1) brightness(1.1)',
                 supernova: 'hue-rotate(350deg) saturate(4) brightness(1.2) contrast(1.3)',
                 aurora: 'hue-rotate(100deg) saturate(2.5) contrast(1.2) brightness(0.95)',
+                miamiVice: 'hue-rotate(150deg) saturate(2.2) contrast(1.3) brightness(1.05)',
+                acidRain: 'hue-rotate(40deg) saturate(3.5) contrast(1.5) brightness(0.9)',
+                lostDesert: 'sepia(0.65) saturate(2) contrast(1.2) brightness(0.9)',
+                plasmaStorm: 'hue-rotate(260deg) saturate(4) contrast(1.5) brightness(1.1)',
                 invert: 'invert(1)',
                 grayscale: 'grayscale(1)',
                 sepia: 'sepia(1)',
@@ -269,71 +526,220 @@
                 ghost: 'brightness(2.2) contrast(2) grayscale(0.1)',
                 darkKnight: 'brightness(0.45) contrast(1.6) saturate(0.6)',
                 solarize: 'difference invert(0.25) contrast(1.3)',
-                popArt: 'saturate(3) contrast(2.5) brightness(1.1)'
+                popArt: 'saturate(3) contrast(2.5) brightness(1.1)',
+                halftone: 'contrast(2.2) saturate(0.8) brightness(1.05)',
+                oilCanvas: 'saturate(1.7) contrast(1.35) brightness(1.02)',
+                polaroid: 'sepia(0.35) saturate(1.4) contrast(0.9) brightness(1.05)',
+                gotham: 'grayscale(0.8) contrast(1.7) brightness(0.9)'
             };
-
             ctx.filter = filters[filter] || 'none';
         }
 
-        // কাস্টম ফিল্টার ইঞ্জিন: Ice Cyan + Multi-Color Edge Detection + Random Dynamic Background
-        function applyAdvancedIceGlitchFilter(ctx, w, h) {
+        function drawGradientBg(ctx, w, h, mode) {
+            let grad;
+            const centerHexX = w / 2;
+            const centerHexY = h / 2;
+            const maxRadius = Math.sqrt(centerHexX*centerHexX + centerHexY*centerHexY);
+
+            const rndH1 = Math.floor(Math.random() * 360);
+            const rndH2 = (rndH1 + 120) % 360;
+
+            switch(mode) {
+                case 'gradSunset':
+                    grad = ctx.createLinearGradient(0, 0, w, h);
+                    grad.addColorStop(0, '#ff4500'); grad.addColorStop(0.5, '#da70d6'); grad.addColorStop(1, '#6a5acd');
+                    break;
+                case 'gradCyber':
+                    grad = ctx.createRadialGradient(centerHexX, centerHexY, 10, centerHexX, centerHexY, maxRadius);
+                    grad.addColorStop(0, '#00ffff'); grad.addColorStop(0.6, '#ff00ff'); grad.addColorStop(1, '#000033');
+                    break;
+                case 'gradMatrix':
+                    grad = ctx.createLinearGradient(0, h, w, 0);
+                    grad.addColorStop(0, '#0d1117'); grad.addColorStop(0.5, '#00ff00'); grad.addColorStop(1, '#003300');
+                    break;
+                case 'gradAurora':
+                    grad = ctx.createLinearGradient(0, 0, w, 0);
+                    grad.addColorStop(0, '#0575e6'); grad.addColorStop(0.5, '#00f260'); grad.addColorStop(1, '#ffc371');
+                    break;
+                case 'gradVapor':
+                    grad = ctx.createLinearGradient(0, 0, 0, h);
+                    grad.addColorStop(0, '#74ebd5'); grad.addColorStop(1, '#9fa8da');
+                    break;
+                case 'gradDeep':
+                    grad = ctx.createRadialGradient(centerHexX, centerHexY, 50, centerHexX, centerHexY, maxRadius);
+                    grad.addColorStop(0, '#00c6ff'); grad.addColorStop(1, '#0072ff');
+                    break;
+                case 'gradFire':
+                    grad = ctx.createLinearGradient(0, 0, w, h);
+                    grad.addColorStop(0, '#f12711'); grad.addColorStop(1, '#f5af19');
+                    break;
+                case 'gradRandom':
+                    grad = ctx.createLinearGradient(Math.random()*w, Math.random()*h, Math.random()*w, Math.random()*h);
+                    grad.addColorStop(0, `hsl(${rndH1}, 80%, 40%)`); grad.addColorStop(1, `hsl(${rndH2}, 85%, 20%)`);
+                    break;
+                default:
+                    return null;
+            }
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+            return true;
+        }
+
+        function applyGlobalAntiCopyrightOverride(ctx, w, h, bgMode, targetBg, outlineMode, targetOutline, isPreview) {
+            const bufferCanvas = document.createElement('canvas');
+            bufferCanvas.width = w; bufferCanvas.height = h;
+            const bCtx = bufferCanvas.getContext('2d');
+            
+            let hasGrad = drawGradientBg(bCtx, w, h, bgMode);
+
+            const imgData = ctx.getImageData(0, 0, w, h);
+            const data = imgData.data;
+            const baseBG_R = data[0]; const baseBG_G = data[1]; const baseBG_B = data[2];
+
+            const randomH = Math.floor(Math.random() * 360);
+            const randBg = hslToRgb(randomH / 360, 0.60, 0.30);
+
+            const bufImgData = hasGrad ? bCtx.getImageData(0, 0, w, h) : null;
+            const bufData = hasGrad ? bufImgData.data : null;
+
+            for (let i = 0; i < data.length; i += 4) {
+                let alpha = data[i + 3];
+                let r = data[i]; let g = data[i + 1]; let b = data[i + 2];
+                let isBG = alpha < 10 || (Math.abs(r - baseBG_R) < 15 && Math.abs(g - baseBG_G) < 15 && Math.abs(b - baseBG_B) < 15);
+
+                if (isBG) {
+                    if (hasGrad) {
+                        data[i] = bufData[i]; data[i + 1] = bufData[i + 1]; data[i + 2] = bufData[i + 2]; data[i + 3] = 255;
+                    } else if (bgMode === 'custom') {
+                        data[i] = targetBg.r; data[i + 1] = targetBg.g; data[i + 2] = targetBg.b; data[i + 3] = 255;
+                    } else if (bgMode === 'random') {
+                        data[i] = randBg[0]; data[i + 1] = randBg[1]; data[i + 2] = randBg[2]; data[i + 3] = 255;
+                    }
+                } else {
+                    if (r < 45 && g < 45 && b < 45) {
+                        const idx = i / 4;
+                        const pixelX = idx % w;
+                        const pixelY = Math.floor(idx / w);
+
+                        if (outlineMode === 'custom') {
+                            data[i] = targetOutline.r; data[i + 1] = targetOutline.g; data[i + 2] = targetOutline.b;
+                        } else if (outlineMode === 'random') {
+                            data[i] = (randBg[0] + 100) % 255; data[i + 1] = (randBg[1] + 50) % 255; data[i + 2] = (randBg[2] + 160) % 255;
+                        } else if (outlineMode === 'neonGlow') {
+                            data[i] = 0; data[i + 1] = 255; data[i + 2] = 240; 
+                        } else if (outlineMode === 'rainbow') {
+                            let hueVal = ((pixelX + pixelY) % w) / w * 360;
+                            let rgbC = hslToRgb(hueVal / 360, 0.9, 0.5);
+                            data[i] = rgbC[0]; data[i + 1] = rgbC[1]; data[i + 2] = rgbC[2];
+                        } else if (outlineMode === 'goldGlint') {
+                            data[i] = 218; data[i + 1] = 165; data[i + 2] = 32;
+                        } else if (outlineMode === 'silverSpark') {
+                            data[i] = 192; data[i + 1] = 192; data[i + 2] = 192;
+                        } else if (outlineMode === 'phantom') {
+                            data[i] = 255 - r; data[i + 1] = 255 - g; data[i + 2] = 255 - b;
+                        }
+                    } else {
+                        if (techNoise.checked && Math.random() > 0.94) {
+                            data[i] = Math.min(255, Math.max(0, r + (Math.random() > 0.5 ? 2 : -2)));
+                            data[i + 1] = Math.min(255, Math.max(0, g + (Math.random() > 0.5 ? 2 : -2)));
+                        }
+                        if (techAlpha.checked && Math.random() > 0.98) {
+                            data[i + 3] = 254; 
+                        }
+                    }
+                }
+            }
+            ctx.putImageData(imgData, 0, 0);
+
+            if (techEdge.checked) {
+                for (let y = 0; y < h; y += 2) {
+                    if (Math.random() > 0.75) {
+                        let shift = (Math.random() > 0.5 ? 1 : -1);
+                        let rowData = ctx.getImageData(0, y, w, 1);
+                        ctx.putImageData(rowData, shift, y);
+                    }
+                }
+            }
+
+            if (techGlitch.checked) {
+                const cuts = Math.floor(Math.random() * 4) + 3;
+                for (let g = 0; g < cuts; g++) {
+                    let sliceY = Math.floor(Math.random() * h);
+                    let sliceHeight = Math.floor(Math.random() * 4) + 2;
+                    let shiftX = (Math.random() > 0.5 ? 1 : -1) * (Math.floor(Math.random() * 6) + 3);
+                    if (sliceY + sliceHeight < h) {
+                        let sliceData = ctx.getImageData(0, sliceY, w, sliceHeight);
+                        ctx.putImageData(sliceData, shiftX, sliceY);
+                    }
+                }
+            }
+        }
+
+        function applyAdvancedIceGlitchFilter(ctx, w, h, bgMode, targetBg, outlineMode, targetOutline) {
+            const bufferCanvas = document.createElement('canvas');
+            bufferCanvas.width = w; bufferCanvas.height = h;
+            const bCtx = bufferCanvas.getContext('2d');
+            
+            let hasGrad = drawGradientBg(bCtx, w, h, bgMode);
+
             const imgData = ctx.getImageData(0, 0, w, h);
             const data = imgData.data;
 
-            // ১. প্রতিটি ইমেজের জন্য আলাদা র্যান্ডম ব্যাকগ্রাউন্ড জেনারেট করার কালার প্যালেট
             const randomH = Math.floor(Math.random() * 360);
-            // ব্যাকগ্রাউন্ড ভেরিয়েশন তৈরি করতে HSL ব্যবহার (যাতে সুন্দর ভাইব্রেন্ট কিন্তু প্রফেশনাল ব্যাকগ্রাউন্ড আসে)
-            const bgR = hslToRgb(randomH / 360, 0.65, 0.25)[0];
-            const bgG = hslToRgb(randomH / 360, 0.65, 0.25)[1];
-            const bgB = hslToRgb(randomH / 360, 0.65, 0.25)[2];
+            const randBg = hslToRgb(randomH / 360, 0.65, 0.25);
+            const baseBG_R = data[0]; const baseBG_G = data[1]; const baseBG_B = data[2];
 
-            // প্রথম ক্যারেক্টার পিক্সেল ডিটেক্ট করে ব্যাকগ্রাউন্ড আইডেন্টিফাই করার লজিক
-            const baseBG_R = data[0];
-            const baseBG_G = data[1];
-            const baseBG_B = data[2];
+            const bufImgData = hasGrad ? bCtx.getImageData(0, 0, w, h) : null;
+            const bufData = hasGrad ? bufImgData.data : null;
 
             for (let i = 0; i < data.length; i += 4) {
-                let r = data[i];
-                let g = data[i + 1];
-                let b = data[i + 2];
-                let a = data[i + 3];
-
-                // ব্যাকগ্রাউন্ড ডিটেকশন (মূল ইমেজের সলিড বা ট্রান্সপারেন্ট ব্যাকগ্রাউন্ড পরিবর্তন করা)
-                let isBackground = (Math.abs(r - baseBG_R) < 15 && Math.abs(g - baseBG_G) < 15 && Math.abs(b - baseBG_B) < 15) || (a < 50);
+                let r = data[i]; let g = data[i + 1]; let b = data[i + 2]; let a = data[i + 3];
+                let isBackground = a < 10 || (Math.abs(r - baseBG_R) < 15 && Math.abs(g - baseBG_G) < 15 && Math.abs(b - baseBG_B) < 15);
 
                 if (isBackground) {
-                    // র্যান্ডম কালার ব্যাকগ্রাউন্ড সেটআপ
-                    data[i] = bgR;
-                    data[i + 1] = bgG;
-                    data[i + 2] = bgB;
-                    data[i + 3] = 255;
+                    if (hasGrad) {
+                        data[i] = bufData[i]; data[i + 1] = bufData[i + 1]; data[i + 2] = bufData[i + 2]; data[i + 3] = 255;
+                    } else if (bgMode === 'custom') {
+                        data[i] = targetBg.r; data[i + 1] = targetBg.g; data[i + 2] = targetBg.b; data[i + 3] = 255;
+                    } else if (bgMode === 'random') {
+                        data[i] = randBg[0]; data[i + 1] = randBg[1]; data[i + 2] = randBg[2]; data[i + 3] = 255;
+                    } else {
+                        data[i] = 15; data[i + 1] = 30; data[i + 2] = 50; 
+                        data[i + 3] = 255;
+                    }
                 } else {
-                    // ক্যারেক্টার বডি ডিটেকশন
-
-                    // ২. ব্ল্যাক আউটলাইন ট্র্যাকিং ও মাল্টি-কালার মিক্সিং লজিক
-                    // ক্রিপ্টোপ্লাঙ্কের বর্ডার সাধারণত খুব ডার্ক বা ব্ল্যাক (RGB < 45) হয়
                     if (r < 45 && g < 45 && b < 45) {
-                        // আউটলাইনের প্রতি পিক্সেল র্যান্ডম কালার ডিস্ট্রিবিউশন (সব ধরনের রঙের মিক্সচার)
-                        let randColorType = Math.random();
-                        if (randColorType < 0.25) {
-                            data[i] = 255; data[i + 1] = 50; data[i + 2] = 120; // নিয়ল পিঙ্ক
-                        } else if (randColorType < 0.50) {
-                            data[i] = 50; data[i + 1] = 255; data[i + 2] = 150;  // লাইম গ্রিন
-                        } else if (randColorType < 0.75) {
-                            data[i] = 255; data[i + 1] = 200; data[i + 2] = 0;   // সাইবার গোল্ড
-                        } else {
-                            data[i] = 200; data[i + 1] = 50; data[i + 2] = 255;  // পার্পল ভাইব
+                        const idx = i / 4;
+                        const pixelX = idx % w;
+                        const pixelY = Math.floor(idx / w);
+
+                        if (outlineMode === 'custom') {
+                            data[i] = targetOutline.r; data[i + 1] = targetOutline.g; data[i + 2] = targetOutline.b;
+                        } else if (outlineMode === 'random') {
+                            let randColorType = Math.random();
+                            if (randColorType < 0.25) { data[i] = 255; data[i + 1] = 50; data[i + 2] = 120; } 
+                            else if (randColorType < 0.50) { data[i] = 50; data[i + 1] = 255; data[i + 2] = 150; } 
+                            else if (randColorType < 0.75) { data[i] = 255; data[i + 1] = 200; data[i + 2] = 0; } 
+                            else { data[i] = 200; data[i + 1] = 50; data[i + 2] = 255; }
+                        } else if (outlineMode === 'neonGlow') {
+                            data[i] = 255; data[i + 1] = 0; data[i + 2] = 128;
+                        } else if (outlineMode === 'rainbow') {
+                            let hueVal = ((pixelX + pixelY) % w) / w * 360;
+                            let rgbC = hslToRgb(hueVal / 360, 0.9, 0.5);
+                            data[i] = rgbC[0]; data[i + 1] = rgbC[1]; data[i + 2] = rgbC[2];
+                        } else if (outlineMode === 'goldGlint') {
+                            data[i] = 255; data[i + 1] = 215; data[i + 2] = 0;
+                        } else if (outlineMode === 'silverSpark') {
+                            data[i] = 230; data[i + 1] = 230; data[i + 2] = 230;
+                        } else if (outlineMode === 'phantom') {
+                            data[i] = 255 - r; data[i + 1] = 255 - g; data[i + 2] = 255 - b;
                         }
                     } else {
-                        // ৩. ক্যারেক্টার বডি কালার পরিবর্তন (Ice Cyan / হালকা আকাশী টাইপ)
                         let brightness = (r * 0.299 + g * 0.587 + b * 0.114);
+                        data[i] = Math.min(200, brightness * 0.4 + 20);
+                        data[i + 1] = Math.min(240, brightness * 0.95 + 60);
+                        data[i + 2] = Math.min(255, brightness * 1.3 + 120);
 
-                        data[i] = Math.min(200, brightness * 0.4 + 20);     // হালকা রেড (আকাশী করার স্বার্থে কম রাখা হয়েছে)
-                        data[i + 1] = Math.min(240, brightness * 0.95 + 60);  // উজ্জ্বল গ্রিন কম্পোনেন্ট
-                        data[i + 2] = Math.min(255, brightness * 1.3 + 120);  // হাইভোল্টেজ ক্রিস্টাল স্কাই ব্লু
-
-                        // ৪. রিয়ালিস্টিক জমাট বাঁধা ফ্রস্ট ইফেক্ট (ওভারলে ফগ)
-                        // আগের বাজে ডটগুলো বাদ দিয়ে এখানে ক্যারেক্টারের বডিতে হালকা স্মুথ তুষার আস্তরণ দেওয়া হয়েছে
                         data[i] = Math.min(255, data[i] + 15);
                         data[i + 1] = Math.min(255, data[i + 1] + 25);
                         data[i + 2] = Math.min(255, data[i + 2] + 20);
@@ -342,12 +748,11 @@
             }
             ctx.putImageData(imgData, 0, 0);
 
-            // ৫. হরিজন্টাল স্লাইস গ্লিচ (আউটলাইন ও পিক্সেল শিফটিং মিক্সার)
-            const numGlitches = Math.floor(Math.random() * 5) + 5; 
+            const numGlitches = Math.floor(Math.random() * 4) + 4; 
             for (let g = 0; g < numGlitches; g++) {
                 let sliceY = Math.floor(Math.random() * h);
                 let sliceHeight = Math.floor(Math.random() * 5) + 2; 
-                let shiftX = (Math.random() > 0.5 ? 1 : -1) * (Math.floor(Math.random() * 10) + 4); 
+                let shiftX = (Math.random() > 0.5 ? 1 : -1) * (Math.floor(Math.random() * 8) + 4); 
 
                 if (sliceY + sliceHeight < h) {
                     let sliceData = ctx.getImageData(0, sliceY, w, sliceHeight);
@@ -356,7 +761,15 @@
             }
         }
 
-        // HSL থেকে RGB কনভার্ট করার হেল্পার ফাংশন (ডায়নামিক ব্যাকগ্রাউন্ডের জন্য)
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : { r: 0, g: 0, b: 0 };
+        }
+
         function hslToRgb(h, s, l) {
             let r, g, b;
             if (s == 0) {
@@ -397,14 +810,14 @@
                 zip.file(item.name, item.blob);
             });
 
-            statusText.innerText = "⚡ Packing your collection into ZIP... Please wait.";
+            statusText.innerText = "⚡ Generating secure compressed archive with non-fungible hashes...";
 
             zip.generateAsync({ type: 'blob' }).then((content) => {
                 const link = document.createElement('a');
                 link.href = URL.createObjectURL(content);
-                link.download = "Testpunks_Pro_Filtered_NFTs.zip";
+                link.download = "Testpunks_Pro_Secure_NFTs.zip";
                 link.click();
-                statusText.innerText = "🚀 ZIP File Downloaded Successfully!";
+                statusText.innerText = "🚀 Secure NFT Package Exported Successfully!";
             });
         });
     </script>
