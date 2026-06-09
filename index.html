@@ -26,7 +26,7 @@
                     </svg>
                 </div>
                 <p class="text-xl font-bold text-slate-300">Batch Upload NFT Folders or Single Images</p>
-                <p class="text-xs text-slate-500 font-mono">Supports PNG, JPG, WEBP formats</p>
+                <p class="text-xs text-slate-500 font-mono">Supports PNG, JPG, WEBP formats (All Collections - Bored Ape, Pudgy Penguins, etc.)</p>
             </div>
         </div>
 
@@ -34,16 +34,26 @@
             
             <div class="bg-slate-950/60 p-5 rounded-2xl border border-slate-800 space-y-4">
                 <h3 class="text-sm font-bold text-cyan-400 tracking-wider uppercase flex items-center gap-2">
-                    <span>🔄</span> Geometry Matrix
+                    <span>🔄</span> Geometry & Scaling
                 </h3>
                 <div class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800">
                     <div>
                         <p class="text-sm font-semibold">Flip Horizon / Mirror</p>
-                        <p class="text-xs text-slate-500">Change character face direction</p>
+                        <p class="text-xs text-slate-500">Change character direction</p>
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" id="flipCheckbox" class="sr-only peer">
                         <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-400 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
+                    </label>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800">
+                    <div>
+                        <p class="text-sm font-semibold">Smart HD Crop Lock</p>
+                        <p class="text-xs text-slate-500">Force Auto-Center Crop (872x1280)</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="cropCheckbox" class="sr-only peer">
+                        <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-400 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
                     </label>
                 </div>
             </div>
@@ -144,11 +154,12 @@
         </div>
 
         <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 mb-8 flex flex-col lg:flex-row gap-5 items-end justify-between">
-            <div class="w-full lg:w-2/3">
+            <div class="w-full lg:w-1/2">
                 <label for="filterType" class="block text-sm font-bold text-slate-400 mb-2">🚀 Choose Advanced Filter Engine (80+ Global Options):</label>
                 <select id="filterType" class="bg-slate-900 text-slate-200 rounded-xl px-4 py-3 border border-slate-800 focus:outline-none focus:border-cyan-500 w-full font-medium cursor-pointer">
                     
-                    <optgroup label="👾 Premium Exclusive Anti-Detection Filters">
+                    <optgroup label="🎨 Exclusive Fine-Art Engines">
+                        <option value="penSketch">Pen Sketch Illustration (Hand-Drawn Ink Vibe)</option>
                         <option value="monoBlueGlitch">Monochrome Blue Glitch (Ice Cyan + Multi-Color Edge Override)</option>
                         <option value="quantumBypass">Quantum Bypass Matrix (Advanced AI-Scrambler v2)</option>
                         <option value="stealthPulse">Stealth Pulse Engine (Deep Convolution Shifter)</option>
@@ -249,7 +260,16 @@
                 </select>
             </div>
 
-            <button id="processBtn" class="w-full lg:w-1/3 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 hover:opacity-90 text-white font-extrabold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg disabled:opacity-30 disabled:cursor-not-allowed" disabled>
+            <div class="w-full lg:w-1/4">
+                <label for="compressionQuality" class="block text-sm font-bold text-slate-400 mb-2">⚡ HD Compression Tuning (WebP):</label>
+                <select id="compressionQuality" class="bg-slate-900 text-slate-200 rounded-xl px-3 py-3 border border-slate-800 focus:outline-none focus:border-cyan-500 w-full font-medium cursor-pointer">
+                    <option value="0.85" selected>Optimized HD (Small File - Recommended)</option>
+                    <option value="0.75">Ultra light (Smallest File / Fast Upload)</option>
+                    <option value="0.95">Maximum Quality (Large File)</option>
+                </select>
+            </div>
+
+            <button id="processBtn" class="w-full lg:w-1/4 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 hover:opacity-90 text-white font-extrabold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg disabled:opacity-30 disabled:cursor-not-allowed" disabled>
                 ✨ Apply & Batch Process
             </button>
         </div>
@@ -265,7 +285,10 @@
         </div>
 
         <div>
-            <h3 class="text-xs font-bold mb-4 text-slate-500 tracking-wider uppercase">Live Render Preview (First 4 Assets):</h3>
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xs font-bold text-slate-500 tracking-wider uppercase">Live Render Preview (First 4 Assets):</h3>
+                <span class="text-[10px] text-cyan-500 bg-cyan-950/50 px-2 py-0.5 rounded border border-cyan-900/50">Click images to copy or save individually</span>
+            </div>
             <div id="previewGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <p class="text-slate-600 text-sm col-span-full italic py-6 text-center">No images uploaded yet. Upload assets to initialize real-time preview.</p>
             </div>
@@ -283,12 +306,14 @@
         const progressBar = document.getElementById('progressBar');
         
         const flipCheckbox = document.getElementById('flipCheckbox');
+        const cropCheckbox = document.getElementById('cropCheckbox');
         const outlineMode = document.getElementById('outlineMode');
         const customOutlineColorContainer = document.getElementById('customOutlineColorContainer');
         const outlineColor = document.getElementById('outlineColor');
         const bgMode = document.getElementById('bgMode');
         const customBgColorContainer = document.getElementById('customBgColorContainer');
         const bgColor = document.getElementById('bgColor');
+        const compressionQuality = document.getElementById('compressionQuality');
 
         const techGlitch = document.getElementById('techGlitch');
         const techNoise = document.getElementById('techNoise');
@@ -313,7 +338,7 @@
             triggerLivePreviewUpdate();
         });
 
-        [flipCheckbox, outlineColor, bgColor, filterType, techGlitch, techNoise, techColorShift, techEdge, techMetadata, techAlpha, techGamma, techExif].forEach(element => {
+        [flipCheckbox, cropCheckbox, outlineColor, bgColor, filterType, techGlitch, techNoise, techColorShift, techEdge, techMetadata, techAlpha, techGamma, techExif].forEach(element => {
             element.addEventListener('change', triggerLivePreviewUpdate);
         });
 
@@ -332,12 +357,46 @@
             }
         });
 
+        // Smart Crop Geometry Calculation Engine
+        function setCanvasDimensions(canvas, img, forceCrop) {
+            if (forceCrop) {
+                canvas.width = 872;
+                canvas.height = 1280;
+            } else {
+                canvas.width = img.width;
+                canvas.height = img.height;
+            }
+        }
+
+        function drawImageToContext(ctx, img, canvas, forceCrop) {
+            if (forceCrop) {
+                const targetWidth = 872;
+                const targetHeight = 1280;
+                
+                let srcX = 0, srcY = 0, srcWidth = img.width, srcHeight = img.height;
+                const imgRatio = img.width / img.height;
+                const targetRatio = targetWidth / targetHeight;
+
+                if (imgRatio > targetRatio) {
+                    srcWidth = img.height * targetRatio;
+                    srcX = (img.width - srcWidth) / 2;
+                } else {
+                    srcHeight = img.width / targetRatio;
+                    srcY = (img.height - srcHeight) / 2;
+                }
+                ctx.drawImage(img, srcX, srcY, srcWidth, srcHeight, 0, 0, targetWidth, targetHeight);
+            } else {
+                ctx.drawImage(img, 0, 0);
+            }
+        }
+
         async function triggerLivePreviewUpdate() {
             if (previewImagesCached.length === 0) return;
             previewGrid.innerHTML = '';
 
             const selectedFilter = filterType.value;
             const shouldFlip = flipCheckbox.checked;
+            const shouldCrop = cropCheckbox.checked;
             const currentOutlineMode = outlineMode.value;
             const targetOutlineColor = hexToRgb(outlineColor.value);
             const currentBgMode = bgMode.value;
@@ -347,9 +406,7 @@
                 const previewCanvas = document.createElement('canvas');
                 const pCtx = previewCanvas.getContext('2d');
                 
-                previewCanvas.width = item.img.width;
-                previewCanvas.height = item.img.height;
-                
+                setCanvasDimensions(previewCanvas, item.img, shouldCrop);
                 pCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
                 
                 if (shouldFlip) {
@@ -359,11 +416,14 @@
                 }
 
                 if (selectedFilter === 'monoBlueGlitch') {
-                    pCtx.drawImage(item.img, 0, 0);
+                    drawImageToContext(pCtx, item.img, previewCanvas, shouldCrop);
                     applyAdvancedIceGlitchFilter(pCtx, previewCanvas.width, previewCanvas.height, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
+                } else if (selectedFilter === 'penSketch') {
+                    drawImageToContext(pCtx, item.img, previewCanvas, shouldCrop);
+                    applyPenSketchFilter(pCtx, previewCanvas.width, previewCanvas.height);
                 } else {
                     applyFilterToContext(pCtx, selectedFilter);
-                    pCtx.drawImage(item.img, 0, 0);
+                    drawImageToContext(pCtx, item.img, previewCanvas, shouldCrop);
                     applyGlobalAntiCopyrightOverride(pCtx, previewCanvas.width, previewCanvas.height, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, true);
                 }
 
@@ -371,14 +431,32 @@
                 pCtx.filter = 'none';
 
                 const div = document.createElement('div');
-                div.className = 'bg-slate-950 p-2 border border-slate-800 rounded-xl flex flex-col items-center';
+                div.className = 'bg-slate-950 p-2 border border-slate-800 rounded-xl flex flex-col items-center cursor-pointer hover:border-cyan-500 transition-colors group';
                 
                 const previewImgTag = document.createElement('img');
-                previewImgTag.src = previewCanvas.toDataURL('image/png');
+                const dataUrl = previewCanvas.toDataURL('image/png');
+                previewImgTag.src = dataUrl;
                 previewImgTag.className = 'w-full h-32 object-contain rounded-lg mb-2 bg-slate-900';
                 
+                // Enhanced single click instant copy pipeline
+                div.addEventListener('click', async () => {
+                    try {
+                        const response = await fetch(dataUrl);
+                        const blob = await response.blob();
+                        await navigator.clipboard.write([
+                            new ClipboardItem({ [blob.type]: blob })
+                        ]);
+                        alert(`📋 Copied ${item.name} cleanly to your clipboard!`);
+                    } catch (err) {
+                        const downloadLink = document.createElement('a');
+                        downloadLink.href = dataUrl;
+                        downloadLink.download = `Processed_${item.name}`;
+                        downloadLink.click();
+                    }
+                });
+                
                 div.appendChild(previewImgTag);
-                div.innerHTML += `<span class="text-[10px] text-slate-500 truncate w-full text-center font-mono">${item.name}</span>`;
+                div.innerHTML += `<span class="text-[10px] text-slate-500 truncate w-full text-center font-mono group-hover:text-cyan-400 transition-colors">${item.name}</span>`;
                 previewGrid.appendChild(div);
             });
         }
@@ -393,10 +471,12 @@
 
             const selectedFilter = filterType.value;
             const shouldFlip = flipCheckbox.checked;
+            const shouldCrop = cropCheckbox.checked;
             const currentOutlineMode = outlineMode.value;
             const targetOutlineColor = hexToRgb(outlineColor.value);
             const currentBgMode = bgMode.value;
             const targetBgColor = hexToRgb(bgColor.value);
+            const qualityValue = parseFloat(compressionQuality.value);
 
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
@@ -406,8 +486,7 @@
                 statusText.innerText = `⚙️ Transforming Core: ${file.name} (${i + 1}/${uploadedFiles.length})`;
                 
                 const img = await loadImage(file);
-                canvas.width = img.width;
-                canvas.height = img.height;
+                setCanvasDimensions(canvas, img, shouldCrop);
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 
                 if (shouldFlip) {
@@ -417,30 +496,35 @@
                 }
 
                 if (selectedFilter === 'monoBlueGlitch') {
-                    ctx.drawImage(img, 0, 0);
+                    drawImageToContext(ctx, img, canvas, shouldCrop);
                     applyAdvancedIceGlitchFilter(ctx, canvas.width, canvas.height, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
+                } else if (selectedFilter === 'penSketch') {
+                    drawImageToContext(ctx, img, canvas, shouldCrop);
+                    applyPenSketchFilter(ctx, canvas.width, canvas.height);
                 } else {
                     applyFilterToContext(ctx, selectedFilter);
-                    ctx.drawImage(img, 0, 0);
+                    drawImageToContext(ctx, img, canvas, shouldCrop);
                     applyGlobalAntiCopyrightOverride(ctx, canvas.width, canvas.height, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, false);
                 }
 
                 if (shouldFlip) ctx.restore();
                 ctx.filter = 'none';
 
-                let finalBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+                // Export to WebP for optimized size while keeping premium HD architecture crisp
+                let finalBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/webp', qualityValue));
+                let outputName = file.name.substring(0, file.name.lastIndexOf('.')) + '.webp';
                 
                 if (techMetadata.checked) {
-                    finalBlob = new Blob([finalBlob], { type: "image/png" });
+                    finalBlob = new Blob([finalBlob], { type: "image/webp" });
                 }
 
-                processedImages.push({ name: file.name, blob: finalBlob });
+                processedImages.push({ name: outputName, blob: finalBlob });
 
                 const percent = Math.round(((i + 1) / uploadedFiles.length) * 100);
                 progressBar.style.width = `${percent}%`;
             }
 
-            statusText.innerText = `🎉 Core Process Clean! Protected ${uploadedFiles.length} NFTs from algorithmic match-banning.`;
+            statusText.innerText = `🎉 Core Process Clean! Protected & optimized ${uploadedFiles.length} assets with WebP High-Definition Compression.`;
             downloadBtn.classList.remove('hidden');
             downloadBtn.style.display = 'flex';
             processBtn.disabled = false;
@@ -585,6 +669,7 @@
             return true;
         }
 
+        // Global Cross-Collection Background Detector & Override Pipeline
         function applyGlobalAntiCopyrightOverride(ctx, w, h, bgMode, targetBg, outlineMode, targetOutline, isPreview) {
             const bufferCanvas = document.createElement('canvas');
             bufferCanvas.width = w; bufferCanvas.height = h;
@@ -594,7 +679,11 @@
 
             const imgData = ctx.getImageData(0, 0, w, h);
             const data = imgData.data;
-            const baseBG_R = data[0]; const baseBG_G = data[1]; const baseBG_B = data[2];
+
+            // Advanced Anchor System: sample corner positions to detect background variation dynamically (Bored Ape / Pudgy Support)
+            const baseBG_R = (data[0] + data[(w - 1) * 4] + data[(w * h - w) * 4]) / 3;
+            const baseBG_G = (data[1] + data[(w - 1) * 4 + 1] + data[(w * h - w) * 4 + 1]) / 3;
+            const baseBG_B = (data[2] + data[(w - 1) * 4 + 2] + data[(w * h - w) * 4 + 2]) / 3;
 
             const randomH = Math.floor(Math.random() * 360);
             const randBg = hslToRgb(randomH / 360, 0.60, 0.30);
@@ -605,7 +694,9 @@
             for (let i = 0; i < data.length; i += 4) {
                 let alpha = data[i + 3];
                 let r = data[i]; let g = data[i + 1]; let b = data[i + 2];
-                let isBG = alpha < 10 || (Math.abs(r - baseBG_R) < 15 && Math.abs(g - baseBG_G) < 15 && Math.abs(b - baseBG_B) < 15);
+                
+                // Adaptive Threshold Matrix for non-flat backgrounds
+                let isBG = alpha < 25 || (Math.abs(r - baseBG_R) < 32 && Math.abs(g - baseBG_G) < 32 && Math.abs(b - baseBG_B) < 32);
 
                 if (isBG) {
                     if (hasGrad) {
@@ -616,7 +707,8 @@
                         data[i] = randBg[0]; data[i + 1] = randBg[1]; data[i + 2] = randBg[2]; data[i + 3] = 255;
                     }
                 } else {
-                    if (r < 45 && g < 45 && b < 45) {
+                    // Outline Vector targeting
+                    if (r < 55 && g < 55 && b < 55) {
                         const idx = i / 4;
                         const pixelX = idx % w;
                         const pixelY = Math.floor(idx / w);
@@ -694,7 +786,7 @@
 
             for (let i = 0; i < data.length; i += 4) {
                 let r = data[i]; let g = data[i + 1]; let b = data[i + 2]; let a = data[i + 3];
-                let isBackground = a < 10 || (Math.abs(r - baseBG_R) < 15 && Math.abs(g - baseBG_G) < 15 && Math.abs(b - baseBG_B) < 15);
+                let isBackground = a < 25 || (Math.abs(r - baseBG_R) < 32 && Math.abs(g - baseBG_G) < 32 && Math.abs(b - baseBG_B) < 32);
 
                 if (isBackground) {
                     if (hasGrad) {
@@ -708,7 +800,7 @@
                         data[i + 3] = 255;
                     }
                 } else {
-                    if (r < 45 && g < 45 && b < 45) {
+                    if (r < 55 && g < 55 && b < 55) {
                         const idx = i / 4;
                         const pixelX = idx % w;
                         const pixelY = Math.floor(idx / w);
@@ -761,6 +853,58 @@
             }
         }
 
+        // Premium Custom Hand-Drawn Pen Sketch Filtration Core
+        function applyPenSketchFilter(ctx, w, h) {
+            const imgData = ctx.getImageData(0, 0, w, h);
+            const data = imgData.data;
+            
+            // Create Grayscale Edge Vector Channel Matrix
+            const monoData = new Float32Array(w * h);
+            for (let i = 0; i < data.length; i += 4) {
+                monoData[i / 4] = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
+            }
+
+            const outImgData = ctx.createImageData(w, h);
+            const outData = outImgData.data;
+
+            // Convolution Kernel Gradient Scanning for Sketch Lines
+            for (let y = 1; y < h - 1; y++) {
+                for (let x = 1; x < w - 1; x++) {
+                    let idx = y * w + x;
+                    
+                    // Sobel Vector Operators
+                    let valX = (
+                        -1 * monoData[(y-1)*w + (x-1)] + 1 * monoData[(y-1)*w + (x+1)] +
+                        -2 * monoData[y*w + (x-1)]     + 2 * monoData[y*w + (x+1)] +
+                        -1 * monoData[(y+1)*w + (x-1)] + 1 * monoData[(y+1)*w + (x+1)]
+                    );
+                    
+                    let valY = (
+                        -1 * monoData[(y-1)*w + (x-1)] - 2 * monoData[(y-1)*w + x] - 1 * monoData[(y-1)*w + (x+1)] +
+                        1 * monoData[(y+1)*w + (x-1)] + 2 * monoData[(y+1)*w + x] + 1 * monoData[(y+1)*w + (x+1)]
+                    );
+
+                    let edgeGrad = Math.sqrt(valX * valX + valY * valY);
+                    let targetPixel = (idx) * 4;
+
+                    if (edgeGrad > 45) {
+                        // Sharp Pen Stroke Texture
+                        outData[targetPixel] = 20;
+                        outData[targetPixel + 1] = 24;
+                        outData[targetPixel + 2] = 35;
+                        outData[targetPixel + 3] = 255;
+                    } else {
+                        // Fine Art Sketch Paper Tone Background
+                        outData[targetPixel] = 242;
+                        outData[targetPixel + 1] = 240;
+                        outData[targetPixel + 2] = 235;
+                        outData[targetPixel + 3] = 255;
+                    }
+                }
+            }
+            ctx.putImageData(outImgData, 0, 0);
+        }
+
         function hexToRgb(hex) {
             const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
             return result ? {
@@ -810,14 +954,14 @@
                 zip.file(item.name, item.blob);
             });
 
-            statusText.innerText = "⚡ Generating secure compressed archive with non-fungible hashes...";
+            statusText.innerText = "⚡ Generating compressed production-grade package archive...";
 
             zip.generateAsync({ type: 'blob' }).then((content) => {
                 const link = document.createElement('a');
                 link.href = URL.createObjectURL(content);
-                link.download = "Testpunks_Pro_Secure_NFTs.zip";
+                link.download = "Testpunks_HD_Optimized_NFTs.zip";
                 link.click();
-                statusText.innerText = "🚀 Secure NFT Package Exported Successfully!";
+                statusText.innerText = "🚀 Compressed NFT Package Exported Successfully!";
             });
         });
     </script>
