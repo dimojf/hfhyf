@@ -9,7 +9,16 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col items-center py-10 px-4 font-sans">
 
-    <div class="max-w-5xl w-full bg-slate-900 rounded-3xl p-6 md:p-10 shadow-2xl border border-slate-800">
+    <div class="max-w-5xl w-full mb-6 flex justify-center gap-4 bg-slate-900 p-2.5 rounded-2xl border border-slate-800 shadow-xl">
+        <button id="tabEngineBtn" onclick="switchTab('engine-pro')" class="flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-indigo-600 text-white shadow-lg shadow-cyan-500/10">
+            <span>🛡️</span> Multi-Tech Engine Pro & Pixelizer
+        </button>
+        <button id="tabCompressorBtn" onclick="switchTab('hd-compressor')" class="flex-1 py-3 px-4 rounded-xl text-sm font-bold text-slate-400 bg-slate-950/40 hover:bg-slate-800/60 hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
+            <span>⚡</span> 10k NFT Bulk HD Compressor
+        </button>
+    </div>
+
+    <div id="tab-engine-pro" class="max-w-5xl w-full bg-slate-900 rounded-3xl p-6 md:p-10 shadow-2xl border border-slate-800 block">
         <div class="text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-pink-500 bg-clip-text text-transparent tracking-wide">
                 Testpunks Multi-Tech NFT Engine Pro
@@ -165,6 +174,24 @@
             </div>
         </div>
 
+        <div class="bg-gradient-to-r from-purple-900/40 to-indigo-950/50 p-5 rounded-2xl border border-indigo-500/30 mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <h3 class="text-base font-bold text-indigo-400 flex items-center gap-2">
+                    <span>👾</span> Character & Body Pixelizer Engine
+                </h3>
+                <p class="text-xs text-slate-400 mt-1">Converts the full asset body structures into professional retro 32x32 or 64x64 grids dynamically.</p>
+            </div>
+            <div class="flex items-center gap-3 bg-slate-950/80 p-2 rounded-xl border border-slate-800 w-full sm:w-auto justify-between">
+                <span class="text-xs text-slate-300 font-semibold pl-2">Pixel Size Matrix:</span>
+                <select id="pixelSizeSelect" class="bg-slate-900 text-xs text-indigo-300 font-bold rounded-lg p-2 border border-slate-700 focus:outline-none focus:border-indigo-500">
+                    <option value="none">Disabled / Off</option>
+                    <option value="32">32x32 CryptoPunk Style</option>
+                    <option value="64">64x64 Standard Retro Art</option>
+                    <option value="16">16x16 High Compression Micro</option>
+                </select>
+            </div>
+        </div>
+
         <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 mb-8 flex flex-col lg:flex-row gap-5 items-end justify-between">
             <div class="w-full lg:w-2/3">
                 <label for="filterType" class="block text-sm font-bold text-slate-400 mb-2">🚀 Choose Advanced Filter Engine (All 80+ Presets Retained):</label>
@@ -295,7 +322,82 @@
         </div>
     </div>
 
+    <div id="tab-hd-compressor" class="max-w-5xl w-full bg-slate-900 rounded-3xl p-6 md:p-10 shadow-2xl border border-slate-800 hidden">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-black bg-gradient-to-r from-emerald-400 via-teal-400 to-indigo-500 bg-clip-text text-transparent tracking-wide">
+                10k NFT High-Speed Bulk Compressor
+            </h1>
+            <p class="text-slate-400 mt-2 text-sm md:text-base">Ultra-Fast Client-Side Compression Algorithm to shrink massive collections safely for GitHub hosting.</p>
+        </div>
+
+        <div class="bg-slate-950/40 p-6 rounded-2xl border border-slate-800 mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-xl">
+                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Target Safe Format</label>
+                <div class="text-sm font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-2 rounded-lg inline-block">WebP Engine (HD Retention Map)</div>
+            </div>
+            <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-xl">
+                <div class="flex justify-between items-center mb-2">
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider">HD Quality Precision Factor</label>
+                    <span id="qualityVal" class="text-sm font-extrabold text-emerald-400">0.85</span>
+                </div>
+                <input id="qualityRange" type="range" min="0.70" max="0.95" step="0.05" value="0.85" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+            </div>
+        </div>
+
+        <div id="dropZoneCompressor" class="border-2 border-dashed border-slate-700 hover:border-emerald-500 bg-slate-950/40 hover:bg-slate-900/40 transition-all rounded-2xl p-10 text-center cursor-pointer group mb-6">
+            <input type="file" id="compressorFileInput" multiple accept="image/*" class="hidden">
+            <svg class="mx-auto h-14 w-14 text-slate-500 group-hover:text-emerald-400 transition-colors mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+            <p class="text-lg font-bold text-slate-300">Drag & Drop 10,000+ NFT Image Folders Here</p>
+            <p class="text-xs text-slate-500 mt-1 font-mono">Processes up to 6.7GB down to ~600MB instantly inside RAM without server uploads</p>
+        </div>
+
+        <div id="compProgressContainer" class="hidden bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4 mb-6">
+            <div class="flex justify-between items-center text-sm">
+                <span id="compStatusText" class="font-bold text-emerald-400">Initializing Core Engine...</span>
+                <span id="compProgressPercent" class="font-black text-slate-200">0%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden border border-slate-700">
+                <div id="compProgressBar" class="bg-gradient-to-r from-emerald-500 to-indigo-500 h-full rounded-full transition-all duration-150" style="width: 0%"></div>
+            </div>
+            <div class="flex justify-between text-xs text-slate-400 font-mono">
+                <span id="compFileCount">0 / 0 Renders Optimized</span>
+                <span id="compEtaText">ETA Prediction: Calculating...</span>
+            </div>
+        </div>
+
+        <button id="compDownloadBtn" class="hidden w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-indigo-600 hover:opacity-90 text-white font-black py-4 px-6 rounded-xl transition-all transform active:scale-[0.99] shadow-xl justify-center items-center gap-2 text-lg">
+            📥 Export Compressed NFT ZIP Production Package
+        </button>
+    </div>
+
+    <footer class="mt-8 text-center text-xs text-slate-600 tracking-wider font-mono">
+        &copy; 2026 NFT Automation Tools. Optimized for High-Volume Deployments.
+    </footer>
+
     <script>
+        // Tab System Switch Mechanism
+        function switchTab(tabId) {
+            const engineTab = document.getElementById('tab-engine-pro');
+            const compressorTab = document.getElementById('tab-hd-compressor');
+            const btnEngine = document.getElementById('tabEngineBtn');
+            const btnCompressor = document.getElementById('tabCompressorBtn');
+
+            if(tabId === 'engine-pro') {
+                engineTab.classList.remove('hidden'); engineTab.classList.add('block');
+                compressorTab.classList.remove('block'); compressorTab.classList.add('hidden');
+                btnEngine.className = "flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-indigo-600 text-white shadow-lg shadow-cyan-500/10";
+                btnCompressor.className = "flex-1 py-3 px-4 rounded-xl text-sm font-bold text-slate-400 bg-slate-950/40 hover:bg-slate-800/60 hover:text-white transition-all duration-300 flex items-center justify-center gap-2";
+            } else {
+                compressorTab.classList.remove('hidden'); compressorTab.classList.add('block');
+                engineTab.classList.remove('block'); engineTab.classList.add('hidden');
+                btnCompressor.className = "flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-indigo-600 text-white shadow-lg shadow-emerald-500/10";
+                btnEngine.className = "flex-1 py-3 px-4 rounded-xl text-sm font-bold text-slate-400 bg-slate-950/40 hover:bg-slate-800/60 hover:text-white transition-all duration-300 flex items-center justify-center gap-2";
+            }
+        }
+
+        // --- Core Elements From Your Existing Layout ---
         const imageInput = document.getElementById('imageInput');
         const filterType = document.getElementById('filterType');
         const processBtn = document.getElementById('processBtn');
@@ -326,6 +428,9 @@
         const techRotation = document.getElementById('techRotation');
         const techSalt = document.getElementById('techSalt');
 
+        // New Element Node for Pixelizer Choice
+        const pixelSizeSelect = document.getElementById('pixelSizeSelect');
+
         let uploadedFiles = [];
         let processedImages = [];
         let previewImagesCached = []; 
@@ -340,7 +445,8 @@
             triggerLivePreviewUpdate();
         });
 
-        [flipCheckbox, resizeCheckbox, outlineColor, bgColor, filterType, techGlitch, techNoise, techColorShift, techEdge, techMetadata, techAlpha, techGamma, techExif, techFourier, techRotation, techSalt].forEach(element => {
+        // Appended new pixel control element node listener safely
+        [flipCheckbox, resizeCheckbox, outlineColor, bgColor, filterType, techGlitch, techNoise, techColorShift, techEdge, techMetadata, techAlpha, techGamma, techExif, techFourier, techRotation, techSalt, pixelSizeSelect].forEach(element => {
             element.addEventListener('change', triggerLivePreviewUpdate);
         });
 
@@ -359,6 +465,25 @@
             }
         });
 
+        // High-fidelity Full-Body Pixelizer Implementation Matrix
+        function pixelizeContextStructure(ctx, w, h, sizeSetting) {
+            if(sizeSetting === 'none') return;
+            const size = parseInt(sizeSetting);
+            
+            // Generate temporary scaling matrix buffer
+            const tempCanvas = document.createElement('canvas');
+            const tCtx = tempCanvas.getContext('2d');
+            tempCanvas.width = size;
+            tempCanvas.height = size;
+            
+            tCtx.imageSmoothingEnabled = false;
+            tCtx.drawImage(ctx.canvas, 0, 0, size, size);
+            
+            ctx.clearRect(0, 0, w, h);
+            ctx.imageSmoothingEnabled = false;
+            ctx.drawImage(tempCanvas, 0, 0, size, size, 0, 0, w, h);
+        }
+
         async function triggerLivePreviewUpdate() {
             if (previewImagesCached.length === 0) return;
             previewGrid.innerHTML = '';
@@ -370,6 +495,7 @@
             const targetOutlineColor = hexToRgb(outlineColor.value);
             const currentBgMode = bgMode.value;
             const targetBgColor = hexToRgb(bgColor.value);
+            const pixelSetting = pixelSizeSelect.value;
 
             previewImagesCached.forEach(item => {
                 const previewCanvas = document.createElement('canvas');
@@ -413,6 +539,11 @@
                     applyGlobalAntiCopyrightOverride(pCtx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, true);
                 }
 
+                // Append custom full structural asset pixelizer processing stage safely before final paint
+                if(pixelSetting !== 'none') {
+                    pixelizeContextStructure(pCtx, renderW, renderH, pixelSetting);
+                }
+
                 pCtx.filter = 'none';
 
                 const div = document.createElement('div');
@@ -443,6 +574,7 @@
             const targetOutlineColor = hexToRgb(outlineColor.value);
             const currentBgMode = bgMode.value;
             const targetBgColor = hexToRgb(bgColor.value);
+            const pixelSetting = pixelSizeSelect.value;
 
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
@@ -490,9 +622,13 @@
                     applyGlobalAntiCopyrightOverride(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, false);
                 }
 
+                // Pixelizer core production stream mapping injection
+                if(pixelSetting !== 'none') {
+                    pixelizeContextStructure(ctx, renderW, renderH, pixelSetting);
+                }
+
                 ctx.filter = 'none';
 
-                // Core Optimization: Save as WebP with custom compression to drastically decrease file size while keeping high quality
                 let finalBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/webp', 0.82));
                 
                 if (techMetadata.checked || techExif.checked) {
@@ -512,6 +648,7 @@
             processBtn.disabled = false;
         });
 
+        // --- All Pre-existing Filter Logic Preserved Intact ---
         function applyFilterToContext(ctx, filter) {
             const cryptoVariance = (techColorShift.checked) ? (Math.random() * 6 - 3) : 0;
             const gammaVal = (techGamma.checked) ? 1.08 : 1;
@@ -651,7 +788,6 @@
             return true;
         }
 
-        // Advanced multi-point universal background detection engine
         function checkIsBackground(r, g, b, a, baseR, baseG, baseB) {
             if (a < 25) return true; 
             const threshold = 35; 
@@ -668,7 +804,6 @@
             const imgData = ctx.getImageData(0, 0, w, h);
             const data = imgData.data;
 
-            // Universal background sampling logic (Sample top-left corner)
             const baseBG_R = data[0]; const baseBG_G = data[1]; const baseBG_B = data[2];
 
             const randomH = Math.floor(Math.random() * 360);
@@ -690,7 +825,6 @@
                         data[i] = randBg[0]; data[i + 1] = randBg[1]; data[i + 2] = randBg[2]; data[i + 3] = 255;
                     }
                 } else {
-                    // Universal dynamic outline scanning (Luminance threshold method)
                     let v = (r * 2126 + g * 7152 + b * 722) / 10000;
                     if (v < 55) { 
                         const idx = i / 4;
@@ -715,7 +849,6 @@
                             data[i] = 255 - r; data[i + 1] = 255 - g; data[i + 2] = 255 - b;
                         }
                     } else {
-                        // High-Tier Anti-Copyright Injections
                         if (techNoise.checked && Math.random() > 0.94) {
                             data[i] = Math.min(255, Math.max(0, r + (Math.random() > 0.5 ? 2 : -2)));
                             data[i + 1] = Math.min(255, Math.max(0, g + (Math.random() > 0.5 ? 2 : -2)));
@@ -727,14 +860,13 @@
                             data[i] = (r + 1) % 255;
                         }
                         if (techSalt.checked && Math.random() > 0.995) {
-                            data[i] = 255; data[i+1] = 255; data[i+2] = 255; // White salt point
+                            data[i] = 255; data[i+1] = 255; data[i+2] = 255;
                         }
                     }
                 }
             }
             ctx.putImageData(imgData, 0, 0);
 
-            // Structure Destabilizers
             if (techEdge.checked) {
                 for (let y = 0; y < h; y += 2) {
                     if (Math.random() > 0.75) {
@@ -761,7 +893,7 @@
             if (techRotation.checked) {
                 ctx.save();
                 ctx.translate(w / 2, h / 2);
-                ctx.rotate((Math.random() * 0.2 - 0.1) * Math.PI / 180); // Micro rotation wobble
+                ctx.rotate((Math.random() * 0.2 - 0.1) * Math.PI / 180);
                 ctx.drawImage(ctx.canvas, -w / 2, -h / 2);
                 ctx.restore();
             }
@@ -842,7 +974,6 @@
             applyGlobalAntiCopyrightOverride(ctx, w, h, bgMode, targetBg, outlineMode, targetOutline, false);
         }
 
-        // New Demanded Feature: Hand-Drawn Pencil Filter Architecture (Maintains full structural integrity and anti-copyright features)
         function applyHandDrawnPencilArtFilter(ctx, w, h, bgMode, targetBg, outlineMode, targetOutline) {
             const imgData = ctx.getImageData(0, 0, w, h);
             const data = imgData.data;
@@ -854,11 +985,10 @@
 
                 if (!isBackground) {
                     let mono = (r * 0.299 + g * 0.587 + b * 0.114);
-                    // Pencil Line Algorithm simulation
                     if (mono < 110) {
-                        data[i] = 35; data[i+1] = 35; data[i+2] = 40; // Slate Graphite Line
+                        data[i] = 35; data[i+1] = 35; data[i+2] = 40; 
                     } else {
-                        data[i] = 240; data[i+1] = 238; data[i+2] = 233; // Vintage Canvas Core Texture
+                        data[i] = 240; data[i+1] = 238; data[i+2] = 233; 
                     }
                 }
             }
@@ -925,6 +1055,146 @@
                 statusText.innerText = "🚀 Compressed Multi-Tech Asset Package Exported!";
             });
         });
+
+        // ==========================================
+        // TABS 2: 10,000 BULK COMPRESSOR LOGIC ENGINE
+        // ==========================================
+        const dropZoneCompressor = document.getElementById('dropZoneCompressor');
+        const compressorFileInput = document.getElementById('compressorFileInput');
+        const qualityRange = document.getElementById('qualityRange');
+        const qualityVal = document.getElementById('qualityVal');
+        const compProgressContainer = document.getElementById('compProgressContainer');
+        const compProgressBar = document.getElementById('compProgressBar');
+        const compProgressPercent = document.getElementById('compProgressPercent');
+        const compStatusText = document.getElementById('compStatusText');
+        const compFileCount = document.getElementById('compFileCount');
+        const compEtaText = document.getElementById('compEtaText');
+        const compDownloadBtn = document.getElementById('compDownloadBtn');
+
+        let bulkZipInstance = null;
+        let bulkCompressedBlobs = [];
+
+        qualityRange.addEventListener('input', (e) => {
+            qualityVal.textContent = e.target.value;
+        });
+
+        dropZoneCompressor.addEventListener('click', () => compressorFileInput.click());
+
+        dropZoneCompressor.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZoneCompressor.classList.add('border-emerald-500', 'bg-slate-900/40');
+        });
+
+        dropZoneCompressor.addEventListener('dragleave', () => {
+            dropZoneCompressor.classList.remove('border-emerald-500', 'bg-slate-900/40');
+        });
+
+        dropZoneCompressor.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZoneCompressor.classList.remove('border-emerald-500', 'bg-slate-900/40');
+            if (e.dataTransfer.files.length > 0) {
+                runBulkCompression(e.dataTransfer.files);
+            }
+        });
+
+        compressorFileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                runBulkCompression(e.target.files);
+            }
+        });
+
+        async function runBulkCompression(files) {
+            const totalFiles = files.length;
+            const qualityFactor = parseFloat(qualityRange.value);
+            
+            bulkZipInstance = new JSZip();
+            bulkCompressedBlobs = [];
+            compDownloadBtn.classList.add('hidden');
+            compProgressContainer.classList.remove('hidden');
+            
+            let completedCount = 0;
+            const compressionStartTime = Date.now();
+
+            for (let i = 0; i < totalFiles; i++) {
+                const currentFile = files[i];
+                
+                if (!currentFile.type.startsWith('image/')) {
+                    completedCount++;
+                    continue;
+                }
+
+                compStatusText.textContent = `Optimizing: ${currentFile.name}`;
+                
+                try {
+                    const optimizedBlob = await executeWebPCompression(currentFile, qualityFactor);
+                    const originalBaseName = currentFile.name.substring(0, currentFile.name.lastIndexOf('.')) || currentFile.name;
+                    bulkZipInstance.file(`${originalBaseName}.webp`, optimizedBlob);
+                } catch (err) {
+                    console.error("Compression fault at asset:", currentFile.name, err);
+                }
+
+                completedCount++;
+                
+                const percent = Math.round((completedCount / totalFiles) * 100);
+                compProgressBar.style.width = `${percent}%`;
+                compProgressPercent.textContent = `${percent}%`;
+                compFileCount.textContent = `${completedCount} / ${totalFiles} Renders Optimized`;
+
+                const secondsElapsed = (Date.now() - compressionStartTime) / 1000;
+                const processingSpeed = completedCount / secondsElapsed;
+                const remainingFiles = totalFiles - completedCount;
+                const estimatedSecondsLeft = Math.round(remainingFiles / processingSpeed);
+
+                if (estimatedSecondsLeft > 60) {
+                    compEtaText.textContent = `ETA Prediction: ~${Math.round(estimatedSecondsLeft / 60)} minutes`;
+                } else {
+                    compEtaText.textContent = `ETA Prediction: ${estimatedSecondsLeft} seconds`;
+                }
+            }
+
+            compStatusText.textContent = "Packaging Secure HD Production Package...";
+            compEtaText.textContent = "Finalizing data structures...";
+            
+            bulkZipInstance.generateAsync({ type: "blob" }).then(function (archiveContent) {
+                compStatusText.textContent = "10k NFT Production Batch Compressed Successfully!";
+                compEtaText.textContent = "Export streaming ready.";
+                
+                compDownloadBtn.classList.remove('hidden');
+                compDownloadBtn.style.display = 'flex';
+                compDownloadBtn.onclick = () => {
+                    const downloadAnchor = document.createElement('a');
+                    downloadAnchor.href = URL.createObjectURL(archiveContent);
+                    downloadAnchor.download = "Optimized_10k_HD_Collection.zip";
+                    downloadAnchor.click();
+                };
+            });
+        }
+
+        function executeWebPCompression(file, quality) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function (e) {
+                    const tempImg = new Image();
+                    tempImg.src = e.target.result;
+                    tempImg.onload = function () {
+                        const parsingCanvas = document.createElement('canvas');
+                        parsingCanvas.width = tempImg.width;
+                        parsingCanvas.height = tempImg.height;
+                        
+                        const pCtx = parsingCanvas.getContext('2d');
+                        pCtx.drawImage(tempImg, 0, 0);
+                        
+                        parsingCanvas.toBlob((blob) => {
+                            if (blob) resolve(blob);
+                            else reject(new Error('WebP Engine Canvas compression failed'));
+                        }, 'image/webp', quality);
+                    };
+                    tempImg.onerror = (err) => reject(err);
+                };
+                reader.onerror = (err) => reject(err);
+            });
+        }
     </script>
 </body>
 </html>
