@@ -6,7 +6,6 @@
     <title>Testpunks - Ultra Anti-Copyright NFT Studio Pro</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gifshot/0.4.5/gifshot.min.js"></script>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col items-center py-10 px-4 font-sans">
 
@@ -28,7 +27,7 @@
         </div>
 
         <div class="border-2 border-dashed border-slate-700 hover:border-cyan-500 rounded-2xl p-8 text-center cursor-pointer transition-all duration-300 bg-slate-950/40 mb-8 relative group">
-            <input type="file" id="imageInput" accept="image/*,image/gif" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+            <input type="file" id="imageInput" accept="image/*" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
             <div class="space-y-3">
                 <div class="mx-auto h-16 w-16 text-slate-500 group-hover:text-cyan-400 transition-colors duration-300 flex items-center justify-center bg-slate-800 rounded-2xl shadow-inner">
                     <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -36,7 +35,7 @@
                     </svg>
                 </div>
                 <p class="text-xl font-bold text-slate-300">Batch Upload NFT Folders or Single Images</p>
-                <p class="text-xs text-slate-500 font-mono">Supports PNG, JPG, WEBP, GIF formats (Universal Ape, Punk & Penguin Engine)</p>
+                <p class="text-xs text-slate-500 font-mono">Supports PNG, JPG, WEBP formats (Universal Ape, Punk & Penguin Engine)</p>
             </div>
         </div>
 
@@ -368,7 +367,7 @@
                 <div id="progressBar" class="bg-gradient-to-r from-cyan-400 via-indigo-400 to-pink-500 h-full transition-all duration-300" style="width: 0%"></div>
             </div>
             <button id="downloadBtn" class="hidden mx-auto bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3.5 px-12 rounded-xl transition-all duration-300 shadow-xl items-center gap-2 text-lg transform hover:scale-105">
-                📥 Download Optimized HD Collection ZIP
+                📥 Download Optimized HD WebP ZIP
             </button>
         </div>
 
@@ -403,7 +402,7 @@
         </div>
 
         <div id="dropZoneCompressor" class="border-2 border-dashed border-slate-700 hover:border-emerald-500 bg-slate-950/40 hover:bg-slate-900/40 transition-all rounded-2xl p-10 text-center cursor-pointer group mb-6">
-            <input type="file" id="compressorFileInput" multiple accept="image/*,image/gif" class="hidden">
+            <input type="file" id="compressorFileInput" multiple accept="image/*" class="hidden">
             <svg class="mx-auto h-14 w-14 text-slate-500 group-hover:text-emerald-400 transition-colors mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
             </svg>
@@ -521,7 +520,7 @@
                 const sliceFiles = uploadedFiles.slice(0, 4);
                 for(let file of sliceFiles) {
                     const img = await loadImage(file);
-                    previewImagesCached.push({ img: img, name: file.name, isGIF: file.type === 'image/gif', file: file });
+                    previewImagesCached.push({ img: img, name: file.name });
                 }
                 triggerLivePreviewUpdate();
             }
@@ -585,25 +584,6 @@
             ctx.putImageData(imgData, 0, 0);
         }
 
-        // GIF ফ্রেম এক্সট্রাক্ট করার জন্য হেল্পার ফাংশন
-        function extractGifFrames(file, targetW, targetH, shouldResize) {
-            return new Promise((resolve) => {
-                gifshot.createGIF({
-                    gifWidth: targetW,
-                    gifHeight: targetH,
-                    images: [file],
-                    interval: 0.1,
-                    numFrames: 10
-                }, function (obj) {
-                    if (!obj.error) {
-                        resolve(obj.savedImages);
-                    } else {
-                        resolve([]);
-                    }
-                });
-            });
-        }
-
         async function triggerLivePreviewUpdate() {
             if (previewImagesCached.length === 0) return;
             previewGrid.innerHTML = '';
@@ -620,7 +600,7 @@
             const remapMode = bypassRemapSelect.value;
             const remapFactor = remapIntensity.value;
 
-            for (let item of previewImagesCached) {
+            previewImagesCached.forEach(item => {
                 const previewCanvas = document.createElement('canvas');
                 const pCtx = previewCanvas.getContext('2d');
                 
@@ -660,6 +640,7 @@
                     applyGlobalAntiCopyrightOverride(pCtx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, true);
                 }
 
+                // Apply AI Bypass Core Stage
                 if (remapMode !== 'none') {
                     applyStructuralRemapBypass(pCtx, renderW, renderH, remapMode, remapFactor);
                 }
@@ -672,18 +653,12 @@
                 const div = document.createElement('div');
                 div.className = 'bg-slate-950 p-2 border border-slate-800 rounded-xl flex flex-col items-center';
                 const previewImgTag = document.createElement('img');
-                
-                if (item.isGIF) {
-                    previewImgTag.src = item.file ? URL.createObjectURL(item.file) : previewCanvas.toDataURL('image/png');
-                } else {
-                    previewImgTag.src = previewCanvas.toDataURL('image/png');
-                }
-                
+                previewImgTag.src = previewCanvas.toDataURL('image/png');
                 previewImgTag.className = 'w-full h-32 object-contain rounded-lg mb-2 bg-slate-900';
                 div.appendChild(previewImgTag);
                 div.innerHTML += `<span class="text-[10px] text-slate-500 truncate w-full text-center font-mono">${item.name}</span>`;
                 previewGrid.appendChild(div);
-            }
+            });
         }
 
         processBtn.addEventListener('click', async () => {
@@ -712,137 +687,59 @@
                 const file = uploadedFiles[i];
                 statusText.innerText = `⚙️ Processing HD Asset: ${file.name} (${i + 1}/${uploadedFiles.length})`;
                 
-                let renderW = 400; 
-                let renderH = 400;
-                
-                if(!file.type.includes('gif')) {
-                    const img = await loadImage(file);
-                    renderW = img.width;
-                    renderH = img.height;
-                }
-                
+                const img = await loadImage(file);
+                let renderW = img.width;
+                let renderH = img.height;
                 if(shouldResize) {
                     renderW = 872;
                     renderH = 1280;
                 }
 
-                if (file.type === 'image/gif') {
-                    // GIF ফ্রেম বাই ফ্রেম ইঞ্জিন
-                    const frames = await extractGifFrames(file, renderW, renderH, shouldResize);
-                    const processedFrames = [];
+                canvas.width = renderW;
+                canvas.height = renderH;
+                ctx.clearRect(0, 0, renderW, renderH);
 
-                    for (let frameData of frames) {
-                        const frameImg = await loadImageFromSrc(frameData);
-                        canvas.width = renderW;
-                        canvas.height = renderH;
-                        ctx.clearRect(0, 0, renderW, renderH);
-
-                        ctx.save();
-                        if (shouldFlip) {
-                            ctx.translate(renderW, 0);
-                            ctx.scale(-1, 1);
-                        }
-                        ctx.drawImage(frameImg, 0, 0, renderW, renderH);
-                        ctx.restore();
-
-                        if (selectedFilter === 'monoBlueGlitch') {
-                            applyAdvancedIceGlitchFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
-                        } else if (selectedFilter === 'handDrawnPencil') {
-                            applyHandDrawnPencilArtFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
-                        } else {
-                            applyFilterToContext(ctx, selectedFilter);
-                            applyGlobalAntiCopyrightOverride(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, false);
-                        }
-
-                        if (remapMode !== 'none') {
-                            applyStructuralRemapBypass(ctx, renderW, renderH, remapMode, remapFactor);
-                        }
-
-                        if(pixelSetting !== 'none') {
-                            pixelizeContextStructure(ctx, renderW, renderH, pixelSetting);
-                        }
-
-                        if (hashRandCheck.checked) {
-                            const d = ctx.getImageData(0, 0, 1, 1);
-                            d.data[0] = (d.data[0] + Math.floor(Math.random() * 3)) % 256;
-                            ctx.putImageData(d, 0, 0);
-                        }
-
-                        processedFrames.push(canvas.toDataURL('image/jpeg', 0.80)); // ফাইল সাইজ কমানোর জন্য অপ্টিমাইজড কম্প্রেশন
-                    }
-
-                    // অ্যানিমেটেড GIF রেন্ডারার (High Quality, Light Size)
-                    const gifBlob = await new Promise((resolve) => {
-                        gifshot.createGIF({
-                            images: processedFrames,
-                            gifWidth: renderW,
-                            gifHeight: renderH,
-                            interval: 0.1,
-                            numFrames: processedFrames.length,
-                            sampleInterval: 10, // মেমোরি এবং সাইজ অপ্টিমাইজেশন
-                            quality: 10
-                        }, function (obj) {
-                            if (!obj.error) {
-                                fetch(obj.image).then(res => res.blob()).then(resolve);
-                            } else {
-                                resolve(null);
-                            }
-                        });
-                    });
-
-                    if (gifBlob) {
-                        processedImages.push({ blob: gifBlob, name: file.name.replace(/\.[^/.]+$/, "") + ".gif" });
-                    }
-
-                } else {
-                    // সাধারণ স্ট্যাটিক ছবির জন্য পূর্বের প্রো-ইঞ্জিন চলমান থাকবে
-                    const img = await loadImage(file);
-                    canvas.width = renderW;
-                    canvas.height = renderH;
-                    ctx.clearRect(0, 0, renderW, renderH);
-
-                    ctx.save();
-                    if (shouldFlip) {
-                        ctx.translate(renderW, 0);
-                        ctx.scale(-1, 1);
-                    }
-
-                    if(shouldResize) {
-                        const scale = Math.max(872 / img.width, 1280 / img.height);
-                        const x = (872 - img.width * scale) / 2;
-                        const y = (1280 - img.height * scale) / 2;
-                        ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-                    } else {
-                        ctx.drawImage(img, 0, 0);
-                    }
-                    ctx.restore();
-
-                    if (selectedFilter === 'monoBlueGlitch') {
-                        applyAdvancedIceGlitchFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
-                    } else if (selectedFilter === 'handDrawnPencil') {
-                        applyHandDrawnPencilArtFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
-                    } else {
-                        applyFilterToContext(ctx, selectedFilter);
-                        applyGlobalAntiCopyrightOverride(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, false);
-                    }
-
-                    if (remapMode !== 'none') {
-                        applyStructuralRemapBypass(ctx, renderW, renderH, remapMode, remapFactor);
-                    }
-
-                    if(pixelSetting !== 'none') {
-                        pixelizeContextStructure(ctx, renderW, renderH, pixelSetting);
-                    }
-
-                    if (hashRandCheck.checked) {
-                        const d = ctx.getImageData(0, 0, 1, 1);
-                        d.data[0] = (d.data[0] + Math.floor(Math.random() * 3)) % 256;
-                        ctx.putImageData(d, 0, 0);
-                    }
-
-                    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/webp', 0.85)); // 0.92 থেকে কমিয়ে 0.85 করা হলো সাইজ কমানোর জন্য
-                    processedImages.push({ blob, name: file.name.replace(/\.[^/.]+$/, "") + ".webp" });
+                ctx.save();
+                if (shouldFlip) {
+                    ctx.translate(renderW, 0);
+                    ctx.scale(-1, 1);
                 }
+
+                if(shouldResize) {
+                    const scale = Math.max(872 / img.width, 1280 / img.height);
+                    const x = (872 - img.width * scale) / 2;
+                    const y = (1280 - img.height * scale) / 2;
+                    ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+                } else {
+                    ctx.drawImage(img, 0, 0);
+                }
+                ctx.restore();
+
+                if (selectedFilter === 'monoBlueGlitch') {
+                    applyAdvancedIceGlitchFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
+                } else if (selectedFilter === 'handDrawnPencil') {
+                    applyHandDrawnPencilArtFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
+                } else {
+                    applyFilterToContext(ctx, selectedFilter);
+                    applyGlobalAntiCopyrightOverride(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, false);
+                }
+
+                if (remapMode !== 'none') {
+                    applyStructuralRemapBypass(ctx, renderW, renderH, remapMode, remapFactor);
+                }
+
+                if(pixelSetting !== 'none') {
+                    pixelizeContextStructure(ctx, renderW, renderH, pixelSetting);
+                }
+
+                if (hashRandCheck.checked) {
+                    const d = ctx.getImageData(0, 0, 1, 1);
+                    d.data[0] = (d.data[0] + Math.floor(Math.random() * 3)) % 256;
+                    ctx.putImageData(d, 0, 0);
+                }
+
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/webp', 0.92));
+                processedImages.push({ blob, name: file.name.replace(/\.[^/.]+$/, "") + ".webp" });
 
                 const pct = Math.round(((i + 1) / uploadedFiles.length) * 100);
                 progressBar.style.width = pct + '%';
@@ -879,14 +776,6 @@
                     img.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
-            });
-        }
-
-        function loadImageFromSrc(src) {
-            return new Promise((resolve) => {
-                const img = new Image();
-                img.onload = () => resolve(img);
-                img.src = src;
             });
         }
 
@@ -1120,35 +1009,9 @@
                 compStatusText.innerText = `Compressing Target Node Matrix: ${currentFile.name}`;
                 
                 try {
-                    if (currentFile.type === 'image/gif') {
-                        // GIF কম্প্রেশন রুলস
-                        const frames = await extractGifFrames(currentFile, 400, 400, false);
-                        const processedFrames = [];
-                        for(let f of frames) {
-                            processedFrames.push(f);
-                        }
-                        const compressedGifBlob = await new Promise((resolve) => {
-                            gifshot.createGIF({
-                                images: processedFrames,
-                                gifWidth: 400,
-                                gifHeight: 400,
-                                interval: 0.1,
-                                sampleInterval: 15, // সাইজ বুস্ট রেশিও অপ্টিমাইজেশন
-                                quality: 10
-                            }, function(obj) {
-                                if(!obj.error) {
-                                    fetch(obj.image).then(res => res.blob()).then(resolve);
-                                } else {
-                                    resolve(currentFile);
-                                }
-                            });
-                        });
-                        compressedArchive.file(currentFile.name, compressedGifBlob);
-                    } else {
-                        const compressedBlob = await executeWebPCompression(currentFile, targetQuality);
-                        const cleanName = currentFile.name.replace(/\.[^/.]+$/, "") + ".webp";
-                        compressedArchive.file(cleanName, compressedBlob);
-                    }
+                    const compressedBlob = await executeWebPCompression(currentFile, targetQuality);
+                    const cleanName = currentFile.name.replace(/\.[^/.]+$/, "") + ".webp";
+                    compressedArchive.file(cleanName, compressedBlob);
                 } catch(e) {
                     console.error("Compression thread faulted out", e);
                 }
