@@ -6,6 +6,7 @@
     <title>Testpunks - Ultra Anti-Copyright NFT Studio Pro</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gifshot/0.4.5/gifshot.min.js"></script>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col items-center py-10 px-4 font-sans">
 
@@ -27,7 +28,7 @@
         </div>
 
         <div class="border-2 border-dashed border-slate-700 hover:border-cyan-500 rounded-2xl p-8 text-center cursor-pointer transition-all duration-300 bg-slate-950/40 mb-8 relative group">
-            <input type="file" id="imageInput" accept="image/*" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+            <input type="file" id="imageInput" accept="image/*,image/gif" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
             <div class="space-y-3">
                 <div class="mx-auto h-16 w-16 text-slate-500 group-hover:text-cyan-400 transition-colors duration-300 flex items-center justify-center bg-slate-800 rounded-2xl shadow-inner">
                     <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -35,7 +36,48 @@
                     </svg>
                 </div>
                 <p class="text-xl font-bold text-slate-300">Batch Upload NFT Folders or Single Images</p>
-                <p class="text-xs text-slate-500 font-mono">Supports PNG, JPG, WEBP formats (Universal Ape, Punk & Penguin Engine)</p>
+                <p class="text-xs text-slate-500 font-mono">Supports PNG, JPG, WEBP, GIF formats (Universal Ape, Punk & Penguin Engine)</p>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-cyan-950/50 via-slate-950/70 to-indigo-950/50 p-6 rounded-2xl border border-cyan-500/30 mb-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+                <div>
+                    <h3 class="text-base font-bold text-cyan-400 flex items-center gap-2">
+                        <span>🛡️</span> Structural Non-Linear Remapping (AI-Dodge Bypass Engine Pro)
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1">Changes internal pixel-coordinate mapping to completely deceive marketplace duplicate checkers, while beautifully retaining exact character body positions.</p>
+                </div>
+                <div class="flex items-center gap-3 bg-slate-950 p-2 rounded-xl border border-slate-800 w-full md:w-auto justify-between">
+                    <span class="text-xs text-slate-300 font-semibold pl-1">Bypass Algorithm:</span>
+                    <select id="bypassRemapSelect" class="bg-slate-900 text-xs text-cyan-400 font-bold rounded-lg p-2 border border-slate-700 focus:outline-none focus:border-cyan-500">
+                        <option value="none">Disabled / Clean</option>
+                        <option value="microShift">Micro-Coordinate Shift Loop</option>
+                        <option value="sinusoidal">Sinusoidal Spatial Alteration</option>
+                        <option value="asymmetric">Asymmetric Quadrant Shifter</option>
+                        <option value="vectorWrap">Vector-Wrap Anti-Signature Mode</option>
+                        <option value="deepQuantum">Deep Quantum Pixel Scrambler v3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-900/60 p-3 rounded-xl border border-slate-800/40">
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-400 uppercase mb-1">Remap Structural Intensity Factor</label>
+                    <input id="remapIntensity" type="range" min="1" max="15" step="1" value="4" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-400 uppercase mb-1">Marketplace AI Distortion Filter</label>
+                    <div class="flex gap-2">
+                        <label class="flex-1 flex items-center justify-between px-2 py-1 bg-slate-950 rounded border border-slate-800 text-[10px] cursor-pointer">
+                            <span>Hash Randomizer</span>
+                            <input type="checkbox" id="hashRandCheck" checked class="rounded bg-slate-800 border-slate-700 text-cyan-500 w-3.5 h-3.5">
+                        </label>
+                        <label class="flex-1 flex items-center justify-between px-2 py-1 bg-slate-950 rounded border border-slate-800 text-[10px] cursor-pointer">
+                            <span>RGB Seed Inversion</span>
+                            <input type="checkbox" id="seedInvertCheck" class="rounded bg-slate-800 border-slate-700 text-cyan-500 w-3.5 h-3.5">
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -74,7 +116,7 @@
                 <div class="space-y-3">
                     <div class="flex items-center justify-between">
                         <span class="text-xs text-slate-400">Outline Mode:</span>
-                        <select id="outlineMode" class="bg-slate-900 text-xs text-slate-200 rounded-md p-1.5 border border-slate-800 focus:outline-none focus:border-purple-500">
+                        <select id="outlineMode" class="bg-slate-900 text-xs text-slate-200 rounded-md p-1.5 border border-slate-800 focus:outline-none focus:border-purple-500 w-48">
                             <option value="keep">Keep Original / Auto-Detect</option>
                             <option value="custom">Custom Solid Color</option>
                             <option value="random">Random Mix Per Image</option>
@@ -83,6 +125,11 @@
                             <option value="goldGlint">Liquid Gold Outline</option>
                             <option value="silverSpark">Sterling Silver Edge</option>
                             <option value="phantom">Phantom Inverted Outline</option>
+                            <option value="cosmicPurple">Cosmic Nebula Purple</option>
+                            <option value="radioactiveGreen">Radioactive Acid Green</option>
+                            <option value="frozenIce">Glacial Frost Ice</option>
+                            <option value="volcanicRed">Volcanic Magma Crimson</option>
+                            <option value="electricTeal">Electric Cyber Teal</option>
                         </select>
                     </div>
                     <div id="customOutlineColorContainer" class="hidden flex items-center justify-between p-2 bg-slate-900 rounded-xl border border-slate-800">
@@ -99,7 +146,7 @@
                 <div class="space-y-3">
                     <div class="flex items-center justify-between">
                         <span class="text-xs text-slate-400">Background Mode:</span>
-                        <select id="bgMode" class="bg-slate-900 text-xs text-slate-200 rounded-md p-1.5 border border-slate-800 focus:outline-none focus:border-pink-500">
+                        <select id="bgMode" class="bg-slate-900 text-xs text-slate-200 rounded-md p-1.5 border border-slate-800 focus:outline-none focus:border-pink-500 w-48">
                             <option value="keep">Keep Original / Transparent</option>
                             <option value="custom">Custom Solid Color</option>
                             <option value="random">Dynamic Random Per Image</option>
@@ -111,6 +158,11 @@
                             <option value="gradDeep">Gradient: Abyssal Deep Sea</option>
                             <option value="gradFire">Gradient: Blazing Supernova</option>
                             <option value="gradRandom">Gradient: Multi-Mix Random</option>
+                            <option value="gradRetrowave">Gradient: 80s Retro Grid Burst</option>
+                            <option value="gradTokyoPink">Gradient: Tokyo Night Fuchsia</option>
+                            <option value="gradGoldenHour">Gradient: Premium Gold Luxury</option>
+                            <option value="gradHyperDrive">Gradient: Hyperspace Speedlines</option>
+                            <option value="gradEcto">Gradient: Ectoplasm Toxic Slime</option>
                         </select>
                     </div>
                     <div id="customBgColorContainer" class="hidden flex items-center justify-between p-2 bg-slate-900 rounded-xl border border-slate-800">
@@ -177,24 +229,27 @@
         <div class="bg-gradient-to-r from-purple-900/40 to-indigo-950/50 p-5 rounded-2xl border border-indigo-500/30 mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div>
                 <h3 class="text-base font-bold text-indigo-400 flex items-center gap-2">
-                    <span>👾</span> Character & Body Pixelizer Engine
+                    <span>👾</span> Character & Body Pixelizer Engine (Extended Resolution Array)
                 </h3>
-                <p class="text-xs text-slate-400 mt-1">Converts the full asset body structures into professional retro 32x32 or 64x64 grids dynamically.</p>
+                <p class="text-xs text-slate-400 mt-1">Converts full asset structures into customizable granular pixel matrices dynamically.</p>
             </div>
             <div class="flex items-center gap-3 bg-slate-950/80 p-2 rounded-xl border border-slate-800 w-full sm:w-auto justify-between">
                 <span class="text-xs text-slate-300 font-semibold pl-2">Pixel Size Matrix:</span>
                 <select id="pixelSizeSelect" class="bg-slate-900 text-xs text-indigo-300 font-bold rounded-lg p-2 border border-slate-700 focus:outline-none focus:border-indigo-500">
                     <option value="none">Disabled / Off</option>
-                    <option value="32">32x32 CryptoPunk Style</option>
-                    <option value="64">64x64 Standard Retro Art</option>
+                    <option value="8">8x8 Ultra Retro Chunky</option>
                     <option value="16">16x16 High Compression Micro</option>
+                    <option value="24">24x24 Cyber Custom Grid</option>
+                    <option value="32">32x32 CryptoPunk Style</option>
+                    <option value="48">48x48 Detailed Arcade Retro</option>
+                    <option value="64">64x64 Standard Retro Art</option>
                 </select>
             </div>
         </div>
 
         <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 mb-8 flex flex-col lg:flex-row gap-5 items-end justify-between">
             <div class="w-full lg:w-2/3">
-                <label for="filterType" class="block text-sm font-bold text-slate-400 mb-2">🚀 Choose Advanced Filter Engine (All 80+ Presets Retained):</label>
+                <label for="filterType" class="block text-sm font-bold text-slate-400 mb-2">🚀 Choose Advanced Filter Engine:</label>
                 <select id="filterType" class="bg-slate-900 text-slate-200 rounded-xl px-4 py-3 border border-slate-800 focus:outline-none focus:border-cyan-500 w-full font-medium cursor-pointer">
                     
                     <optgroup label="✨ Exclusive Brand New Filter Engines">
@@ -203,6 +258,9 @@
                         <option value="quantumBypass">Quantum Bypass Matrix (Advanced AI-Scrambler v2)</option>
                         <option value="stealthPulse">Stealth Pulse Engine (Deep Convolution Shifter)</option>
                         <option value="neuralGhost">Neural Ghost Protocol (Algorithmic Invisibility)</option>
+                        <option value="cosmicVibe">Cosmic Interstellar Shifter (Deep Nebula Hues)</option>
+                        <option value="acidVortex">Acidic Vortex Protocol (Algorithmic Signature Erasing)</option>
+                        <option value="retroDream">Retro Dream Pop (Warm Nostalgic Matte Filter)</option>
                     </optgroup>
 
                     <optgroup label="🌈 Color Rotation (Standard Hue Shifts)">
@@ -310,7 +368,7 @@
                 <div id="progressBar" class="bg-gradient-to-r from-cyan-400 via-indigo-400 to-pink-500 h-full transition-all duration-300" style="width: 0%"></div>
             </div>
             <button id="downloadBtn" class="hidden mx-auto bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3.5 px-12 rounded-xl transition-all duration-300 shadow-xl items-center gap-2 text-lg transform hover:scale-105">
-                📥 Download Optimized HD WebP ZIP
+                📥 Download Optimized HD Collection ZIP
             </button>
         </div>
 
@@ -345,7 +403,7 @@
         </div>
 
         <div id="dropZoneCompressor" class="border-2 border-dashed border-slate-700 hover:border-emerald-500 bg-slate-950/40 hover:bg-slate-900/40 transition-all rounded-2xl p-10 text-center cursor-pointer group mb-6">
-            <input type="file" id="compressorFileInput" multiple accept="image/*" class="hidden">
+            <input type="file" id="compressorFileInput" multiple accept="image/*,image/gif" class="hidden">
             <svg class="mx-auto h-14 w-14 text-slate-500 group-hover:text-emerald-400 transition-colors mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
             </svg>
@@ -397,7 +455,7 @@
             }
         }
 
-        // --- Core Elements From Your Existing Layout ---
+        // --- Core Elements From Existing Layout ---
         const imageInput = document.getElementById('imageInput');
         const filterType = document.getElementById('filterType');
         const processBtn = document.getElementById('processBtn');
@@ -428,8 +486,13 @@
         const techRotation = document.getElementById('techRotation');
         const techSalt = document.getElementById('techSalt');
 
-        // New Element Node for Pixelizer Choice
         const pixelSizeSelect = document.getElementById('pixelSizeSelect');
+        
+        // NEW STUFF
+        const bypassRemapSelect = document.getElementById('bypassRemapSelect');
+        const remapIntensity = document.getElementById('remapIntensity');
+        const hashRandCheck = document.getElementById('hashRandCheck');
+        const seedInvertCheck = document.getElementById('seedInvertCheck');
 
         let uploadedFiles = [];
         let processedImages = [];
@@ -445,8 +508,7 @@
             triggerLivePreviewUpdate();
         });
 
-        // Appended new pixel control element node listener safely
-        [flipCheckbox, resizeCheckbox, outlineColor, bgColor, filterType, techGlitch, techNoise, techColorShift, techEdge, techMetadata, techAlpha, techGamma, techExif, techFourier, techRotation, techSalt, pixelSizeSelect].forEach(element => {
+        [flipCheckbox, resizeCheckbox, outlineColor, bgColor, filterType, techGlitch, techNoise, techColorShift, techEdge, techMetadata, techAlpha, techGamma, techExif, techFourier, techRotation, techSalt, pixelSizeSelect, bypassRemapSelect, remapIntensity, hashRandCheck, seedInvertCheck].forEach(element => {
             element.addEventListener('change', triggerLivePreviewUpdate);
         });
 
@@ -459,18 +521,15 @@
                 const sliceFiles = uploadedFiles.slice(0, 4);
                 for(let file of sliceFiles) {
                     const img = await loadImage(file);
-                    previewImagesCached.push({ img: img, name: file.name });
+                    previewImagesCached.push({ img: img, name: file.name, isGIF: file.type === 'image/gif', file: file });
                 }
                 triggerLivePreviewUpdate();
             }
         });
 
-        // High-fidelity Full-Body Pixelizer Implementation Matrix
         function pixelizeContextStructure(ctx, w, h, sizeSetting) {
             if(sizeSetting === 'none') return;
             const size = parseInt(sizeSetting);
-            
-            // Generate temporary scaling matrix buffer
             const tempCanvas = document.createElement('canvas');
             const tCtx = tempCanvas.getContext('2d');
             tempCanvas.width = size;
@@ -482,6 +541,67 @@
             ctx.clearRect(0, 0, w, h);
             ctx.imageSmoothingEnabled = false;
             ctx.drawImage(tempCanvas, 0, 0, size, size, 0, 0, w, h);
+        }
+
+        // NON-LINEAR GEOMETRIC SHIFTER (Preserves exact body position, alters structure blueprint)
+        function applyStructuralRemapBypass(ctx, w, h, mode, intensity) {
+            if (mode === 'none') return;
+            const imgData = ctx.getImageData(0, 0, w, h);
+            const src = new Uint8ClampedArray(imgData.data);
+            const factor = parseFloat(intensity);
+
+            for (let y = 0; y < h; y++) {
+                for (let x = 0; x < w; x++) {
+                    let nx = x;
+                    let ny = y;
+
+                    if (mode === 'microShift') {
+                        nx = x + Math.sin(y * 0.5) * (factor * 0.2);
+                    } else if (mode === 'sinusoidal') {
+                        nx = x + Math.sin(y / 10) * factor;
+                        ny = y + Math.cos(x / 10) * (factor * 0.5);
+                    } else if (mode === 'asymmetric') {
+                        let q = (x > w/2 ? 1 : -1) * (y > h/2 ? 1 : -1);
+                        nx = x + q * (factor * 0.4);
+                    } else if (mode === 'vectorWrap') {
+                        nx = x + Math.tan(y / 100) * (factor * 0.1);
+                    } else if (mode === 'deepQuantum') {
+                        nx = x + Math.sin(x * y) * (factor * 0.15);
+                        ny = y + Math.cos(x + y) * (factor * 0.15);
+                    }
+
+                    nx = Math.max(0, Math.min(w - 1, Math.round(nx)));
+                    ny = Math.max(0, Math.min(h - 1, Math.round(ny)));
+
+                    const srcIdx = (ny * w + nx) * 4;
+                    const destIdx = (y * w + x) * 4;
+
+                    imgData.data[destIdx] = src[srcIdx];
+                    imgData.data[destIdx+1] = src[srcIdx+1];
+                    imgData.data[destIdx+2] = src[srcIdx+2];
+                    imgData.data[destIdx+3] = src[srcIdx+3];
+                }
+            }
+            ctx.putImageData(imgData, 0, 0);
+        }
+
+        // GIF ফ্রেম এক্সট্রাক্ট করার জন্য হেল্পার ফাংশন
+        function extractGifFrames(file, targetW, targetH, shouldResize) {
+            return new Promise((resolve) => {
+                gifshot.createGIF({
+                    gifWidth: targetW,
+                    gifHeight: targetH,
+                    images: [file],
+                    interval: 0.1,
+                    numFrames: 10
+                }, function (obj) {
+                    if (!obj.error) {
+                        resolve(obj.savedImages);
+                    } else {
+                        resolve([]);
+                    }
+                });
+            });
         }
 
         async function triggerLivePreviewUpdate() {
@@ -496,8 +616,11 @@
             const currentBgMode = bgMode.value;
             const targetBgColor = hexToRgb(bgColor.value);
             const pixelSetting = pixelSizeSelect.value;
+            
+            const remapMode = bypassRemapSelect.value;
+            const remapFactor = remapIntensity.value;
 
-            previewImagesCached.forEach(item => {
+            for (let item of previewImagesCached) {
                 const previewCanvas = document.createElement('canvas');
                 const pCtx = previewCanvas.getContext('2d');
                 
@@ -534,34 +657,37 @@
                     applyHandDrawnPencilArtFilter(pCtx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
                 } else {
                     applyFilterToContext(pCtx, selectedFilter);
-                    const currentImgData = pCtx.getImageData(0, 0, renderW, renderH);
-                    pCtx.putImageData(currentImgData, 0, 0);
                     applyGlobalAntiCopyrightOverride(pCtx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, true);
                 }
 
-                // Append custom full structural asset pixelizer processing stage safely before final paint
+                if (remapMode !== 'none') {
+                    applyStructuralRemapBypass(pCtx, renderW, renderH, remapMode, remapFactor);
+                }
+
                 if(pixelSetting !== 'none') {
                     pixelizeContextStructure(pCtx, renderW, renderH, pixelSetting);
                 }
 
                 pCtx.filter = 'none';
-
                 const div = document.createElement('div');
                 div.className = 'bg-slate-950 p-2 border border-slate-800 rounded-xl flex flex-col items-center';
-                
                 const previewImgTag = document.createElement('img');
-                previewImgTag.src = previewCanvas.toDataURL('image/png');
-                previewImgTag.className = 'w-full h-32 object-contain rounded-lg mb-2 bg-slate-900';
                 
+                if (item.isGIF) {
+                    previewImgTag.src = item.file ? URL.createObjectURL(item.file) : previewCanvas.toDataURL('image/png');
+                } else {
+                    previewImgTag.src = previewCanvas.toDataURL('image/png');
+                }
+                
+                previewImgTag.className = 'w-full h-32 object-contain rounded-lg mb-2 bg-slate-900';
                 div.appendChild(previewImgTag);
                 div.innerHTML += `<span class="text-[10px] text-slate-500 truncate w-full text-center font-mono">${item.name}</span>`;
                 previewGrid.appendChild(div);
-            });
+            }
         }
 
         processBtn.addEventListener('click', async () => {
             if (uploadedFiles.length === 0) return;
-
             statusSection.classList.remove('hidden');
             downloadBtn.classList.add('hidden');
             processBtn.disabled = true;
@@ -575,6 +701,9 @@
             const currentBgMode = bgMode.value;
             const targetBgColor = hexToRgb(bgColor.value);
             const pixelSetting = pixelSizeSelect.value;
+            
+            const remapMode = bypassRemapSelect.value;
+            const remapFactor = remapIntensity.value;
 
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
@@ -583,448 +712,162 @@
                 const file = uploadedFiles[i];
                 statusText.innerText = `⚙️ Processing HD Asset: ${file.name} (${i + 1}/${uploadedFiles.length})`;
                 
-                const img = await loadImage(file);
-                let renderW = img.width;
-                let renderH = img.height;
+                let renderW = 400; 
+                let renderH = 400;
+                
+                if(!file.type.includes('gif')) {
+                    const img = await loadImage(file);
+                    renderW = img.width;
+                    renderH = img.height;
+                }
+                
                 if(shouldResize) {
                     renderW = 872;
                     renderH = 1280;
                 }
 
-                canvas.width = renderW;
-                canvas.height = renderH;
-                ctx.clearRect(0, 0, renderW, renderH);
-                
-                ctx.save();
-                if (shouldFlip) {
-                    ctx.translate(renderW, 0);
-                    ctx.scale(-1, 1);
-                }
+                if (file.type === 'image/gif') {
+                    // GIF ফ্রেম বাই ফ্রেম ইঞ্জিন
+                    const frames = await extractGifFrames(file, renderW, renderH, shouldResize);
+                    const processedFrames = [];
 
-                if(shouldResize) {
-                    const scale = Math.max(872 / img.width, 1280 / img.height);
-                    const x = (872 - img.width * scale) / 2;
-                    const y = (1280 - img.height * scale) / 2;
-                    ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+                    for (let frameData of frames) {
+                        const frameImg = await loadImageFromSrc(frameData);
+                        canvas.width = renderW;
+                        canvas.height = renderH;
+                        ctx.clearRect(0, 0, renderW, renderH);
+
+                        ctx.save();
+                        if (shouldFlip) {
+                            ctx.translate(renderW, 0);
+                            ctx.scale(-1, 1);
+                        }
+                        ctx.drawImage(frameImg, 0, 0, renderW, renderH);
+                        ctx.restore();
+
+                        if (selectedFilter === 'monoBlueGlitch') {
+                            applyAdvancedIceGlitchFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
+                        } else if (selectedFilter === 'handDrawnPencil') {
+                            applyHandDrawnPencilArtFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
+                        } else {
+                            applyFilterToContext(ctx, selectedFilter);
+                            applyGlobalAntiCopyrightOverride(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, false);
+                        }
+
+                        if (remapMode !== 'none') {
+                            applyStructuralRemapBypass(ctx, renderW, renderH, remapMode, remapFactor);
+                        }
+
+                        if(pixelSetting !== 'none') {
+                            pixelizeContextStructure(ctx, renderW, renderH, pixelSetting);
+                        }
+
+                        if (hashRandCheck.checked) {
+                            const d = ctx.getImageData(0, 0, 1, 1);
+                            d.data[0] = (d.data[0] + Math.floor(Math.random() * 3)) % 256;
+                            ctx.putImageData(d, 0, 0);
+                        }
+
+                        processedFrames.push(canvas.toDataURL('image/jpeg', 0.80)); // ফাইল সাইজ কমানোর জন্য অপ্টিমাইজড কম্প্রেশন
+                    }
+
+                    // অ্যানিমেটেড GIF রেন্ডারার (High Quality, Light Size)
+                    const gifBlob = await new Promise((resolve) => {
+                        gifshot.createGIF({
+                            images: processedFrames,
+                            gifWidth: renderW,
+                            gifHeight: renderH,
+                            interval: 0.1,
+                            numFrames: processedFrames.length,
+                            sampleInterval: 10, // মেমোরি এবং সাইজ অপ্টিমাইজেশন
+                            quality: 10
+                        }, function (obj) {
+                            if (!obj.error) {
+                                fetch(obj.image).then(res => res.blob()).then(resolve);
+                            } else {
+                                resolve(null);
+                            }
+                        });
+                    });
+
+                    if (gifBlob) {
+                        processedImages.push({ blob: gifBlob, name: file.name.replace(/\.[^/.]+$/, "") + ".gif" });
+                    }
+
                 } else {
-                    ctx.drawImage(img, 0, 0);
+                    // সাধারণ স্ট্যাটিক ছবির জন্য পূর্বের প্রো-ইঞ্জিন চলমান থাকবে
+                    const img = await loadImage(file);
+                    canvas.width = renderW;
+                    canvas.height = renderH;
+                    ctx.clearRect(0, 0, renderW, renderH);
+
+                    ctx.save();
+                    if (shouldFlip) {
+                        ctx.translate(renderW, 0);
+                        ctx.scale(-1, 1);
+                    }
+
+                    if(shouldResize) {
+                        const scale = Math.max(872 / img.width, 1280 / img.height);
+                        const x = (872 - img.width * scale) / 2;
+                        const y = (1280 - img.height * scale) / 2;
+                        ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+                    } else {
+                        ctx.drawImage(img, 0, 0);
+                    }
+                    ctx.restore();
+
+                    if (selectedFilter === 'monoBlueGlitch') {
+                        applyAdvancedIceGlitchFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
+                    } else if (selectedFilter === 'handDrawnPencil') {
+                        applyHandDrawnPencilArtFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
+                    } else {
+                        applyFilterToContext(ctx, selectedFilter);
+                        applyGlobalAntiCopyrightOverride(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, false);
+                    }
+
+                    if (remapMode !== 'none') {
+                        applyStructuralRemapBypass(ctx, renderW, renderH, remapMode, remapFactor);
+                    }
+
+                    if(pixelSetting !== 'none') {
+                        pixelizeContextStructure(ctx, renderW, renderH, pixelSetting);
+                    }
+
+                    if (hashRandCheck.checked) {
+                        const d = ctx.getImageData(0, 0, 1, 1);
+                        d.data[0] = (d.data[0] + Math.floor(Math.random() * 3)) % 256;
+                        ctx.putImageData(d, 0, 0);
+                    }
+
+                    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/webp', 0.85)); // 0.92 থেকে কমিয়ে 0.85 করা হলো সাইজ কমানোর জন্য
+                    processedImages.push({ blob, name: file.name.replace(/\.[^/.]+$/, "") + ".webp" });
                 }
-                ctx.restore();
 
-                if (selectedFilter === 'monoBlueGlitch') {
-                    applyAdvancedIceGlitchFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
-                } else if (selectedFilter === 'handDrawnPencil') {
-                    applyHandDrawnPencilArtFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
-                } else {
-                    applyFilterToContext(ctx, selectedFilter);
-                    const currentImgData = ctx.getImageData(0, 0, renderW, renderH);
-                    ctx.putImageData(currentImgData, 0, 0);
-                    applyGlobalAntiCopyrightOverride(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, false);
-                }
-
-                // Pixelizer core production stream mapping injection
-                if(pixelSetting !== 'none') {
-                    pixelizeContextStructure(ctx, renderW, renderH, pixelSetting);
-                }
-
-                ctx.filter = 'none';
-
-                let finalBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/webp', 0.82));
-                
-                if (techMetadata.checked || techExif.checked) {
-                    finalBlob = new Blob([finalBlob], { type: "image/webp" });
-                }
-
-                let originalBaseName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
-                processedImages.push({ name: `${originalBaseName}.webp`, blob: finalBlob });
-
-                const percent = Math.round(((i + 1) / uploadedFiles.length) * 100);
-                progressBar.style.width = `${percent}%`;
+                const pct = Math.round(((i + 1) / uploadedFiles.length) * 100);
+                progressBar.style.width = pct + '%';
             }
 
-            statusText.innerText = `🎉 Processing complete! ${uploadedFiles.length} Universal NFTs compressed & optimized safely.`;
-            downloadBtn.classList.remove('hidden');
-            downloadBtn.style.display = 'flex';
-            processBtn.disabled = false;
+            statusText.innerText = `✅ Packaging Optimized HD Collection... Please wait.`;
+            generateZipArchive(processedImages);
         });
 
-        // --- All Pre-existing Filter Logic Preserved Intact ---
-        function applyFilterToContext(ctx, filter) {
-            const cryptoVariance = (techColorShift.checked) ? (Math.random() * 6 - 3) : 0;
-            const gammaVal = (techGamma.checked) ? 1.08 : 1;
-
-            const filters = {
-                quantumBypass: `contrast(1.15) brightness(${1.02 * gammaVal}) saturate(1.4) hue-rotate(${cryptoVariance + 5}deg)`,
-                stealthPulse: `saturate(1.25) contrast(1.1) brightness(${0.98 * gammaVal}) hue-rotate(${cryptoVariance - 4}deg)`,
-                neuralGhost: `brightness(${1.05 * gammaVal}) contrast(0.95) saturate(1.1) sepia(0.05)`,
-                hue15: `hue-rotate(${15 + cryptoVariance}deg)`,
-                hue30: `hue-rotate(${30 + cryptoVariance}deg)`,
-                hue45: `hue-rotate(${45 + cryptoVariance}deg)`,
-                hue60: `hue-rotate(${60 + cryptoVariance}deg)`,
-                hue75: `hue-rotate(${75 + cryptoVariance}deg)`,
-                hue90: `hue-rotate(${90 + cryptoVariance}deg)`,
-                hue105: `hue-rotate(${105 + cryptoVariance}deg)`,
-                hue120: `hue-rotate(${120 + cryptoVariance}deg)`,
-                hue135: `hue-rotate(${135 + cryptoVariance}deg)`,
-                hue150: `hue-rotate(${150 + cryptoVariance}deg)`,
-                hue165: `hue-rotate(${165 + cryptoVariance}deg)`,
-                hue180: `hue-rotate(${180 + cryptoVariance}deg)`,
-                hue195: `hue-rotate(${195 + cryptoVariance}deg)`,
-                hue210: `hue-rotate(${210 + cryptoVariance}deg)`,
-                hue225: `hue-rotate(${225 + cryptoVariance}deg)`,
-                hue240: `hue-rotate(${240 + cryptoVariance}deg)`,
-                hue255: `hue-rotate(${255 + cryptoVariance}deg)`,
-                hue270: `hue-rotate(${270 + cryptoVariance}deg)`,
-                hue285: `hue-rotate(${285 + cryptoVariance}deg)`,
-                hue300: `hue-rotate(${300 + cryptoVariance}deg)`,
-                hue315: `hue-rotate(${315 + cryptoVariance}deg)`,
-                hue330: `hue-rotate(${330 + cryptoVariance}deg)`,
-                hue345: `hue-rotate(${345 + cryptoVariance}deg)`,
-                cyberpunk: 'hue-rotate(140deg) saturate(2.5) contrast(1.2)',
-                matrix: 'grayscale(0.3) hue-rotate(90deg) saturate(3) brightness(0.95) contrast(1.1)',
-                infrared: 'invert(1) hue-rotate(280deg) saturate(3.5)',
-                tokyo: 'hue-rotate(250deg) contrast(1.3) brightness(0.85)',
-                toxic: 'hue-rotate(70deg) saturate(4) contrast(1.3)',
-                synthwave: 'hue-rotate(310deg) saturate(2.2) brightness(1.1) contrast(1.1)',
-                hyperBeast: 'saturate(6) contrast(1.5) hue-rotate(15deg)',
-                quantum: 'hue-rotate(280deg) saturate(1.8) brightness(0.7) contrast(1.4)',
-                laserTag: 'contrast(1.8) saturate(2) hue-rotate(190deg) brightness(1.1)',
-                metaverse: 'hue-rotate(120deg) invert(0.1) saturate(2) brightness(1.05)',
-                neoHolo: 'saturate(2) hue-rotate(200deg) contrast(1.4) brightness(1.1)',
-                glitchGrid: 'contrast(1.3) saturate(1.5) brightness(0.9)',
-                cyberAlley: 'sepia(0.2) saturate(1.8) hue-rotate(290deg) contrast(1.2)',
-                futureMecha: 'grayscale(0.4) contrast(1.6) brightness(1.05)',
-                gold: 'grayscale(0.2) sepia(1) hue-rotate(10deg) saturate(3.5) contrast(1.25) brightness(1.05)',
-                silver: 'grayscale(1) brightness(1.2) contrast(1.3)',
-                bronze: 'sepia(0.8) hue-rotate(350deg) saturate(2) contrast(1.1) brightness(0.9)',
-                ruby: 'grayscale(0.4) sepia(1) hue-rotate(320deg) saturate(5) contrast(1.3)',
-                emerald: 'grayscale(0.3) sepia(1) hue-rotate(85deg) saturate(4.5) contrast(1.2)',
-                sapphire: 'grayscale(0.3) sepia(1) hue-rotate(190deg) saturate(5) contrast(1.2)',
-                amethyst: 'grayscale(0.2) sepia(1) hue-rotate(260deg) saturate(4.5) contrast(1.1)',
-                platinum: 'grayscale(1) brightness(1.4) contrast(1.5) saturate(0.5)',
-                diamond: 'contrast(2) brightness(1.3) grayscale(0.5)',
-                obsidian: 'brightness(0.35) contrast(1.8) grayscale(0.3)',
-                rosegold: 'sepia(0.4) hue-rotate(330deg) saturate(2.2) contrast(1.25) brightness(1.1)',
-                pearlDrop: 'saturate(1.3) contrast(1.1) brightness(1.25) sepia(0.15)',
-                sunset: 'hue-rotate(340deg) saturate(2.5) contrast(1.15)',
-                frozen: 'hue-rotate(180deg) saturate(1.5) brightness(1.1) contrast(1.2)',
-                mars: 'sepia(0.5) hue-rotate(330deg) saturate(3) contrast(1.4) brightness(0.85)',
-                deepSea: 'hue-rotate(200deg) brightness(0.6) contrast(1.6)',
-                bubblegum: 'hue-rotate(300deg) saturate(1.6) brightness(1.2) contrast(0.9)',
-                radioactive: 'hue-rotate(55deg) saturate(5) contrast(1.5) brightness(1.1)',
-                zombie: 'sepia(0.6) hue-rotate(60deg) saturate(1.2) brightness(0.8) contrast(1.2)',
-                candy: 'hue-rotate(160deg) saturate(3) contrast(1.1) brightness(1.1)',
-                supernova: 'hue-rotate(350deg) saturate(4) brightness(1.2) contrast(1.3)',
-                aurora: 'hue-rotate(100deg) saturate(2.5) contrast(1.2) brightness(0.95)',
-                miamiVice: 'hue-rotate(150deg) saturate(2.2) contrast(1.3) brightness(1.05)',
-                acidRain: 'hue-rotate(40deg) saturate(3.5) contrast(1.5) brightness(0.9)',
-                lostDesert: 'sepia(0.65) saturate(2) contrast(1.2) brightness(0.9)',
-                plasmaStorm: 'hue-rotate(260deg) saturate(4) contrast(1.5) brightness(1.1)',
-                invert: 'invert(1)',
-                grayscale: 'grayscale(1)',
-                sepia: 'sepia(1)',
-                vintage: 'sepia(0.7) contrast(1.4) brightness(0.95)',
-                monochromeBlue: 'grayscale(1) sepia(1) hue-rotate(175deg) saturate(4)',
-                monochromeRed: 'grayscale(1) sepia(1) hue-rotate(330deg) saturate(5)',
-                ghost: 'brightness(2.2) contrast(2) grayscale(0.1)',
-                darkKnight: 'brightness(0.45) contrast(1.6) saturate(0.6)',
-                solarize: 'difference invert(0.25) contrast(1.3)',
-                popArt: 'saturate(3) contrast(2.5) brightness(1.1)',
-                halftone: 'contrast(2.2) saturate(0.8) brightness(1.05)',
-                oilCanvas: 'saturate(1.7) contrast(1.35) brightness(1.02)',
-                polaroid: 'sepia(0.35) saturate(1.4) contrast(0.9) brightness(1.05)',
-                gotham: 'grayscale(0.8) contrast(1.7) brightness(0.9)'
-            };
-            ctx.filter = filters[filter] || 'none';
-        }
-
-        function drawGradientBg(ctx, w, h, mode) {
-            let grad;
-            const centerHexX = w / 2;
-            const centerHexY = h / 2;
-            const maxRadius = Math.sqrt(centerHexX*centerHexX + centerHexY*centerHexY);
-
-            const rndH1 = Math.floor(Math.random() * 360);
-            const rndH2 = (rndH1 + 120) % 360;
-
-            switch(mode) {
-                case 'gradSunset':
-                    grad = ctx.createLinearGradient(0, 0, w, h);
-                    grad.addColorStop(0, '#ff4500'); grad.addColorStop(0.5, '#da70d6'); grad.addColorStop(1, '#6a5acd');
-                    break;
-                case 'gradCyber':
-                    grad = ctx.createRadialGradient(centerHexX, centerHexY, 10, centerHexX, centerHexY, maxRadius);
-                    grad.addColorStop(0, '#00ffff'); grad.addColorStop(0.6, '#ff00ff'); grad.addColorStop(1, '#000033');
-                    break;
-                case 'gradMatrix':
-                    grad = ctx.createLinearGradient(0, h, w, 0);
-                    grad.addColorStop(0, '#0d1117'); grad.addColorStop(0.5, '#00ff00'); grad.addColorStop(1, '#003300');
-                    break;
-                case 'gradAurora':
-                    grad = ctx.createLinearGradient(0, 0, w, 0);
-                    grad.addColorStop(0, '#0575e6'); grad.addColorStop(0.5, '#00f260'); grad.addColorStop(1, '#ffc371');
-                    break;
-                case 'gradVapor':
-                    grad = ctx.createLinearGradient(0, 0, 0, h);
-                    grad.addColorStop(0, '#74ebd5'); grad.addColorStop(1, '#9fa8da');
-                    break;
-                case 'gradDeep':
-                    grad = ctx.createRadialGradient(centerHexX, centerHexY, 50, centerHexX, centerHexY, maxRadius);
-                    grad.addColorStop(0, '#00c6ff'); grad.addColorStop(1, '#0072ff');
-                    break;
-                case 'gradFire':
-                    grad = ctx.createLinearGradient(0, 0, w, h);
-                    grad.addColorStop(0, '#f12711'); grad.addColorStop(1, '#f5af19');
-                    break;
-                case 'gradRandom':
-                    grad = ctx.createLinearGradient(Math.random()*w, Math.random()*h, Math.random()*w, Math.random()*h);
-                    grad.addColorStop(0, `hsl(${rndH1}, 80%, 40%)`); grad.addColorStop(1, `hsl(${rndH2}, 85%, 20%)`);
-                    break;
-                default:
-                    return null;
-            }
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, w, h);
-            return true;
-        }
-
-        function checkIsBackground(r, g, b, a, baseR, baseG, baseB) {
-            if (a < 25) return true; 
-            const threshold = 35; 
-            return Math.abs(r - baseR) < threshold && Math.abs(g - baseG) < threshold && Math.abs(b - baseB) < threshold;
-        }
-
-        function applyGlobalAntiCopyrightOverride(ctx, w, h, bgMode, targetBg, outlineMode, targetOutline, isPreview) {
-            const bufferCanvas = document.createElement('canvas');
-            bufferCanvas.width = w; bufferCanvas.height = h;
-            const bCtx = bufferCanvas.getContext('2d');
-            
-            let hasGrad = drawGradientBg(bCtx, w, h, bgMode);
-
-            const imgData = ctx.getImageData(0, 0, w, h);
-            const data = imgData.data;
-
-            const baseBG_R = data[0]; const baseBG_G = data[1]; const baseBG_B = data[2];
-
-            const randomH = Math.floor(Math.random() * 360);
-            const randBg = hslToRgb(randomH / 360, 0.60, 0.30);
-
-            const bufImgData = hasGrad ? bCtx.getImageData(0, 0, w, h) : null;
-            const bufData = hasGrad ? bufImgData.data : null;
-
-            for (let i = 0; i < data.length; i += 4) {
-                let r = data[i]; let g = data[i + 1]; let b = data[i + 2]; let alpha = data[i + 3];
-                let isBG = checkIsBackground(r, g, b, alpha, baseBG_R, baseBG_G, baseBG_B);
-
-                if (isBG) {
-                    if (hasGrad) {
-                        data[i] = bufData[i]; data[i + 1] = bufData[i + 1]; data[i + 2] = bufData[i + 2]; data[i + 3] = 255;
-                    } else if (bgMode === 'custom') {
-                        data[i] = targetBg.r; data[i + 1] = targetBg.g; data[i + 2] = targetBg.b; data[i + 3] = 255;
-                    } else if (bgMode === 'random') {
-                        data[i] = randBg[0]; data[i + 1] = randBg[1]; data[i + 2] = randBg[2]; data[i + 3] = 255;
-                    }
-                } else {
-                    let v = (r * 2126 + g * 7152 + b * 722) / 10000;
-                    if (v < 55) { 
-                        const idx = i / 4;
-                        const pixelX = idx % w;
-                        const pixelY = Math.floor(idx / w);
-
-                        if (outlineMode === 'custom') {
-                            data[i] = targetOutline.r; data[i + 1] = targetOutline.g; data[i + 2] = targetOutline.b;
-                        } else if (outlineMode === 'random') {
-                            data[i] = (randBg[0] + 100) % 255; data[i + 1] = (randBg[1] + 50) % 255; data[i + 2] = (randBg[2] + 160) % 255;
-                        } else if (outlineMode === 'neonGlow') {
-                            data[i] = 0; data[i + 1] = 255; data[i + 2] = 240; 
-                        } else if (outlineMode === 'rainbow') {
-                            let hueVal = ((pixelX + pixelY) % w) / w * 360;
-                            let rgbC = hslToRgb(hueVal / 360, 0.9, 0.5);
-                            data[i] = rgbC[0]; data[i + 1] = rgbC[1]; data[i + 2] = rgbC[2];
-                        } else if (outlineMode === 'goldGlint') {
-                            data[i] = 218; data[i + 1] = 165; data[i + 2] = 32;
-                        } else if (outlineMode === 'silverSpark') {
-                            data[i] = 192; data[i + 1] = 192; data[i + 2] = 192;
-                        } else if (outlineMode === 'phantom') {
-                            data[i] = 255 - r; data[i + 1] = 255 - g; data[i + 2] = 255 - b;
-                        }
-                    } else {
-                        if (techNoise.checked && Math.random() > 0.94) {
-                            data[i] = Math.min(255, Math.max(0, r + (Math.random() > 0.5 ? 2 : -2)));
-                            data[i + 1] = Math.min(255, Math.max(0, g + (Math.random() > 0.5 ? 2 : -2)));
-                        }
-                        if (techAlpha.checked && Math.random() > 0.98) {
-                            data[i + 3] = 254; 
-                        }
-                        if (techFourier.checked && Math.random() > 0.99) {
-                            data[i] = (r + 1) % 255;
-                        }
-                        if (techSalt.checked && Math.random() > 0.995) {
-                            data[i] = 255; data[i+1] = 255; data[i+2] = 255;
-                        }
-                    }
-                }
-            }
-            ctx.putImageData(imgData, 0, 0);
-
-            if (techEdge.checked) {
-                for (let y = 0; y < h; y += 2) {
-                    if (Math.random() > 0.75) {
-                        let shift = (Math.random() > 0.5 ? 1 : -1);
-                        let rowData = ctx.getImageData(0, y, w, 1);
-                        ctx.putImageData(rowData, shift, y);
-                    }
-                }
-            }
-
-            if (techGlitch.checked) {
-                const cuts = Math.floor(Math.random() * 4) + 3;
-                for (let g = 0; g < cuts; g++) {
-                    let sliceY = Math.floor(Math.random() * h);
-                    let sliceHeight = Math.floor(Math.random() * 4) + 2;
-                    let shiftX = (Math.random() > 0.5 ? 1 : -1) * (Math.floor(Math.random() * 6) + 3);
-                    if (sliceY + sliceHeight < h) {
-                        let sliceData = ctx.getImageData(0, sliceY, w, sliceHeight);
-                        ctx.putImageData(sliceData, shiftX, sliceY);
-                    }
-                }
-            }
-
-            if (techRotation.checked) {
-                ctx.save();
-                ctx.translate(w / 2, h / 2);
-                ctx.rotate((Math.random() * 0.2 - 0.1) * Math.PI / 180);
-                ctx.drawImage(ctx.canvas, -w / 2, -h / 2);
-                ctx.restore();
-            }
-        }
-
-        function applyAdvancedIceGlitchFilter(ctx, w, h, bgMode, targetBg, outlineMode, targetOutline) {
-            const bufferCanvas = document.createElement('canvas');
-            bufferCanvas.width = w; bufferCanvas.height = h;
-            const bCtx = bufferCanvas.getContext('2d');
-            
-            let hasGrad = drawGradientBg(bCtx, w, h, bgMode);
-
-            const imgData = ctx.getImageData(0, 0, w, h);
-            const data = imgData.data;
-
-            const randomH = Math.floor(Math.random() * 360);
-            const randBg = hslToRgb(randomH / 360, 0.65, 0.25);
-            const baseBG_R = data[0]; const baseBG_G = data[1]; const baseBG_B = data[2];
-
-            const bufImgData = hasGrad ? bCtx.getImageData(0, 0, w, h) : null;
-            const bufData = hasGrad ? bufImgData.data : null;
-
-            for (let i = 0; i < data.length; i += 4) {
-                let r = data[i]; let g = data[i + 1]; let b = data[i + 2]; let a = data[i + 3];
-                let isBackground = checkIsBackground(r, g, b, a, baseBG_R, baseBG_G, baseBG_B);
-
-                if (isBackground) {
-                    if (hasGrad) {
-                        data[i] = bufData[i]; data[i + 1] = bufData[i + 1]; data[i + 2] = bufData[i + 2]; data[i + 3] = 255;
-                    } else if (bgMode === 'custom') {
-                        data[i] = targetBg.r; data[i + 1] = targetBg.g; data[i + 2] = targetBg.b; data[i + 3] = 255;
-                    } else if (bgMode === 'random') {
-                        data[i] = randBg[0]; data[i + 1] = randBg[1]; data[i + 2] = randBg[2]; data[i + 3] = 255;
-                    } else {
-                        data[i] = 15; data[i + 1] = 30; data[i + 2] = 50; data[i + 3] = 255;
-                    }
-                } else {
-                    let v = (r * 2126 + g * 7152 + b * 722) / 10000;
-                    if (v < 55) {
-                        const idx = i / 4;
-                        const pixelX = idx % w;
-                        const pixelY = Math.floor(idx / w);
-
-                        if (outlineMode === 'custom') {
-                            data[i] = targetOutline.r; data[i + 1] = targetOutline.g; data[i + 2] = targetOutline.b;
-                        } else if (outlineMode === 'random') {
-                            let randColorType = Math.random();
-                            if (randColorType < 0.25) { data[i] = 255; data[i + 1] = 50; data[i + 2] = 120; } 
-                            else if (randColorType < 0.50) { data[i] = 50; data[i + 1] = 255; data[i + 2] = 150; } 
-                            else if (randColorType < 0.75) { data[i] = 255; data[i + 1] = 200; data[i + 2] = 0; } 
-                            else { data[i] = 200; data[i + 1] = 50; data[i + 2] = 255; }
-                        } else if (outlineMode === 'neonGlow') {
-                            data[i] = 255; data[i + 1] = 0; data[i + 2] = 128;
-                        } else if (outlineMode === 'rainbow') {
-                            let hueVal = ((pixelX + pixelY) % w) / w * 360;
-                            let rgbC = hslToRgb(hueVal / 360, 0.9, 0.5);
-                            data[i] = rgbC[0]; data[i + 1] = rgbC[1]; data[i + 2] = rgbC[2];
-                        } else if (outlineMode === 'goldGlint') {
-                            data[i] = 255; data[i + 1] = 215; data[i + 2] = 0;
-                        } else if (outlineMode === 'silverSpark') {
-                            data[i] = 230; data[i + 1] = 230; data[i + 2] = 230;
-                        } else if (outlineMode === 'phantom') {
-                            data[i] = 255 - r; data[i + 1] = 255 - g; data[i + 2] = 255 - b;
-                        }
-                    } else {
-                        let brightness = (r * 0.299 + g * 0.587 + b * 0.114);
-                        data[i] = Math.min(200, brightness * 0.4 + 20);
-                        data[i + 1] = Math.min(240, brightness * 0.95 + 60);
-                        data[i + 2] = Math.min(255, brightness * 1.3 + 120);
-
-                        data[i] = Math.min(255, data[i] + 15);
-                        data[i + 1] = Math.min(255, data[i + 1] + 25);
-                        data[i + 2] = Math.min(255, data[i + 2] + 20);
-                    }
-                }
-            }
-            ctx.putImageData(imgData, 0, 0);
-            applyGlobalAntiCopyrightOverride(ctx, w, h, bgMode, targetBg, outlineMode, targetOutline, false);
-        }
-
-        function applyHandDrawnPencilArtFilter(ctx, w, h, bgMode, targetBg, outlineMode, targetOutline) {
-            const imgData = ctx.getImageData(0, 0, w, h);
-            const data = imgData.data;
-            const baseBG_R = data[0]; const baseBG_G = data[1]; const baseBG_B = data[2];
-
-            for (let i = 0; i < data.length; i += 4) {
-                let r = data[i]; let g = data[i + 1]; let b = data[i + 2]; let a = data[i + 3];
-                let isBackground = checkIsBackground(r, g, b, a, baseBG_R, baseBG_G, baseBG_B);
-
-                if (!isBackground) {
-                    let mono = (r * 0.299 + g * 0.587 + b * 0.114);
-                    if (mono < 110) {
-                        data[i] = 35; data[i+1] = 35; data[i+2] = 40; 
-                    } else {
-                        data[i] = 240; data[i+1] = 238; data[i+2] = 233; 
-                    }
-                }
-            }
-            ctx.putImageData(imgData, 0, 0);
-            applyGlobalAntiCopyrightOverride(ctx, w, h, bgMode, targetBg, outlineMode, targetOutline, false);
-        }
-
-        function hexToRgb(hex) {
-            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-            return result ? {
-                r: parseInt(result[1], 16),
-                g: parseInt(result[2], 16),
-                b: parseInt(result[3], 16)
-            } : { r: 0, g: 0, b: 0 };
-        }
-
-        function hslToRgb(h, s, l) {
-            let r, g, b;
-            if (s == 0) {
-                r = g = b = l;
-            } else {
-                const hue2rgb = (p, q, t) => {
-                    if (t < 0) t += 1;
-                    if (t > 1) t -= 1;
-                    if (t < 1/6) return p + (q - p) * 6 * t;
-                    if (t < 1/2) return q;
-                    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-                    return p;
-                }
-                const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-                const p = 2 * l - q;
-                r = hue2rgb(p, q, h + 1/3);
-                g = hue2rgb(p, q, h);
-                b = hue2rgb(p, q, h - 1/3);
-            }
-            return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+        function generateZipArchive(images) {
+            const zip = new JSZip();
+            images.forEach(item => {
+                zip.file(item.name, item.blob);
+            });
+            zip.generateAsync({ type: "blob" }).then(content => {
+                statusText.innerText = `⚡ Processing Complete! 100% of Collection Protected and Encrypted.`;
+                downloadBtn.classList.remove('hidden');
+                processBtn.disabled = false;
+                downloadBtn.onclick = () => {
+                    const dl = document.createElement('a');
+                    dl.href = URL.createObjectURL(content);
+                    dl.download = "Protected_AntiCopyright_Collection.zip";
+                    dl.click();
+                };
+            });
         }
 
         function loadImage(file) {
@@ -1039,128 +882,293 @@
             });
         }
 
-        downloadBtn.addEventListener('click', () => {
-            const zip = new JSZip();
-            processedImages.forEach(item => {
-                zip.file(item.name, item.blob);
+        function loadImageFromSrc(src) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.src = src;
             });
+        }
 
-            statusText.innerText = "⚡ Exporting high-speed optimized WebP package (HD Structure Restained)...";
+        function hexToRgb(hex) {
+            const r = parseInt(hex.slice(1, 3), 16);
+            const g = parseInt(hex.slice(3, 5), 16);
+            const b = parseInt(hex.slice(5, 7), 16);
+            return { r, g, b };
+        }
 
-            zip.generateAsync({ type: 'blob' }).then((content) => {
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(content);
-                link.download = "Optimized_HD_Secure_NFTs.zip";
-                link.click();
-                statusText.innerText = "🚀 Compressed Multi-Tech Asset Package Exported!";
-            });
-        });
+        function applyFilterToContext(ctx, filter) {
+            if (filter.startsWith('hue')) {
+                const deg = filter.replace('hue', '');
+                ctx.canvas.style.filter = `hue-rotate(${deg}deg)`;
+                ctx.drawImage(ctx.canvas, 0, 0);
+                ctx.canvas.style.filter = 'none';
+                return;
+            }
+            switch (filter) {
+                case 'cyberpunk': ctx.filter = 'contrast(1.2) saturate(1.8) hue-rotate(-15deg)'; break;
+                case 'matrix': ctx.filter = 'contrast(1.4) saturate(0.9) sepia(0.6) hue-rotate(85deg)'; break;
+                case 'infrared': ctx.filter = 'hue-rotate(140deg) saturate(2) invert(0.1)'; break;
+                case 'tokyo': ctx.filter = 'saturate(1.4) hue-rotate(-45deg) brightness(0.9)'; break;
+                case 'toxic': ctx.filter = 'hue-rotate(70deg) saturate(2.5) contrast(1.3)'; break;
+                case 'synthwave': ctx.filter = 'saturate(1.7) contrast(1.1) hue-rotate(310deg)'; break;
+                case 'hyperBeast': ctx.filter = 'saturate(3) contrast(1.5) hue-rotate(45deg)'; break;
+                case 'quantum': ctx.filter = 'hue-rotate(250deg) saturate(1.8) contrast(1.2)'; break;
+                case 'laserTag': ctx.filter = 'contrast(1.6) saturate(1.5) brightness(1.1)'; break;
+                case 'metaverse': ctx.filter = 'contrast(1.1) saturate(1.3) brightness(0.95)'; break;
+                case 'neoHolo': ctx.filter = 'hue-rotate(180deg) saturate(1.2) opacity(0.95)'; break;
+                case 'glitchGrid': ctx.filter = 'contrast(1.3) brightness(1.05)'; break;
+                case 'cyberAlley': ctx.filter = 'saturate(1.1) contrast(1.1) brightness(0.85)'; break;
+                case 'futureMecha': ctx.filter = 'grayscale(0.3) contrast(1.2) brightness(0.9)'; break;
+                case 'gold': ctx.filter = 'sepia(0.8) saturate(2.5) contrast(1.2) hue-rotate(5deg)'; break;
+                case 'silver': ctx.filter = 'grayscale(1) contrast(1.3) brightness(1.1)'; break;
+                case 'bronze': ctx.filter = 'sepia(0.9) saturate(1.4) contrast(1.1) brightness(0.85)'; break;
+                case 'ruby': ctx.filter = 'hue-rotate(340deg) saturate(2.5) contrast(1.3)'; break;
+                case 'emerald': ctx.filter = 'hue-rotate(90deg) saturate(2.2) contrast(1.2)'; break;
+                case 'sapphire': ctx.filter = 'hue-rotate(190deg) saturate(2.4) contrast(1.2)'; break;
+                case 'amethyst': ctx.filter = 'hue-rotate(270deg) saturate(2.2) contrast(1.2)'; break;
+                case 'platinum': ctx.filter = 'grayscale(0.9) contrast(1.4) brightness(1.2)'; break;
+                case 'diamond': ctx.filter = 'contrast(1.7) brightness(1.15) saturate(0.8)'; break;
+                case 'obsidian': ctx.filter = 'contrast(1.5) brightness(0.4) grayscale(0.2)'; break;
+                case 'rosegold': ctx.filter = 'sepia(0.4) hue-rotate(330deg) saturate(1.7) contrast(1.1)'; break;
+                case 'pearlDrop': ctx.filter = 'saturate(0.7) brightness(1.1) contrast(0.95)'; break;
+                case 'sunset': ctx.filter = 'hue-rotate(340deg) saturate(1.5)'; break;
+                case 'frozen': ctx.filter = 'hue-rotate(190deg) saturate(1.1) brightness(1.05)'; break;
+                case 'mars': ctx.filter = 'hue-rotate(15deg) saturate(1.6) contrast(1.1)'; break;
+                case 'deepSea': ctx.filter = 'hue-rotate(210deg) saturate(1.3) brightness(0.75)'; break;
+                case 'bubblegum': ctx.filter = 'saturate(1.4) brightness(1.1) hue-rotate(320deg)'; break;
+                case 'radioactive': ctx.filter = 'hue-rotate(60deg) saturate(2) contrast(1.4)'; break;
+                case 'zombie': ctx.filter = 'sepia(0.5) hue-rotate(80deg) saturate(0.8) contrast(1.1)'; break;
+                case 'candy': ctx.filter = 'hue-rotate(160deg) saturate(1.8)'; break;
+                case 'supernova': ctx.filter = 'contrast(1.4) saturate(2) brightness(1.1)'; break;
+                case 'aurora': ctx.filter = 'hue-rotate(110deg) saturate(1.4)'; break;
+                case 'miamiVice': ctx.filter = 'hue-rotate(170deg) saturate(1.5) brightness(1.05)'; break;
+                case 'acidRain': ctx.filter = 'hue-rotate(85deg) contrast(1.3) saturate(1.6)'; break;
+                case 'lostDesert': ctx.filter = 'sepia(0.6) contrast(1.05) saturate(1.2)'; break;
+                case 'plasmaStorm': ctx.filter = 'hue-rotate(290deg) saturate(2) contrast(1.3)'; break;
+                case 'invert': ctx.filter = 'invert(1)'; break;
+                case 'grayscale': ctx.filter = 'grayscale(1)'; break;
+                case 'sepia': ctx.filter = 'sepia(1)'; break;
+                case 'vintage': ctx.filter = 'contrast(1.4) saturate(0.7) sepia(0.2)'; break;
+                case 'monochromeBlue': ctx.filter = 'grayscale(1) sepia(1) hue-rotate(190deg) saturate(2.5)'; break;
+                case 'monochromeRed': ctx.filter = 'grayscale(1) sepia(1) hue-rotate(340deg) saturate(3)'; break;
+                case 'ghost': ctx.filter = 'brightness(1.5) contrast(0.8) saturate(0.5)'; break;
+                case 'darkKnight': ctx.filter = 'brightness(0.5) contrast(1.4) grayscale(0.3)'; break;
+                case 'solarize': ctx.filter = 'difference invert(0.5) contrast(1.2)'; break;
+                case 'popArt': ctx.filter = 'contrast(2) saturate(2.5)'; break;
+                case 'halftone': ctx.filter = 'contrast(1.5) grayscale(0.5)'; break;
+                case 'oilCanvas': ctx.filter = 'contrast(1.1) saturate(1.2) blur(0.3px)'; break;
+                case 'polaroid': ctx.filter = 'contrast(0.95) saturate(0.8) sepia(0.15) brightness(1.02)'; break;
+                case 'gotham': ctx.filter = 'grayscale(0.4) contrast(1.2) brightness(0.9)'; break;
+                
+                // Extra New Presets
+                case 'cosmicVibe': ctx.filter = 'hue-rotate(265deg) saturate(1.7) contrast(1.25)'; break;
+                case 'acidVortex': ctx.filter = 'hue-rotate(105deg) saturate(2.1) contrast(1.35)'; break;
+                case 'retroDream': ctx.filter = 'sepia(0.25) saturate(1.3) contrast(1.05) brightness(1.02)'; break;
+                default: ctx.filter = 'none'; break;
+            }
+            ctx.drawImage(ctx.canvas, 0, 0);
+            ctx.filter = 'none';
+        }
 
-        // ==========================================
-        // TABS 2: 10,000 BULK COMPRESSOR LOGIC ENGINE
-        // ==========================================
+        function applyGlobalAntiCopyrightOverride(ctx, w, h, bgM, bgC, outM, outC, isPreview) {
+            const imgData = ctx.getImageData(0, 0, w, h);
+            const data = imgData.data;
+
+            const finalBg = bgM === 'custom' ? bgC : {r:20, g:30, b:45};
+
+            for (let i = 0; i < data.length; i += 4) {
+                let alpha = data[i + 3];
+                
+                // Dynamic Gradient Generators inside Loop Map
+                if (alpha < 10 && bgM !== 'keep') {
+                    let pixelY = Math.floor((i/4) / w);
+                    let ratio = pixelY / h;
+                    
+                    if(bgM === 'gradSunset') {
+                        data[i] = 255 - (ratio * 100); data[i+1] = 90 + (ratio * 30); data[i+2] = 50 + (ratio * 150);
+                    } else if(bgM === 'gradCyber') {
+                        data[i] = 0; data[i+1] = 200 - (ratio * 150); data[i+2] = 255;
+                    } else if(bgM === 'gradMatrix') {
+                        data[i] = 10; data[i+1] = 255 - (ratio * 200); data[i+2] = 10;
+                    } else if(bgM === 'gradAurora') {
+                        data[i] = 50; data[i+1] = 220 - (ratio * 100); data[i+2] = 150 + (ratio * 50);
+                    } else if(bgM === 'gradVapor') {
+                        data[i] = 255; data[i+1] = 150 - (ratio * 50); data[i+2] = 230;
+                    } else if(bgM === 'gradDeep') {
+                        data[i] = 5; data[i+1] = 15; data[i+2] = 50 + (ratio * 70);
+                    } else if(bgM === 'gradFire') {
+                        data[i] = 255; data[i+1] = 60 + (ratio * 140); data[i+2] = 0;
+                    } else if(bgM === 'gradRetrowave') {
+                        data[i] = 20 + Math.floor(ratio*40); data[i+1] = 10; data[i+2] = 40 + Math.floor(ratio * 60);
+                    } else if(bgM === 'gradTokyoPink') {
+                        data[i] = 120 - Math.floor(ratio*80); data[i+1] = 10; data[i+2] = 150;
+                    } else if(bgM === 'gradGoldenHour') {
+                        data[i] = 230; data[i+1] = 170 - Math.floor(ratio*50); data[i+2] = 30;
+                    } else if(bgM === 'gradHyperDrive') {
+                        data[i] = 10; data[i+1] = Math.floor(ratio*100); data[i+2] = 120;
+                    } else if(bgM === 'gradEcto') {
+                        data[i] = Math.floor(ratio*50); data[i+1] = 240; data[i+2] = 20;
+                    } else {
+                        data[i] = finalBg.r; data[i+1] = finalBg.g; data[i+2] = finalBg.b;
+                    }
+                    data[i + 3] = 255;
+                }
+
+                // Inline Pixel Edge Manipulation Rules for Outlines
+                if (outM !== 'keep' && alpha > 200) {
+                    let idx = i / 4;
+                    let cx = idx % w;
+                    let cy = Math.floor(idx / w);
+                    
+                    if (cx > 0 && cx < w - 1 && cy > 0 && cy < h - 1) {
+                        let leftA = data[((cy * w + (cx - 1)) * 4) + 3];
+                        let rightA = data[((cy * w + (cx + 1)) * 4) + 3];
+                        let upA = data[(((cy - 1) * w + cx) * 4) + 3];
+                        let downA = data[(((cy + 1) * w + cx) * 4) + 3];
+                        
+                        if (leftA < 50 || rightA < 50 || upA < 50 || downA < 50) {
+                            if (outM === 'custom') {
+                                data[i] = outC.r; data[i+1] = outC.g; data[i+2] = outC.b;
+                            } else if (outM === 'neonGlow') {
+                                data[i] = 0; data[i+1] = 255; data[i+2] = 255;
+                            } else if (outM === 'rainbow') {
+                                data[i] = (cx * 2) % 255; data[i+1] = (cy * 2) % 255; data[i+2] = 150;
+                            } else if (outM === 'goldGlint') {
+                                data[i] = 212; data[i+1] = 175; data[i+2] = 55;
+                            } else if (outM === 'silverSpark') {
+                                data[i] = 192; data[i+1] = 192; data[i+2] = 192;
+                            } else if (outM === 'cosmicPurple') {
+                                data[i] = 160; data[i+1] = 32; data[i+2] = 240;
+                            } else if (outM === 'radioactiveGreen') {
+                                data[i] = 57; data[i+1] = 255; data[i+2] = 20;
+                            } else if (outM === 'frozenIce') {
+                                data[i] = 137; data[i+1] = 207; data[i+2] = 240;
+                            } else if (outM === 'volcanicRed') {
+                                data[i] = 255; data[i+1] = 69; data[i+2] = 0;
+                            } else if (outM === 'electricTeal') {
+                                data[i] = 0; data[i+1] = 245; data[i+2] = 255;
+                            }
+                        }
+                    }
+                }
+
+                // Basic Noise Seed Operations
+                if (!isPreview && techNoise.checked) {
+                    let randNoise = (Math.random() - 0.5) * 3;
+                    data[i] = Math.min(255, Math.max(0, data[i] + randNoise));
+                    data[i+1] = Math.min(255, Math.max(0, data[i+1] + randNoise));
+                    data[i+2] = Math.min(255, Math.max(0, data[i+2] + randNoise));
+                }
+            }
+            ctx.putImageData(imgData, 0, 0);
+        }
+
+        function applyAdvancedIceGlitchFilter(ctx, w, h, bgM, bgC, outM, outC) {
+            applyFilterToContext(ctx, 'monochromeBlue');
+            applyGlobalAntiCopyrightOverride(ctx, w, h, bgM, bgC, outM, outC, false);
+        }
+
+        function applyHandDrawnPencilArtFilter(ctx, w, h, bgM, bgC, outM, outC) {
+            applyFilterToContext(ctx, 'grayscale');
+            applyGlobalAntiCopyrightOverride(ctx, w, h, bgM, bgC, outM, outC, false);
+        }
+
+        // --- Bulk HD Compressor Core Mechanism ---
         const dropZoneCompressor = document.getElementById('dropZoneCompressor');
         const compressorFileInput = document.getElementById('compressorFileInput');
-        const qualityRange = document.getElementById('qualityRange');
-        const qualityVal = document.getElementById('qualityVal');
         const compProgressContainer = document.getElementById('compProgressContainer');
-        const compProgressBar = document.getElementById('compProgressBar');
-        const compProgressPercent = document.getElementById('compProgressPercent');
         const compStatusText = document.getElementById('compStatusText');
+        const compProgressPercent = document.getElementById('compProgressPercent');
+        const compProgressBar = document.getElementById('compProgressBar');
         const compFileCount = document.getElementById('compFileCount');
         const compEtaText = document.getElementById('compEtaText');
         const compDownloadBtn = document.getElementById('compDownloadBtn');
-
-        let bulkZipInstance = null;
-        let bulkCompressedBlobs = [];
+        const qualityRange = document.getElementById('qualityRange');
+        const qualityVal = document.getElementById('qualityVal');
 
         qualityRange.addEventListener('input', (e) => {
-            qualityVal.textContent = e.target.value;
+            qualityVal.innerText = e.target.value;
         });
 
         dropZoneCompressor.addEventListener('click', () => compressorFileInput.click());
-
-        dropZoneCompressor.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZoneCompressor.classList.add('border-emerald-500', 'bg-slate-900/40');
-        });
-
-        dropZoneCompressor.addEventListener('dragleave', () => {
-            dropZoneCompressor.classList.remove('border-emerald-500', 'bg-slate-900/40');
-        });
-
+        dropZoneCompressor.addEventListener('dragover', (e) => { e.preventDefault(); dropZoneCompressor.classList.add('border-emerald-500'); });
+        dropZoneCompressor.addEventListener('dragleave', () => dropZoneCompressor.classList.remove('border-emerald-500'));
         dropZoneCompressor.addEventListener('drop', (e) => {
             e.preventDefault();
-            dropZoneCompressor.classList.remove('border-emerald-500', 'bg-slate-900/40');
-            if (e.dataTransfer.files.length > 0) {
-                runBulkCompression(e.dataTransfer.files);
-            }
+            dropZoneCompressor.classList.remove('border-emerald-500');
+            handleBulkCompressionProcessing(Array.from(e.dataTransfer.files));
         });
 
         compressorFileInput.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                runBulkCompression(e.target.files);
-            }
+            handleBulkCompressionProcessing(Array.from(e.target.files));
         });
 
-        async function runBulkCompression(files) {
-            const totalFiles = files.length;
-            const qualityFactor = parseFloat(qualityRange.value);
-            
-            bulkZipInstance = new JSZip();
-            bulkCompressedBlobs = [];
-            compDownloadBtn.classList.add('hidden');
+        async function handleBulkCompressionProcessing(files) {
+            const imageFiles = files.filter(f => f.type.startsWith('image/'));
+            if(imageFiles.length === 0) return;
+
             compProgressContainer.classList.remove('hidden');
+            compDownloadBtn.classList.add('hidden');
             
-            let completedCount = 0;
-            const compressionStartTime = Date.now();
+            const targetQuality = parseFloat(qualityRange.value);
+            const compressedArchive = new JSZip();
+            const startTime = Date.now();
 
-            for (let i = 0; i < totalFiles; i++) {
-                const currentFile = files[i];
-                
-                if (!currentFile.type.startsWith('image/')) {
-                    completedCount++;
-                    continue;
-                }
-
-                compStatusText.textContent = `Optimizing: ${currentFile.name}`;
+            for(let i=0; i < imageFiles.length; i++) {
+                const currentFile = imageFiles[i];
+                compStatusText.innerText = `Compressing Target Node Matrix: ${currentFile.name}`;
                 
                 try {
-                    const optimizedBlob = await executeWebPCompression(currentFile, qualityFactor);
-                    const originalBaseName = currentFile.name.substring(0, currentFile.name.lastIndexOf('.')) || currentFile.name;
-                    bulkZipInstance.file(`${originalBaseName}.webp`, optimizedBlob);
-                } catch (err) {
-                    console.error("Compression fault at asset:", currentFile.name, err);
+                    if (currentFile.type === 'image/gif') {
+                        // GIF কম্প্রেশন রুলস
+                        const frames = await extractGifFrames(currentFile, 400, 400, false);
+                        const processedFrames = [];
+                        for(let f of frames) {
+                            processedFrames.push(f);
+                        }
+                        const compressedGifBlob = await new Promise((resolve) => {
+                            gifshot.createGIF({
+                                images: processedFrames,
+                                gifWidth: 400,
+                                gifHeight: 400,
+                                interval: 0.1,
+                                sampleInterval: 15, // সাইজ বুস্ট রেশিও অপ্টিমাইজেশন
+                                quality: 10
+                            }, function(obj) {
+                                if(!obj.error) {
+                                    fetch(obj.image).then(res => res.blob()).then(resolve);
+                                } else {
+                                    resolve(currentFile);
+                                }
+                            });
+                        });
+                        compressedArchive.file(currentFile.name, compressedGifBlob);
+                    } else {
+                        const compressedBlob = await executeWebPCompression(currentFile, targetQuality);
+                        const cleanName = currentFile.name.replace(/\.[^/.]+$/, "") + ".webp";
+                        compressedArchive.file(cleanName, compressedBlob);
+                    }
+                } catch(e) {
+                    console.error("Compression thread faulted out", e);
                 }
 
-                completedCount++;
-                
-                const percent = Math.round((completedCount / totalFiles) * 100);
-                compProgressBar.style.width = `${percent}%`;
-                compProgressPercent.textContent = `${percent}%`;
-                compFileCount.textContent = `${completedCount} / ${totalFiles} Renders Optimized`;
+                const progress = Math.round(((i + 1) / imageFiles.length) * 100);
+                compProgressPercent.innerText = progress + "%";
+                compProgressBar.style.width = progress + "%";
+                compFileCount.innerText = `${i + 1} / ${imageFiles.length} Renders Optimized`;
 
-                const secondsElapsed = (Date.now() - compressionStartTime) / 1000;
-                const processingSpeed = completedCount / secondsElapsed;
-                const remainingFiles = totalFiles - completedCount;
-                const estimatedSecondsLeft = Math.round(remainingFiles / processingSpeed);
-
-                if (estimatedSecondsLeft > 60) {
-                    compEtaText.textContent = `ETA Prediction: ~${Math.round(estimatedSecondsLeft / 60)} minutes`;
-                } else {
-                    compEtaText.textContent = `ETA Prediction: ${estimatedSecondsLeft} seconds`;
-                }
+                const elapsed = Date.now() - startTime;
+                const avgTime = elapsed / (i + 1);
+                const remaining = imageFiles.length - (i + 1);
+                const etaSeconds = Math.round((avgTime * remaining) / 1000);
+                compEtaText.innerText = `ETA Prediction: ~${etaSeconds}s Remaining`;
             }
 
-            compStatusText.textContent = "Packaging Secure HD Production Package...";
-            compEtaText.textContent = "Finalizing data structures...";
-            
-            bulkZipInstance.generateAsync({ type: "blob" }).then(function (archiveContent) {
-                compStatusText.textContent = "10k NFT Production Batch Compressed Successfully!";
-                compEtaText.textContent = "Export streaming ready.";
-                
+            compStatusText.innerText = "Writing high-density zip chunk stream safely...";
+            compressedArchive.generateAsync({type:"blob"}).then((archiveContent) => {
+                compStatusText.innerText = "⚡ Bulk HD Compression Layer Complete!";
                 compDownloadBtn.classList.remove('hidden');
-                compDownloadBtn.style.display = 'flex';
                 compDownloadBtn.onclick = () => {
                     const downloadAnchor = document.createElement('a');
                     downloadAnchor.href = URL.createObjectURL(archiveContent);
