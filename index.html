@@ -1,932 +1,269 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testpunks - Ultra Anti-Copyright NFT Studio Pro</title>
+    <title>WebP to PNG Bulk Converter</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col items-center py-10 px-4 font-sans">
+<body class="bg-slate-50 font-sans min-h-screen flex flex-col justify-between">
 
-    <div class="max-w-5xl w-full mb-6 flex justify-center gap-4 bg-slate-900 p-2.5 rounded-2xl border border-slate-800 shadow-xl">
-        <button id="tabEngineBtn" onclick="switchTab('engine-pro')" class="flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-indigo-600 text-white shadow-lg shadow-cyan-500/10">
-            <span>🛡️</span> Multi-Tech Engine Pro & Pixelizer
-        </button>
-        <button id="tabCompressorBtn" onclick="switchTab('hd-compressor')" class="flex-1 py-3 px-4 rounded-xl text-sm font-bold text-slate-400 bg-slate-950/40 hover:bg-slate-800/60 hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
-            <span>⚡</span> 10k NFT Bulk HD Compressor
-        </button>
-    </div>
-
-    <div id="tab-engine-pro" class="max-w-5xl w-full bg-slate-900 rounded-3xl p-6 md:p-10 shadow-2xl border border-slate-800 block">
+    <main class="max-w-4xl w-full mx-auto my-10 p-6 bg-white rounded-2xl shadow-sm border border-slate-100 flex-grow">
         <div class="text-center mb-8">
-            <h1 class="text-4xl md:text-5xl font-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-pink-500 bg-clip-text text-transparent tracking-wide">
-                Testpunks Multi-Tech NFT Engine Pro
-            </h1>
-            <p class="text-slate-400 mt-2 text-sm md:text-base">Universal Advanced Edge Manipulation, Mirroring, HD Compression, and Cross-Collection Anti-Ban System.</p>
+            <h1 class="text-3xl font-bold text-slate-800 mb-2">WebP to PNG Bulk Converter</h1>
+            <p class="text-slate-500">আপনার WebP ছবিগুলো নাম ঠিক রেখে PNG ফরম্যাটে কনভার্ট করুন (১০,০০০+ ছবি একসাথে প্রসেস করার উপযোগী)</p>
         </div>
 
-        <div class="border-2 border-dashed border-slate-700 hover:border-cyan-500 rounded-2xl p-8 text-center cursor-pointer transition-all duration-300 bg-slate-950/40 mb-8 relative group">
-            <input type="file" id="imageInput" accept="image/*" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-            <div class="space-y-3">
-                <div class="mx-auto h-16 w-16 text-slate-500 group-hover:text-cyan-400 transition-colors duration-300 flex items-center justify-center bg-slate-800 rounded-2xl shadow-inner">
-                    <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                    </svg>
-                </div>
-                <p class="text-xl font-bold text-slate-300">Batch Upload NFT Folders or Single Images</p>
-                <p class="text-xs text-slate-500 font-mono">Supports PNG, JPG, WEBP formats (Universal Ape, Punk & Penguin Engine)</p>
+        <div id="dropzone" class="border-2 border-dashed border-slate-300 hover:border-indigo-500 rounded-xl p-8 text-center cursor-pointer transition-colors bg-slate-50/50">
+            <input type="file" id="fileInput" multiple accept=".webp" class="hidden">
+            <div class="flex flex-col items-center justify-center space-y-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+                <p class="text-base text-slate-700 font-medium">এখানে আপনার WebP ফাইলগুলো ড্র্যাগ এন্ড ড্রপ করুন অথবা ক্লিক করে সিলেক্ট করুন</p>
+                <p class="text-xs text-slate-400">অনতিধিক ১০,০০০+ ফাইল একসাথে প্রসেস করা সম্ভব</p>
             </div>
         </div>
 
-        <div class="bg-gradient-to-r from-cyan-950/50 via-slate-950/70 to-indigo-950/50 p-6 rounded-2xl border border-cyan-500/30 mb-8">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
-                <div>
-                    <h3 class="text-base font-bold text-cyan-400 flex items-center gap-2">
-                        <span>🛡️</span> Structural Non-Linear Remapping (AI-Dodge Bypass Engine Pro)
-                    </h3>
-                    <p class="text-xs text-slate-400 mt-1">Changes internal pixel-coordinate mapping to completely deceive marketplace duplicate checkers, while beautifully retaining exact character body positions.</p>
-                </div>
-                <div class="flex items-center gap-3 bg-slate-950 p-2 rounded-xl border border-slate-800 w-full md:w-auto justify-between">
-                    <span class="text-xs text-slate-300 font-semibold pl-1">Bypass Algorithm:</span>
-                    <select id="bypassRemapSelect" class="bg-slate-900 text-xs text-cyan-400 font-bold rounded-lg p-2 border border-slate-700 focus:outline-none focus:border-cyan-500">
-                        <option value="none">Disabled / Clean</option>
-                        <option value="microShift">Micro-Coordinate Shift Loop</option>
-                        <option value="sinusoidal">Sinusoidal Spatial Alteration</option>
-                        <option value="asymmetric">Asymmetric Quadrant Shifter</option>
-                        <option value="vectorWrap">Vector-Wrap Anti-Signature Mode</option>
-                        <option value="deepQuantum">Deep Quantum Pixel Scrambler v3</option>
-                    </select>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-900/60 p-3 rounded-xl border border-slate-800/40">
-                <div>
-                    <label class="block text-[11px] font-bold text-slate-400 uppercase mb-1">Remap Structural Intensity Factor</label>
-                    <input id="remapIntensity" type="range" min="1" max="15" step="1" value="4" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400">
-                </div>
-                <div>
-                    <label class="block text-[11px] font-bold text-slate-400 uppercase mb-1">Marketplace AI Distortion Filter</label>
-                    <div class="flex gap-2">
-                        <label class="flex-1 flex items-center justify-between px-2 py-1 bg-slate-950 rounded border border-slate-800 text-[10px] cursor-pointer">
-                            <span>Hash Randomizer</span>
-                            <input type="checkbox" id="hashRandCheck" checked class="rounded bg-slate-800 border-slate-700 text-cyan-500 w-3.5 h-3.5">
-                        </label>
-                        <label class="flex-1 flex items-center justify-between px-2 py-1 bg-slate-950 rounded border border-slate-800 text-[10px] cursor-pointer">
-                            <span>RGB Seed Inversion</span>
-                            <input type="checkbox" id="seedInvertCheck" class="rounded bg-slate-800 border-slate-700 text-cyan-500 w-3.5 h-3.5">
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            
-            <div class="bg-slate-950/60 p-5 rounded-2xl border border-slate-800 space-y-4">
-                <h3 class="text-sm font-bold text-cyan-400 tracking-wider uppercase flex items-center gap-2">
-                    <span>🔄</span> Geometry & Layout Matrix
-                </h3>
-                <div class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800">
-                    <div>
-                        <p class="text-sm font-semibold">Flip Horizon / Mirror</p>
-                        <p class="text-xs text-slate-500">Change character face direction</p>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="flipCheckbox" class="sr-only peer">
-                        <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-400 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
-                    </label>
-                </div>
-                <div class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800">
-                    <div>
-                        <p class="text-sm font-semibold text-pink-400">HD Smart Resize & Crop</p>
-                        <p class="text-xs text-slate-500">Force Aspect Ratio (872 × 1280)</p>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="resizeCheckbox" class="sr-only peer">
-                        <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-400 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-500"></div>
-                    </label>
-                </div>
-            </div>
-
-            <div class="bg-slate-950/60 p-5 rounded-2xl border border-slate-800 space-y-4">
-                <h3 class="text-sm font-bold text-purple-400 tracking-wider uppercase flex items-center gap-2">
-                    <span>🖌️</span> Outline Modification
-                </h3>
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs text-slate-400">Outline Mode:</span>
-                        <select id="outlineMode" class="bg-slate-900 text-xs text-slate-200 rounded-md p-1.5 border border-slate-800 focus:outline-none focus:border-purple-500 w-48">
-                            <option value="keep">Keep Original / Auto-Detect</option>
-                            <option value="custom">Custom Solid Color</option>
-                            <option value="random">Random Mix Per Image</option>
-                            <option value="neonGlow">Cyber Neon Glow</option>
-                            <option value="rainbow">Chroma Rainbow Edge</option>
-                            <option value="goldGlint">Liquid Gold Outline</option>
-                            <option value="silverSpark">Sterling Silver Edge</option>
-                            <option value="phantom">Phantom Inverted Outline</option>
-                            <option value="cosmicPurple">Cosmic Nebula Purple</option>
-                            <option value="radioactiveGreen">Radioactive Acid Green</option>
-                            <option value="frozenIce">Glacial Frost Ice</option>
-                            <option value="volcanicRed">Volcanic Magma Crimson</option>
-                            <option value="electricTeal">Electric Cyber Teal</option>
-                        </select>
-                    </div>
-                    <div id="customOutlineColorContainer" class="hidden flex items-center justify-between p-2 bg-slate-900 rounded-xl border border-slate-800">
-                        <span class="text-xs text-slate-400">Choose Color:</span>
-                        <input type="color" id="outlineColor" value="#ff007f" class="w-8 h-8 rounded cursor-pointer bg-transparent border-0">
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-slate-950/60 p-5 rounded-2xl border border-slate-800 space-y-4">
-                <h3 class="text-sm font-bold text-pink-400 tracking-wider uppercase flex items-center gap-2">
-                    <span>🌅</span> Smart Background Engine
-                </h3>
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs text-slate-400">Background Mode:</span>
-                        <select id="bgMode" class="bg-slate-900 text-xs text-slate-200 rounded-md p-1.5 border border-slate-800 focus:outline-none focus:border-pink-500 w-48">
-                            <option value="keep">Keep Original / Transparent</option>
-                            <option value="custom">Custom Solid Color</option>
-                            <option value="random">Dynamic Random Per Image</option>
-                            <option value="gradSunset">Gradient: Solana Sunset</option>
-                            <option value="gradCyber">Gradient: Cyberpunk Neon</option>
-                            <option value="gradMatrix">Gradient: Toxic Acid Matrix</option>
-                            <option value="gradAurora">Gradient: Cosmic Aurora</option>
-                            <option value="gradVapor">Gradient: Vaporwave Dream</option>
-                            <option value="gradDeep">Gradient: Abyssal Deep Sea</option>
-                            <option value="gradFire">Gradient: Blazing Supernova</option>
-                            <option value="gradRandom">Gradient: Multi-Mix Random</option>
-                            <option value="gradRetrowave">Gradient: 80s Retro Grid Burst</option>
-                            <option value="gradTokyoPink">Gradient: Tokyo Night Fuchsia</option>
-                            <option value="gradGoldenHour">Gradient: Premium Gold Luxury</option>
-                            <option value="gradHyperDrive">Gradient: Hyperspace Speedlines</option>
-                            <option value="gradEcto">Gradient: Ectoplasm Toxic Slime</option>
-                        </select>
-                    </div>
-                    <div id="customBgColorContainer" class="hidden flex items-center justify-between p-2 bg-slate-900 rounded-xl border border-slate-800">
-                        <span class="text-xs text-slate-400">Select Color:</span>
-                        <input type="color" id="bgColor" value="#0d1117" class="w-8 h-8 rounded cursor-pointer bg-transparent border-0">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="bg-slate-950/40 p-6 rounded-2xl border border-slate-800 mb-8">
-            <h3 class="text-sm font-bold text-emerald-400 tracking-wider uppercase mb-4 flex items-center gap-2">
-                <span>🛡️</span> Multi-Tech Anti-Copyright Arsenal (All Options Maintained + Upgraded)
-            </h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
-                    <span class="text-xs font-semibold text-slate-300">Glitch Micro-Slicing</span>
-                    <input type="checkbox" id="techGlitch" class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0 w-4 h-4">
-                </label>
-                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
-                    <span class="text-xs font-semibold text-slate-300">Invisible Noise (pHash Break)</span>
-                    <input type="checkbox" id="techNoise" checked class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0 w-4 h-4">
-                </label>
-                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
-                    <span class="text-xs font-semibold text-slate-300">Subtle Color Shifting</span>
-                    <input type="checkbox" id="techColorShift" checked class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0 w-4 h-4">
-                </label>
-                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
-                    <span class="text-xs font-semibold text-slate-300">Edge Displacement</span>
-                    <input type="checkbox" id="techEdge" class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0 w-4 h-4">
-                </label>
-                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
-                    <span class="text-xs font-semibold text-slate-300">Metadata Scrambler</span>
-                    <input type="checkbox" id="techMetadata" checked class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0 w-4 h-4">
-                </label>
-                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
-                    <span class="text-xs font-semibold text-slate-300">Alpha Channel Injection</span>
-                    <input type="checkbox" id="techAlpha" class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0 w-4 h-4">
-                </label>
-                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
-                    <span class="text-xs font-semibold text-slate-300">Gamma Distortion Layer</span>
-                    <input type="checkbox" id="techGamma" class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0 w-4 h-4">
-                </label>
-                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
-                    <span class="text-xs font-semibold text-slate-300">EXIF Eraser Protection</span>
-                    <input type="checkbox" id="techExif" checked class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0 w-4 h-4">
-                </label>
-                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border-emerald-800/80 border cursor-pointer select-none">
-                    <span class="text-xs font-semibold text-emerald-400">Fourier Frequency Noise</span>
-                    <input type="checkbox" id="techFourier" checked class="rounded bg-slate-800 border-slate-700 text-emerald-500 focus:ring-0 w-4 h-4">
-                </label>
-                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border-emerald-800/80 border cursor-pointer select-none">
-                    <span class="text-xs font-semibold text-emerald-400">Micro-Rotation Wobble</span>
-                    <input type="checkbox" id="techRotation" checked class="rounded bg-slate-800 border-slate-700 text-emerald-500 focus:ring-0 w-4 h-4">
-                </label>
-                <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border-emerald-800/80 border cursor-pointer select-none">
-                    <span class="text-xs font-semibold text-emerald-400">Stochastic Pixel Salt</span>
-                    <input type="checkbox" id="techSalt" class="rounded bg-slate-800 border-slate-700 text-emerald-500 focus:ring-0 w-4 h-4">
-                </label>
-            </div>
-        </div>
-
-        <div class="bg-gradient-to-r from-purple-900/40 to-indigo-950/50 p-5 rounded-2xl border border-indigo-500/30 mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div id="statsCard" class="hidden mt-6 bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-wrap gap-4 justify-between items-center">
             <div>
-                <h3 class="text-base font-bold text-indigo-400 flex items-center gap-2">
-                    <span>👾</span> Character & Body Pixelizer Engine (Extended Resolution Array)
-                </h3>
-                <p class="text-xs text-slate-400 mt-1">Converts full asset structures into customizable granular pixel matrices dynamically.</p>
+                <span class="text-sm font-medium text-slate-500">মোট ফাইল:</span>
+                <span id="totalCount" class="text-sm font-bold text-slate-800 ml-1">0</span>
             </div>
-            <div class="flex items-center gap-3 bg-slate-950/80 p-2 rounded-xl border border-slate-800 w-full sm:w-auto justify-between">
-                <span class="text-xs text-slate-300 font-semibold pl-2">Pixel Size Matrix:</span>
-                <select id="pixelSizeSelect" class="bg-slate-900 text-xs text-indigo-300 font-bold rounded-lg p-2 border border-slate-700 focus:outline-none focus:border-indigo-500">
-                    <option value="none">Disabled / Off</option>
-                    <option value="8">8x8 Ultra Retro Chunky</option>
-                    <option value="16">16x16 High Compression Micro</option>
-                    <option value="24">24x24 Cyber Custom Grid</option>
-                    <option value="32">32x32 CryptoPunk Style</option>
-                    <option value="48">48x48 Detailed Arcade Retro</option>
-                    <option value="64">64x64 Standard Retro Art</option>
-                </select>
+            <div>
+                <span class="text-sm font-medium text-slate-500">কনভার্ট হয়েছে:</span>
+                <span id="successCount" class="text-sm font-bold text-emerald-600 ml-1">0</span>
             </div>
-        </div>
-
-        <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 mb-8 flex flex-col lg:flex-row gap-5 items-end justify-between">
-            <div class="w-full lg:w-2/3">
-                <label for="filterType" class="block text-sm font-bold text-slate-400 mb-2">🚀 Choose Advanced Filter Engine:</label>
-                <select id="filterType" class="bg-slate-900 text-slate-200 rounded-xl px-4 py-3 border border-slate-800 focus:outline-none focus:border-cyan-500 w-full font-medium cursor-pointer">
-                    
-                    <optgroup label="✨ Exclusive Brand New Filter Engines">
-                        <option value="handDrawnPencil">Hand-Drawn Pencil Art (Sketch Lineart Override with Canvas Preservation)</option>
-                        <option value="monoBlueGlitch">Monochrome Blue Glitch (Ice Cyan + Multi-Color Edge Override)</option>
-                        <option value="quantumBypass">Quantum Bypass Matrix (Advanced AI-Scrambler v2)</option>
-                        <option value="stealthPulse">Stealth Pulse Engine (Deep Convolution Shifter)</option>
-                        <option value="neuralGhost">Neural Ghost Protocol (Algorithmic Invisibility)</option>
-                        <option value="cosmicVibe">Cosmic Interstellar Shifter (Deep Nebula Hues)</option>
-                        <option value="acidVortex">Acidic Vortex Protocol (Algorithmic Signature Erasing)</option>
-                        <option value="retroDream">Retro Dream Pop (Warm Nostalgic Matte Filter)</option>
-                    </optgroup>
-
-                    <optgroup label="🌈 Color Rotation (Standard Hue Shifts)">
-                        <option value="hue15">Hue Shift 15° (Warm Amber Touch)</option>
-                        <option value="hue30">Hue Shift 30° (Subtle Warmth)</option>
-                        <option value="hue45">Hue Shift 45° (Soft Tangerine)</option>
-                        <option value="hue60">Hue Shift 60° (Gold-Orange Swap)</option>
-                        <option value="hue75">Hue Shift 75° (Chartreuse Blend)</option>
-                        <option value="hue90">Hue Shift 90° (Lime / Autumn Mix)</option>
-                        <option value="hue105">Hue Shift 105° (Bright Emerald Twist)</option>
-                        <option value="hue120">Hue Shift 120° (Greenish / Purple)</option>
-                        <option value="hue135">Hue Shift 135° (Minty Turquoise)</option>
-                        <option value="hue150">Hue Shift 150° (Deep Turquoise Swap)</option>
-                        <option value="hue165">Hue Shift 165° (Cyan-Aquamarine Wave)</option>
-                        <option value="hue180">Hue Shift 180° (Perfect Opposite / Negative Flip)</option>
-                        <option value="hue195">Hue Shift 195° (Deep Electric Teal)</option>
-                        <option value="hue210">Hue Shift 210° (Electric Blue Era)</option>
-                        <option value="hue225">Hue Shift 225° (Cobalt / Violet Shift)</option>
-                        <option value="hue240">Hue Shift 240° (Blue / Pink Vibe)</option>
-                        <option value="hue255">Hue Shift 255° (Indigo Twilight)</option>
-                        <option value="hue270">Hue Shift 270° (Deep Purple Magic)</option>
-                        <option value="hue285">Hue Shift 285° (Vibrant Orchid Bloom)</option>
-                        <option value="hue300">Hue Shift 300° (Magenta Punch)</option>
-                        <option value="hue315">Hue Shift 315° (Fuchsia Flare)</option>
-                        <option value="hue330">Hue Shift 330° (Hot Pink Neon)</option>
-                        <option value="hue345">Hue Shift 345° (Rose / Crimson Boost)</option>
-                    </optgroup>
-
-                    <optgroup label="🔥 Cyberpunk & Web3 Future Trends">
-                        <option value="cyberpunk">Cyberpunk Neon (Cyan/Pink Boost)</option>
-                        <option value="matrix">The Matrix (Digital Green Acid)</option>
-                        <option value="infrared">Infrared Thermal (Predator Vision)</option>
-                        <option value="tokyo">Tokyo Night (Deep Blues & Purples)</option>
-                        <option value="toxic">Toxic Waste (Radioactive Lime)</option>
-                        <option value="synthwave">Synthwave Grid (Sunset Magenta & Yellow)</option>
-                        <option value="hyperBeast">Hyper Beast (Over-saturated Trippy)</option>
-                        <option value="quantum">Quantum Realm (Deep Cosmic Violet)</option>
-                        <option value="laserTag">Laser Tag (Neon Highlighting)</option>
-                        <option value="metaverse">Metaverse Glitch (Ghostly Digital Overlay)</option>
-                        <option value="neoHolo">Neo Hologram (Prismatic Reflections)</option>
-                        <option value="glitchGrid">Glitch Grid (Interlaced Data Static)</option>
-                        <option value="cyberAlley">Cyber Alley (Gritty Synth Low-Fi)</option>
-                        <option value="futureMecha">Future Mecha (Industrial Steel Tech)</option>
-                    </optgroup>
-
-                    <optgroup label="👑 Precious Metals & Gem Rarities">
-                        <option value="gold">Liquid Gold (Metallic Gold Treasure)</option>
-                        <option value="silver">Sterling Silver (Pure Metallic Shimmer)</option>
-                        <option value="bronze">Ancient Bronze (Rustic Bronze Shading)</option>
-                        <option value="ruby">Deep Ruby (Blood Red Premium)</option>
-                        <option value="emerald">Jade Emerald (Rich Green Diamond Look)</option>
-                        <option value="sapphire">Ocean Sapphire (Deep Crystal Blue)</option>
-                        <option value="amethyst">Royal Amethyst (Pure Velvet Purple)</option>
-                        <option value="platinum">Ice Platinum (Bright Cyber White Metal)</option>
-                        <option value="diamond">Diamond Dust (High Contrast Clean White)</option>
-                        <option value="obsidian">Obsidian Black (Dark Shadow Luxury)</option>
-                        <option value="rosegold">Blush Rose Gold (Elegant Copper Glow)</option>
-                        <option value="pearlDrop">Opal Pearl (Soft Iridescent Sheen)</option>
-                    </optgroup>
-
-                    <optgroup label="🌅 Multi-Tone Mixed Palettes">
-                        <option value="sunset">Solana Sunset (Orange/Purple Fade)</option>
-                        <option value="frozen">Frozen Tundra (Ice Blue & Clean White)</option>
-                        <option value="mars">Mars Rover (Dusty Red & Desert Orange)</option>
-                        <option value="deepSea">Abyssal Deep Sea (Navy & Cyan Shadow)</option>
-                        <option value="bubblegum">Bubblegum Pop (Pastel Pink & Baby Blue)</option>
-                        <option value="radioactive">Radioactive Yellow (High Voltage Sulfur)</option>
-                        <option value="zombie">Zombie Apocalypse (Decayed Green & Brown)</option>
-                        <option value="candy">Cotton Candy (Sweet Pink Teal Combo)</option>
-                        <option value="supernova">Supernova Flare (Blazing Red-Hot Core)</option>
-                        <option value="aurora">Aurora Borealis (Northern Green & Purple)</option>
-                        <option value="miamiVice">Miami Vice (Retro Coral & Turquoise)</option>
-                        <option value="acidRain">Acid Rain (Corrosive Yellow & Indigo)</option>
-                        <option value="lostDesert">Lost Desert (Earthy Sand & Clay Rust)</option>
-                        <option value="plasmaStorm">Plasma Storm (Violent Violet & Neon Green)</option>
-                    </optgroup>
-
-                    <optgroup label="🎭 Vintage & Aesthetic Comic">
-                        <option value="invert">Invert Colors (Classic Negative)</option>
-                        <option value="grayscale">Pure Grayscale (Classic B&W)</option>
-                        <option value="sepia">Warm Sepia (Vintage Rare)</option>
-                        <option value="vintage">90s Comic (High Contrast Retro)</option>
-                        <option value="monochromeBlue">Monochrome Blue (Ice Crypto)</option>
-                        <option value="monochromeRed">Monochrome Red (Virtual Boy Alert)</option>
-                        <option value="ghost">Ghost Mint (High Exposure White)</option>
-                        <option value="darkKnight">Dark Knight (Deep Shadow Noir)</option>
-                        <option value="solarize">Solarized (Surreal Abstract Art)</option>
-                        <option value="popArt">Andy Warhol Pop Art (Extreme Posterized)</option>
-                        <option value="halftone">Retro Halftone (Newsprint Ink Bleed)</option>
-                        <option value="oilCanvas">Glitch Canvas (Simulated Wet Paint Texture)</option>
-                        <option value="polaroid">80s Polaroid (Faded Wash & Heavy Matte)</option>
-                        <option value="gotham">Gotham Shadow (Desaturated Industrial Vibe)</option>
-                    </optgroup>
-                </select>
+            <div>
+                <span class="text-sm font-medium text-slate-500">বাকি আছে:</span>
+                <span id="pendingCount" class="text-sm font-bold text-amber-600 ml-1">0</span>
             </div>
-
-            <button id="processBtn" class="w-full lg:w-1/3 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 hover:opacity-90 text-white font-extrabold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg disabled:opacity-30 disabled:cursor-not-allowed" disabled>
-                ✨ Apply & Batch Process
+            <button id="downloadZipBtn" disabled class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 text-white font-semibold text-sm rounded-lg shadow-sm transition-colors cursor-pointer disabled:cursor-not-allowed flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                সব একসাথে ডাউনলোড করুন (.ZIP)
             </button>
         </div>
 
-        <div id="statusSection" class="hidden bg-slate-950 p-6 rounded-2xl border border-slate-800 text-center mb-8">
-            <p id="statusText" class="text-sm font-bold text-cyan-400 mb-3">Processing images...</p>
-            <div class="w-full bg-slate-800 rounded-full h-3 mb-5 overflow-hidden">
-                <div id="progressBar" class="bg-gradient-to-r from-cyan-400 via-indigo-400 to-pink-500 h-full transition-all duration-300" style="width: 0%"></div>
+        <div id="progressContainer" class="hidden mt-6">
+            <div class="flex justify-between text-xs font-semibold text-slate-600 mb-2">
+                <span id="progressStatus">প্রসেসিং চলছে...</span>
+                <span id="progressPercent">0%</span>
             </div>
-            <button id="downloadBtn" class="hidden mx-auto bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3.5 px-12 rounded-xl transition-all duration-300 shadow-xl items-center gap-2 text-lg transform hover:scale-105">
-                📥 Download Optimized HD WebP ZIP
-            </button>
-        </div>
-
-        <div>
-            <h3 class="text-xs font-bold mb-4 text-slate-500 tracking-wider uppercase">Live Render Preview (First 4 Assets):</h3>
-            <div id="previewGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <p class="text-slate-600 text-sm col-span-full italic py-6 text-center">No images uploaded yet. Upload assets to initialize real-time preview.</p>
+            <div class="w-full bg-slate-200 rounded-full h-2.5">
+                <div id="progressBar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
             </div>
         </div>
-    </div>
 
-    <div id="tab-hd-compressor" class="max-w-5xl w-full bg-slate-900 rounded-3xl p-6 md:p-10 shadow-2xl border border-slate-800 hidden">
-        <div class="text-center mb-8">
-            <h1 class="text-4xl md:text-5xl font-black bg-gradient-to-r from-emerald-400 via-teal-400 to-indigo-500 bg-clip-text text-transparent tracking-wide">
-                10k NFT High-Speed Bulk Compressor
-            </h1>
-            <p class="text-slate-400 mt-2 text-sm md:text-base">Ultra-Fast Client-Side Compression Algorithm to shrink massive collections safely for GitHub hosting.</p>
-        </div>
-
-        <div class="bg-slate-950/40 p-6 rounded-2xl border border-slate-800 mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-xl">
-                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Target Safe Format</label>
-                <select id="compressFormatSelect" class="bg-slate-950 text-sm font-bold text-emerald-400 border border-emerald-500/20 px-3 py-2 rounded-lg bg-slate-900 focus:outline-none focus:border-emerald-500 cursor-pointer w-full">
-                    <option value="image/webp">WebP Engine (HD Retention Map)</option>
-                    <option value="image/png">PNG Engine (Lossless Transparency)</option>
-                </select>
-            </div>
-            <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-xl">
-                <div class="flex justify-between items-center mb-2">
-                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider">HD Quality Precision Factor</label>
-                    <span id="qualityVal" class="text-sm font-extrabold text-emerald-400">0.85</span>
+        <div id="previewContainer" class="hidden mt-8">
+            <h3 class="text-lg font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                ফাইল লিস্ট
+                <span id="listBadge" class="bg-slate-200 text-slate-700 text-xs px-2.5 py-0.5 rounded-full font-bold">0</span>
+            </h3>
+            <div id="fileList" class="border border-slate-200 rounded-xl overflow-hidden max-h-96 overflow-y-auto custom-scrollbar divide-y divide-slate-100 bg-white">
                 </div>
-                <input id="qualityRange" type="range" min="0.70" max="0.95" step="0.05" value="0.85" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500">
-            </div>
         </div>
+    </main>
 
-        <div id="dropZoneCompressor" class="border-2 border-dashed border-slate-700 hover:border-emerald-500 bg-slate-950/40 hover:bg-slate-900/40 transition-all rounded-2xl p-10 text-center cursor-pointer group mb-6">
-            <input type="file" id="compressorFileInput" multiple accept="image/*" class="hidden">
-            <svg class="mx-auto h-14 w-14 text-slate-500 group-hover:text-emerald-400 transition-colors mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-            </svg>
-            <p class="text-lg font-bold text-slate-300">Drag & Drop 10,000+ NFT Image Folders Here</p>
-            <p class="text-xs text-slate-500 mt-1 font-mono">Processes up to 6.7GB down to ~600MB instantly inside RAM without server uploads</p>
-        </div>
-
-        <div class="mb-6">
-            <button id="runCompressBtn" class="w-full bg-gradient-to-r from-emerald-500 to-indigo-600 hover:opacity-90 text-white font-extrabold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg disabled:opacity-30 disabled:cursor-not-allowed" disabled>
-                ⚡ Run Bulk HD Compression
-            </button>
-        </div>
-
-        <div id="compProgressContainer" class="hidden bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4 mb-6">
-            <div class="flex justify-between items-center text-sm">
-                <span id="compStatusText" class="font-bold text-emerald-400">Initializing Core Engine...</span>
-                <span id="compProgressPercent" class="font-black text-slate-200">0%</span>
-            </div>
-            <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden border border-slate-700">
-                <div id="compProgressBar" class="bg-gradient-to-r from-emerald-500 to-indigo-500 h-full rounded-full transition-all duration-150" style="width: 0%"></div>
-            </div>
-            <div class="flex justify-between text-xs text-slate-400 font-mono">
-                <span id="compFileCount">0 / 0 Renders Optimized</span>
-                <span id="compEtaText">ETA Prediction: Calculating...</span>
-            </div>
-        </div>
-
-        <button id="compDownloadBtn" class="hidden w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-indigo-600 hover:opacity-90 text-white font-black py-4 px-6 rounded-xl transition-all shadow-xl justify-center items-center gap-2 text-lg">
-            📥 Export Compressed NFT ZIP Production Package
-        </button>
-    </div>
-
-    <footer class="mt-8 text-center text-xs text-slate-600 tracking-wider font-mono">
-        &copy; 2026 NFT Automation Tools. Optimized for High-Volume Deployments.
+    <footer class="text-center py-4 border-t border-slate-100 text-xs text-slate-400">
+        Bulk WebP to PNG Converter &bull; শতভাগ সুরক্ষিত ও লোকাল প্রসেসিং (সার্ভারে কোনো ফাইল আপলোড হয় না)
     </footer>
 
     <script>
-        // Tab System Switch Mechanism
-        function switchTab(tabId) {
-            const engineTab = document.getElementById('tab-engine-pro');
-            const compressorTab = document.getElementById('tab-hd-compressor');
-            const btnEngine = document.getElementById('tabEngineBtn');
-            const btnCompressor = document.getElementById('tabCompressorBtn');
-
-            if(tabId === 'engine-pro') {
-                engineTab.classList.remove('hidden'); engineTab.classList.add('block');
-                compressorTab.classList.remove('block'); compressorTab.classList.add('hidden');
-                btnEngine.className = "flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-indigo-600 text-white shadow-lg shadow-cyan-500/10";
-                btnCompressor.className = "flex-1 py-3 px-4 rounded-xl text-sm font-bold text-slate-400 bg-slate-950/40 hover:bg-slate-800/60 hover:text-white transition-all duration-300 flex items-center justify-center gap-2";
-            } else {
-                compressorTab.classList.remove('hidden'); compressorTab.classList.add('block');
-                engineTab.classList.remove('block'); engineTab.classList.add('hidden');
-                btnCompressor.className = "flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-indigo-600 text-white shadow-lg shadow-emerald-500/10";
-                btnEngine.className = "flex-1 py-3 px-4 rounded-xl text-sm font-bold text-slate-400 bg-slate-950/40 hover:bg-slate-800/60 hover:text-white transition-all duration-300 flex items-center justify-center gap-2";
-            }
-        }
-
-        // --- Core Elements From Existing Layout ---
-        const imageInput = document.getElementById('imageInput');
-        const filterType = document.getElementById('filterType');
-        const processBtn = document.getElementById('processBtn');
-        const downloadBtn = document.getElementById('downloadBtn');
-        const previewGrid = document.getElementById('previewGrid');
-        const statusSection = document.getElementById('statusSection');
-        const statusText = document.getElementById('statusText');
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('fileInput');
+        const statsCard = document.getElementById('statsCard');
+        const totalCountEl = document.getElementById('totalCount');
+        const successCountEl = document.getElementById('successCount');
+        const pendingCountEl = document.getElementById('pendingCount');
+        const downloadZipBtn = document.getElementById('downloadZipBtn');
+        const progressContainer = document.getElementById('progressContainer');
         const progressBar = document.getElementById('progressBar');
-        
-        const flipCheckbox = document.getElementById('flipCheckbox');
-        const resizeCheckbox = document.getElementById('resizeCheckbox');
-        const outlineMode = document.getElementById('outlineMode');
-        const customOutlineColorContainer = document.getElementById('customOutlineColorContainer');
-        const outlineColor = document.getElementById('outlineColor');
-        const bgMode = document.getElementById('bgMode');
-        const customBgColorContainer = document.getElementById('customBgColorContainer');
-        const bgColor = document.getElementById('bgColor');
+        const progressPercent = document.getElementById('progressPercent');
+        const progressStatus = document.getElementById('progressStatus');
+        const previewContainer = document.getElementById('previewContainer');
+        const fileList = document.getElementById('fileList');
 
-        const techGlitch = document.getElementById('techGlitch');
-        const techNoise = document.getElementById('techNoise');
-        const techColorShift = document.getElementById('techColorShift');
-        const techEdge = document.getElementById('techEdge');
-        const techMetadata = document.getElementById('techMetadata');
-        const techAlpha = document.getElementById('techAlpha');
-        const techGamma = document.getElementById('techGamma');
-        const techExif = document.getElementById('techExif');
-        const techFourier = document.getElementById('techFourier');
-        const techRotation = document.getElementById('techRotation');
-        const techSalt = document.getElementById('techSalt');
+        let zip = new JSZip();
+        let totalFiles = 0;
+        let processedCount = 0;
+        const BATCH_SIZE = 5; // ব্রাউজার ক্র্যাশ হওয়া রোধ করতে একসাথে ৫টি করে ইমেজ প্রসেস হবে
 
-        const pixelSizeSelect = document.getElementById('pixelSizeSelect');
-        
-        // NEW STUFF
-        const bypassRemapSelect = document.getElementById('bypassRemapSelect');
-        const remapIntensity = document.getElementById('remapIntensity');
-        const hashRandCheck = document.getElementById('hashRandCheck');
-        const seedInvertCheck = document.getElementById('seedInvertCheck');
-
-        let uploadedFiles = [];
-        let processedImages = [];
-        let previewImagesCached = []; 
-
-        outlineMode.addEventListener('change', () => {
-            customOutlineColorContainer.classList.toggle('hidden', outlineMode.value !== 'custom');
-            triggerLivePreviewUpdate();
-        });
-
-        bgMode.addEventListener('change', () => {
-            customBgColorContainer.classList.toggle('hidden', bgMode.value !== 'custom');
-            triggerLivePreviewUpdate();
-        });
-
-        [flipCheckbox, resizeCheckbox, outlineColor, bgColor, filterType, techGlitch, techNoise, techColorShift, techEdge, techMetadata, techAlpha, techGamma, techExif, techFourier, techRotation, techSalt, pixelSizeSelect, bypassRemapSelect, remapIntensity, hashRandCheck, seedInvertCheck].forEach(element => {
-            element.addEventListener('change', triggerLivePreviewUpdate);
-        });
-
-        imageInput.addEventListener('change', async (e) => {
-            uploadedFiles = Array.from(e.target.files);
-            if (uploadedFiles.length > 0) {
-                processBtn.disabled = false;
-                previewImagesCached = [];
-                
-                const sliceFiles = uploadedFiles.slice(0, 4);
-                for(let file of sliceFiles) {
-                    const img = await loadImage(file);
-                    previewImagesCached.push({ img: img, name: file.name });
-                }
-                triggerLivePreviewUpdate();
-            }
-        });
-
-        function pixelizeContextStructure(ctx, w, h, sizeSetting) {
-            if(sizeSetting === 'none') return;
-            const size = parseInt(sizeSetting);
-            const tempCanvas = document.createElement('canvas');
-            const tCtx = tempCanvas.getContext('2d');
-            tempCanvas.width = size;
-            tempCanvas.height = size;
-            
-            tCtx.imageSmoothingEnabled = false;
-            tCtx.drawImage(ctx.canvas, 0, 0, size, size);
-            
-            ctx.clearRect(0, 0, w, h);
-            ctx.imageSmoothingEnabled = false;
-            ctx.drawImage(tempCanvas, 0, 0, size, size, 0, 0, w, h);
-        }
-
-        // NON-LINEAR GEOMETRIC SHIFTER (Preserves exact body position, alters structure blueprint)
-        function applyStructuralRemapBypass(ctx, w, h, mode, intensity) {
-            if (mode === 'none') return;
-            const imgData = ctx.getImageData(0, 0, w, h);
-            const src = new Uint8ClampedArray(imgData.data);
-            const factor = parseFloat(intensity);
-
-            for (let y = 0; y < h; y++) {
-                for (let x = 0; x < w; x++) {
-                    let nx = x;
-                    let ny = y;
-
-                    if (mode === 'microShift') {
-                        nx = x + Math.sin(y * 0.5) * (factor * 0.2);
-                    } else if (mode === 'sinusoidal') {
-                        nx = x + Math.sin(y / 10) * factor;
-                        ny = y + Math.cos(x / 10) * (factor * 0.5);
-                    } else if (mode === 'asymmetric') {
-                        let q = (x > w/2 ? 1 : -1) * (y > h/2 ? 1 : -1);
-                        nx = x + q * (factor * 0.4);
-                    } else if (mode === 'vectorWrap') {
-                        nx = x + Math.tan(y / 100) * (factor * 0.1);
-                    } else if (mode === 'deepQuantum') {
-                        nx = x + Math.sin(x * y) * (factor * 0.15);
-                        ny = y + Math.cos(x + y) * (factor * 0.15);
-                    }
-
-                    nx = Math.max(0, Math.min(w - 1, Math.round(nx)));
-                    ny = Math.max(0, Math.min(h - 1, Math.round(ny)));
-
-                    const srcIdx = (ny * w + nx) * 4;
-                    const destIdx = (y * w + x) * 4;
-
-                    imgData.data[destIdx] = src[srcIdx];
-                    imgData.data[destIdx+1] = src[srcIdx+1];
-                    imgData.data[destIdx+2] = src[srcIdx+2];
-                    imgData.data[destIdx+3] = src[srcIdx+3];
-                }
-            }
-            ctx.putImageData(imgData, 0, 0);
-        }
-
-        async function triggerLivePreviewUpdate() {
-            if (previewImagesCached.length === 0) return;
-            previewGrid.innerHTML = '';
-
-            const selectedFilter = filterType.value;
-            const shouldFlip = flipCheckbox.checked;
-            const shouldResize = resizeCheckbox.checked;
-            const currentOutlineMode = outlineMode.value;
-            const targetOutlineColor = hexToRgb(outlineColor.value);
-            const currentBgMode = bgMode.value;
-            const targetBgColor = hexToRgb(bgColor.value);
-            const pixelSetting = pixelSizeSelect.value;
-            
-            const remapMode = bypassRemapSelect.value;
-            const remapFactor = remapIntensity.value;
-
-            previewImagesCached.forEach(item => {
-                const previewCanvas = document.createElement('canvas');
-                const pCtx = previewCanvas.getContext('2d');
-                
-                let renderW = item.img.width;
-                let renderH = item.img.height;
-                if(shouldResize) {
-                    renderW = 872;
-                    renderH = 1280;
-                }
-                
-                previewCanvas.width = renderW;
-                previewCanvas.height = renderH;
-                pCtx.clearRect(0, 0, renderW, renderH);
-                
-                pCtx.save();
-                if (shouldFlip) {
-                    pCtx.translate(renderW, 0);
-                    pCtx.scale(-1, 1);
-                }
-
-                if(shouldResize) {
-                    const scale = Math.max(872 / item.img.width, 1280 / item.img.height);
-                    const x = (872 - item.img.width * scale) / 2;
-                    const y = (1280 - item.img.height * scale) / 2;
-                    pCtx.drawImage(item.img, x, y, item.img.width * scale, item.img.height * scale);
-                } else {
-                    pCtx.drawImage(item.img, 0, 0);
-                }
-                pCtx.restore();
-
-                if (selectedFilter === 'monoBlueGlitch') {
-                    applyAdvancedIceGlitchFilter(pCtx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
-                } else if (selectedFilter === 'handDrawnPencil') {
-                    applyHandDrawnPencilArtFilter(pCtx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
-                } else {
-                    applyFilterToContext(pCtx, selectedFilter);
-                    applyGlobalAntiCopyrightOverride(pCtx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, true);
-                }
-
-                // Apply AI Bypass Core Stage
-                if (remapMode !== 'none') {
-                    applyStructuralRemapBypass(pCtx, renderW, renderH, remapMode, remapFactor);
-                }
-
-                if(pixelSetting !== 'none') {
-                    pixelizeContextStructure(pCtx, renderW, renderH, pixelSetting);
-                }
-
-                pCtx.filter = 'none';
-                const div = document.createElement('div');
-                div.className = 'bg-slate-950 p-2 border border-slate-800 rounded-xl flex flex-col items-center';
-                const previewImgTag = document.createElement('img');
-                previewImgTag.src = previewCanvas.toDataURL('image/png');
-                previewImgTag.className = 'w-full h-32 object-contain rounded-lg mb-2 bg-slate-900';
-                div.appendChild(previewImgTag);
-                div.innerHTML += `<span class="text-[10px] text-slate-500 truncate w-full text-center font-mono">${item.name}</span>`;
-                previewGrid.appendChild(div);
-            });
-        }
-
-        processBtn.addEventListener('click', async () => {
-            if (uploadedFiles.length === 0) return;
-            statusSection.classList.remove('hidden');
-            downloadBtn.classList.add('hidden');
-            processBtn.disabled = true;
-            processedImages = [];
-
-            const selectedFilter = filterType.value;
-            const shouldFlip = flipCheckbox.checked;
-            const shouldResize = resizeCheckbox.checked;
-            const currentOutlineMode = outlineMode.value;
-            const targetOutlineColor = hexToRgb(outlineColor.value);
-            const currentBgMode = bgMode.value;
-            const targetBgColor = hexToRgb(bgColor.value);
-            const pixelSetting = pixelSizeSelect.value;
-            
-            const remapMode = bypassRemapSelect.value;
-            const remapFactor = remapIntensity.value;
-
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-
-            for (let i = 0; i < uploadedFiles.length; i++) {
-                const file = uploadedFiles[i];
-                statusText.innerText = `⚙️ Processing HD Asset: ${file.name} (${i + 1}/${uploadedFiles.length})`;
-                
-                const img = await loadImage(file);
-                let renderW = img.width;
-                let renderH = img.height;
-                if(shouldResize) {
-                    renderW = 872;
-                    renderH = 1280;
-                }
-
-                canvas.width = renderW;
-                canvas.height = renderH;
-                ctx.clearRect(0, 0, renderW, renderH);
-
-                ctx.save();
-                if (shouldFlip) {
-                    ctx.translate(renderW, 0);
-                    ctx.scale(-1, 1);
-                }
-
-                if(shouldResize) {
-                    const scale = Math.max(872 / img.width, 1280 / img.height);
-                    const x = (872 - img.width * scale) / 2;
-                    const y = (1280 - img.height * scale) / 2;
-                    ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-                } else {
-                    ctx.drawImage(img, 0, 0);
-                }
-                ctx.restore();
-
-                if (selectedFilter === 'monoBlueGlitch') {
-                    applyAdvancedIceGlitchFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
-                } else if (selectedFilter === 'handDrawnPencil') {
-                    applyHandDrawnPencilArtFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
-                } else {
-                    applyFilterToContext(ctx, selectedFilter);
-                    applyGlobalAntiCopyrightOverride(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, false);
-                }
-
-                if (remapMode !== 'none') {
-                    applyStructuralRemapBypass(ctx, renderW, renderH, remapMode, remapFactor);
-                }
-
-                if(pixelSetting !== 'none') {
-                    pixelizeContextStructure(ctx, renderW, renderH, pixelSetting);
-                }
-
-                if (hashRandCheck.checked) {
-                    const d = ctx.getImageData(0, 0, 1, 1);
-                    d.data[0] = (d.data[0] + Math.floor(Math.random() * 3)) % 256;
-                    ctx.putImageData(d, 0, 0);
-                }
-
-                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/webp', 0.92));
-                processedImages.push({ blob, name: file.name.replace(/\.[^/.]+$/, "") + ".webp" });
-
-                const pct = Math.round(((i + 1) / uploadedFiles.length) * 100);
-                progressBar.style.width = pct + '%';
-            }
-
-            statusText.innerText = `✅ Packaging Optimized HD Collection... Please wait.`;
-            generateZipArchive(processedImages);
-        });
-
-        function generateZipArchive(images) {
-            const zip = new JSZip();
-            images.forEach(item => {
-                zip.file(item.name, item.blob);
-            });
-            zip.generateAsync({ type: "blob" }).then(content => {
-                statusText.innerText = `⚡ Processing Complete! 100% of Collection Protected and Encrypted.`;
-                downloadBtn.classList.remove('hidden');
-                downloadBtn.classList.add('block');
-                processBtn.disabled = false;
-                downloadBtn.onclick = () => {
-                    const dl = document.createElement('a');
-                    dl.href = URL.createObjectURL(content);
-                    dl.download = "Protected_AntiCopyright_Collection.zip";
-                    dl.click();
-                };
-            });
-        }
-
-        // --- Bulk HD Compressor Core Mechanism ---
-        const dropZoneCompressor = document.getElementById('dropZoneCompressor');
-        const compressorFileInput = document.getElementById('compressorFileInput');
-        const runCompressBtn = document.getElementById('runCompressBtn');
-        const compProgressContainer = document.getElementById('compProgressContainer');
-        const compStatusText = document.getElementById('compStatusText');
-        const compProgressPercent = document.getElementById('compProgressPercent');
-        const compProgressBar = document.getElementById('compProgressBar');
-        const compFileCount = document.getElementById('compFileCount');
-        const compEtaText = document.getElementById('compEtaText');
-        const compDownloadBtn = document.getElementById('compDownloadBtn');
-        const qualityRange = document.getElementById('qualityRange');
-        const qualityVal = document.getElementById('qualityVal');
-        const compressFormatSelect = document.getElementById('compressFormatSelect');
-
-        let bulkCompressFiles = [];
-
-        qualityRange.addEventListener('input', (e) => {
-            qualityVal.innerText = e.target.value;
-        });
-
-        dropZoneCompressor.addEventListener('click', () => compressorFileInput.click());
-        dropZoneCompressor.addEventListener('dragover', (e) => { e.preventDefault(); dropZoneCompressor.classList.add('border-emerald-500'); });
-        dropZoneCompressor.addEventListener('dragleave', () => dropZoneCompressor.classList.remove('border-emerald-500'));
-        dropZoneCompressor.addEventListener('drop', (e) => {
+        // Drag and Drop Events
+        dropzone.addEventListener('click', () => fileInput.click());
+        dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('border-indigo-500', 'bg-indigo-50/20'); });
+        dropzone.addEventListener('dragleave', () => { dropzone.classList.remove('border-indigo-500', 'bg-indigo-50/20'); });
+        dropzone.addEventListener('drop', (e) => {
             e.preventDefault();
-            dropZoneCompressor.classList.remove('border-emerald-500');
-            prepareBulkCompression(Array.from(e.dataTransfer.files));
+            dropzone.classList.remove('border-indigo-500', 'bg-indigo-50/20');
+            if (e.dataTransfer.files.length > 0) handleFiles(e.dataTransfer.files);
         });
 
-        compressorFileInput.addEventListener('change', (e) => {
-            prepareBulkCompression(Array.from(e.target.files));
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) handleFiles(e.target.files);
         });
 
-        function prepareBulkCompression(files) {
-            bulkCompressFiles = files.filter(f => f.type.startsWith('image/'));
-            if(bulkCompressFiles.length > 0) {
-                runCompressBtn.disabled = false;
-                compDownloadBtn.classList.remove('flex');
-                compDownloadBtn.classList.add('hidden');
-                compProgressContainer.classList.add('hidden');
-                alert(`Loaded ${bulkCompressFiles.length} images. Click 'Run Bulk HD Compression' to start.`);
-            }
-        }
-
-        runCompressBtn.addEventListener('click', async () => {
-            if(bulkCompressFiles.length === 0) return;
-
-            runCompressBtn.disabled = true;
-            compProgressContainer.classList.remove('hidden');
-            compDownloadBtn.classList.remove('flex');
-            compDownloadBtn.classList.add('hidden');
+        // Main File Handler
+        function handleFiles(files) {
+            // শুধুমাত্র .webp ফাইল ফিল্টার করা
+            const webpFiles = Array.from(files).filter(file => file.name.toLowerCase().endsWith('.webp'));
             
-            const targetQuality = parseFloat(qualityRange.value);
-            const chosenFormat = compressFormatSelect.value;
-            const fileExtension = chosenFormat === 'image/png' ? '.png' : '.webp';
-            const compressedArchive = new JSZip();
-            const startTime = Date.now();
-
-            for(let i=0; i < bulkCompressFiles.length; i++) {
-                const currentFile = bulkCompressFiles[i];
-                compStatusText.innerText = `Compressing Target Node Matrix: ${currentFile.name}`;
-                
-                try {
-                    const compressedBlob = await executeImageCompression(currentFile, targetQuality, chosenFormat);
-                    const cleanName = currentFile.name.replace(/\.[^/.]+$/, "") + fileExtension;
-                    compressedArchive.file(cleanName, compressedBlob);
-                } catch(e) {
-                    console.error("Compression thread faulted out", e);
-                }
-
-                const progress = Math.round(((i + 1) / bulkCompressFiles.length) * 100);
-                compProgressPercent.innerText = progress + "%";
-                compProgressBar.style.width = progress + "%";
-                compFileCount.innerText = `${i + 1} / ${bulkCompressFiles.length} Renders Optimized`;
-
-                const elapsed = Date.now() - startTime;
-                const avgTime = elapsed / (i + 1);
-                const remaining = bulkCompressFiles.length - (i + 1);
-                const etaSeconds = Math.round((avgTime * remaining) / 1000);
-                compEtaText.innerText = `ETA Prediction: ~${etaSeconds}s Remaining`;
+            if (webpFiles.length === 0) {
+                alert('অনুগ্রহ করে সঠিক .webp ফাইল আপলোড করুন!');
+                return;
             }
 
-            compStatusText.innerText = "Writing high-density zip chunk stream safely...";
-            
-            // Generate zip file with fast store method to avoid browser memory freezes
-            compressedArchive.generateAsync({type:"blob", compression: "STORE"}).then((archiveContent) => {
-                compStatusText.innerText = "⚡ Bulk HD Compression Layer Complete!";
-                
-                // Force display settings cleanly removing standard Tailwind conflict classes
-                compDownloadBtn.classList.remove('hidden');
-                compDownloadBtn.classList.add('flex');
-                
-                runCompressBtn.disabled = false;
-                compDownloadBtn.onclick = () => {
-                    const downloadAnchor = document.createElement('a');
-                    downloadAnchor.href = URL.createObjectURL(archiveContent);
-                    downloadAnchor.download = "Optimized_10k_HD_Collection.zip";
-                    downloadAnchor.click();
-                };
-            }).catch(err => {
-                compStatusText.innerText = "❌ Error rendering package.";
-                console.error(err);
-            });
-        });
+            // Reset States
+            zip = new JSZip();
+            fileList.innerHTML = '';
+            totalFiles = webpFiles.length;
+            processedCount = 0;
 
-        function executeImageCompression(file, quality, format) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = function (e) {
-                    const tempImg = new Image();
-                    tempImg.src = e.target.result;
-                    tempImg.onload = function () {
-                        const parsingCanvas = document.createElement('canvas');
-                        parsingCanvas.width = tempImg.width;
-                        parsingCanvas.height = tempImg.height;
-                        
-                        const pCtx = parsingCanvas.getContext('2d');
-                        pCtx.drawImage(tempImg, 0, 0);
-                        
-                        parsingCanvas.toBlob((blob) => {
-                            if (blob) resolve(blob);
-                            else reject(new Error('Image Engine Canvas compression failed'));
-                        }, format, quality);
-                    };
-                    tempImg.onerror = (err) => reject(err);
-                };
-                reader.onerror = (err) => reject(err);
-            });
+            // Update UI State
+            totalCountEl.innerText = totalFiles;
+            successCountEl.innerText = '0';
+            pendingCountEl.innerText = totalFiles;
+            document.getElementById('listBadge').innerText = totalFiles;
+            
+            statsCard.classList.remove('hidden');
+            progressContainer.classList.remove('hidden');
+            previewContainer.classList.remove('hidden');
+            downloadZipBtn.disabled = true;
+
+            updateProgress(0, 'ইমেজ প্রসেস শুরু হচ্ছে...');
+
+            // ১০,০০০ ফাইলের ক্ষেত্রে পুরো ইন্টারফেস যাতে লক না হয়, তাই ব্যাচ প্রসেসিং
+            processInBatches(webpFiles);
         }
 
-        function loadImage(file) {
+        // Batch processing to prevent UI freezing
+        async function processInBatches(files) {
+            for (let i = 0; i < files.length; i += BATCH_SIZE) {
+                const batch = files.slice(i, i + BATCH_SIZE);
+                const promises = batch.map(file => convertWebpToPng(file));
+                await Promise.all(promises);
+            }
+            
+            // Completion State
+            progressStatus.innerText = 'সব ফাইল কনভার্ট সম্পন্ন হয়েছে!';
+            downloadZipBtn.disabled = false;
+        }
+
+        // Core Canvas Converter
+        function convertWebpToPng(file) {
             return new Promise((resolve) => {
+                const originalName = file.name;
+                // এক্সটেনশন পরিবর্তন: 1.webp -> 1.png
+                const newName = originalName.substring(0, originalName.lastIndexOf('.')) + '.png';
+
+                // DOM-এ প্রিলিমিনারি লিস্ট আইটেম তৈরি
+                const row = document.createElement('div');
+                row.className = "flex justify-between items-center p-3 text-sm text-slate-700";
+                row.innerHTML = `
+                    <div class="flex items-center gap-2 truncate max-w-[60%]">
+                        <span class="text-slate-400 font-mono text-xs">WebP</span>
+                        <span class="truncate font-medium">${originalName}</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span id="status-${processedCount}" class="text-amber-500 text-xs font-semibold flex items-center gap-1">
+                            <svg class="animate-spin h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                            প্রসেসিং
+                        </span>
+                    </div>
+                `;
+                fileList.appendChild(row);
+                const currentStatusSpan = row.querySelector(`#status-${processedCount}`);
+
                 const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = new Image();
-                    img.onload = () => resolve(img);
-                    img.src = e.target.result;
-                };
                 reader.readAsDataURL(file);
-            });
+                reader.onload = function (event) {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = function () {
+                        // Canvas তৈরি করে ইমেজ ড্র করা
+                        const canvas = document.createElement('canvas');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0);
+
+                        // PNG তে রূপান্তর
+                        canvas.toBlob((blob) => {
+                            // ZIP ফাইলে যুক্ত করা হচ্ছে হুবহু একই নামে (.png সহ)
+                            zip.file(newName, blob);
+
+                            // Individual row UI আপডেট
+                            currentStatusSpan.className = "text-emerald-600 text-xs font-semibold flex items-center gap-1";
+                            currentStatusSpan.innerHTML = `
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                ${newName}
+                            `;
+
+                            // Global counters আপডেট
+                            processedCount++;
+                            successCountEl.innerText = processedCount;
+                            pendingCountEl.innerText = totalFiles - processedCount;
+
+                            const percentage = Math.round((processedCount / totalFiles) * 100);
+                            updateProgress(percentage, `কনভার্ট হচ্ছে: ${processedCount}/${totalFiles}`);
+                            
+                            resolve();
+                        }, 'image/png');
+                    };
+                    img.onerror = function() {
+                        // কোনো ফাইল করাপ্টেড হলে তা স্কিপ করার লজিক
+                        currentStatusSpan.className = "text-rose-500 text-xs font-semibold";
+                        currentStatusSpan.innerText = "ব্যর্থ হয়েছে";
+                        processedCount++;
+                        resolve();
+                    }
+                };
+            }
+        );
         }
 
-        function hexToRgb(hex) {
-            const r = parseInt(hex.slice(1, 3), 16);
-            const g = parseInt(hex.slice(3, 5), 16);
-            const b = parseInt(hex.slice(5, 7), 16);
-            return { r, g, b };
+        // Update progress bar
+        function updateProgress(percentage, text) {
+            progressBar.style.width = percentage + '%';
+            progressPercent.innerText = percentage + '%';
+            progressStatus.innerText = text;
         }
+
+        // Trigger ZIP Download
+        downloadZipBtn.addEventListener('click', () => {
+            progressStatus.innerText = 'ZIP ফাইল তৈরি হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...';
+            downloadZipBtn.disabled = true;
+
+            zip.generateAsync({ type: 'blob' }, (metadata) => {
+                // ZIP তৈরি করার লাইভ প্রোগ্রেস ট্র্যাকিং
+                updateProgress(metadata.percent.toFixed(0), `ZIP ফাইল প্যাকেজিং হচ্ছে: ${metadata.percent.toFixed(0)}%`);
+            }).then((content) => {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(content);
+                link.download = "converted_png_images.zip";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                progressStatus.innerText = 'ডাউনলোড সম্পন্ন হয়েছে!';
+                downloadZipBtn.disabled = false;
+            }).catch(err => {
+                alert('ZIP ফাইল তৈরিতে সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+                downloadZipBtn.disabled = false;
+            });
+        });
     </script>
 </body>
 </html>
