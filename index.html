@@ -433,7 +433,7 @@
             </div>
         </div>
 
-        <button id="compDownloadBtn" class="hidden w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-indigo-600 hover:opacity-90 text-white font-black py-4 px-6 rounded-xl transition-all transform active:scale-[0.99] shadow-xl justify-center items-center gap-2 text-lg">
+        <button id="compDownloadBtn" class="hidden w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-indigo-600 hover:opacity-90 text-white font-black py-4 px-6 rounded-xl transition-all shadow-xl justify-center items-center gap-2 text-lg">
             📥 Export Compressed NFT ZIP Production Package
         </button>
     </div>
@@ -766,6 +766,7 @@
             zip.generateAsync({ type: "blob" }).then(content => {
                 statusText.innerText = `⚡ Processing Complete! 100% of Collection Protected and Encrypted.`;
                 downloadBtn.classList.remove('hidden');
+                downloadBtn.classList.add('block');
                 processBtn.disabled = false;
                 downloadBtn.onclick = () => {
                     const dl = document.createElement('a');
@@ -774,202 +775,6 @@
                     dl.click();
                 };
             });
-        }
-
-        function loadImage(file) {
-            return new Promise((resolve) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = new Image();
-                    img.onload = () => resolve(img);
-                    img.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-
-        function hexToRgb(hex) {
-            const r = parseInt(hex.slice(1, 3), 16);
-            const g = parseInt(hex.slice(3, 5), 16);
-            const b = parseInt(hex.slice(5, 7), 16);
-            return { r, g, b };
-        }
-
-        function applyFilterToContext(ctx, filter) {
-            if (filter.startsWith('hue')) {
-                const deg = filter.replace('hue', '');
-                ctx.canvas.style.filter = `hue-rotate(${deg}deg)`;
-                ctx.drawImage(ctx.canvas, 0, 0);
-                ctx.canvas.style.filter = 'none';
-                return;
-            }
-            switch (filter) {
-                case 'cyberpunk': ctx.filter = 'contrast(1.2) saturate(1.8) hue-rotate(-15deg)'; break;
-                case 'matrix': ctx.filter = 'contrast(1.4) saturate(0.9) sepia(0.6) hue-rotate(85deg)'; break;
-                case 'infrared': ctx.filter = 'hue-rotate(140deg) saturate(2) invert(0.1)'; break;
-                case 'tokyo': ctx.filter = 'saturate(1.4) hue-rotate(-45deg) brightness(0.9)'; break;
-                case 'toxic': ctx.filter = 'hue-rotate(70deg) saturate(2.5) contrast(1.3)'; break;
-                case 'synthwave': ctx.filter = 'saturate(1.7) contrast(1.1) hue-rotate(310deg)'; break;
-                case 'hyperBeast': ctx.filter = 'saturate(3) contrast(1.5) hue-rotate(45deg)'; break;
-                case 'quantum': ctx.filter = 'hue-rotate(250deg) saturate(1.8) contrast(1.2)'; break;
-                case 'laserTag': ctx.filter = 'contrast(1.6) saturate(1.5) brightness(1.1)'; break;
-                case 'metaverse': ctx.filter = 'contrast(1.1) saturate(1.3) brightness(0.95)'; break;
-                case 'neoHolo': ctx.filter = 'hue-rotate(180deg) saturate(1.2) opacity(0.95)'; break;
-                case 'glitchGrid': ctx.filter = 'contrast(1.3) brightness(1.05)'; break;
-                case 'cyberAlley': ctx.filter = 'saturate(1.1) contrast(1.1) brightness(0.85)'; break;
-                case 'futureMecha': ctx.filter = 'grayscale(0.3) contrast(1.2) brightness(0.9)'; break;
-                case 'gold': ctx.filter = 'sepia(0.8) saturate(2.5) contrast(1.2) hue-rotate(5deg)'; break;
-                case 'silver': ctx.filter = 'grayscale(1) contrast(1.3) brightness(1.1)'; break;
-                case 'bronze': ctx.filter = 'sepia(0.9) saturate(1.4) contrast(1.1) brightness(0.85)'; break;
-                case 'ruby': ctx.filter = 'hue-rotate(340deg) saturate(2.5) contrast(1.3)'; break;
-                case 'emerald': ctx.filter = 'hue-rotate(90deg) saturate(2.2) contrast(1.2)'; break;
-                case 'sapphire': ctx.filter = 'hue-rotate(190deg) saturate(2.4) contrast(1.2)'; break;
-                case 'amethyst': ctx.filter = 'hue-rotate(270deg) saturate(2.2) contrast(1.2)'; break;
-                case 'platinum': ctx.filter = 'grayscale(0.9) contrast(1.4) brightness(1.2)'; break;
-                case 'diamond': ctx.filter = 'contrast(1.7) brightness(1.15) saturate(0.8)'; break;
-                case 'obsidian': ctx.filter = 'contrast(1.5) brightness(0.4) grayscale(0.2)'; break;
-                case 'rosegold': ctx.filter = 'sepia(0.4) hue-rotate(330deg) saturate(1.7) contrast(1.1)'; break;
-                case 'pearlDrop': ctx.filter = 'saturate(0.7) brightness(1.1) contrast(0.95)'; break;
-                case 'sunset': ctx.filter = 'hue-rotate(340deg) saturate(1.5)'; break;
-                case 'frozen': ctx.filter = 'hue-rotate(190deg) saturate(1.1) brightness(1.05)'; break;
-                case 'mars': ctx.filter = 'hue-rotate(15deg) saturate(1.6) contrast(1.1)'; break;
-                case 'deepSea': ctx.filter = 'hue-rotate(210deg) saturate(1.3) brightness(0.75)'; break;
-                case 'bubblegum': ctx.filter = 'saturate(1.4) brightness(1.1) hue-rotate(320deg)'; break;
-                case 'radioactive': ctx.filter = 'hue-rotate(60deg) saturate(2) contrast(1.4)'; break;
-                case 'zombie': ctx.filter = 'sepia(0.5) hue-rotate(80deg) saturate(0.8) contrast(1.1)'; break;
-                case 'candy': ctx.filter = 'hue-rotate(160deg) saturate(1.8)'; break;
-                case 'supernova': ctx.filter = 'contrast(1.4) saturate(2) brightness(1.1)'; break;
-                case 'aurora': ctx.filter = 'hue-rotate(110deg) saturate(1.4)'; break;
-                case 'miamiVice': ctx.filter = 'hue-rotate(170deg) saturate(1.5) brightness(1.05)'; break;
-                case 'acidRain': ctx.filter = 'hue-rotate(85deg) contrast(1.3) saturate(1.6)'; break;
-                case 'lostDesert': ctx.filter = 'sepia(0.6) contrast(1.05) saturate(1.2)'; break;
-                case 'plasmaStorm': ctx.filter = 'hue-rotate(290deg) saturate(2) contrast(1.3)'; break;
-                case 'invert': ctx.filter = 'invert(1)'; break;
-                case 'grayscale': ctx.filter = 'grayscale(1)'; break;
-                case 'sepia': ctx.filter = 'sepia(1)'; break;
-                case 'vintage': ctx.filter = 'contrast(1.4) saturate(0.7) sepia(0.2)'; break;
-                case 'monochromeBlue': ctx.filter = 'grayscale(1) sepia(1) hue-rotate(190deg) saturate(2.5)'; break;
-                case 'monochromeRed': ctx.filter = 'grayscale(1) sepia(1) hue-rotate(340deg) saturate(3)'; break;
-                case 'ghost': ctx.filter = 'brightness(1.5) contrast(0.8) saturate(0.5)'; break;
-                case 'darkKnight': ctx.filter = 'brightness(0.5) contrast(1.4) grayscale(0.3)'; break;
-                case 'solarize': ctx.filter = 'difference invert(0.5) contrast(1.2)'; break;
-                case 'popArt': ctx.filter = 'contrast(2) saturate(2.5)'; break;
-                case 'halftone': ctx.filter = 'contrast(1.5) grayscale(0.5)'; break;
-                case 'oilCanvas': ctx.filter = 'contrast(1.1) saturate(1.2) blur(0.3px)'; break;
-                case 'polaroid': ctx.filter = 'contrast(0.95) saturate(0.8) sepia(0.15) brightness(1.02)'; break;
-                case 'gotham': ctx.filter = 'grayscale(0.4) contrast(1.2) brightness(0.9)'; break;
-                
-                // Extra New Presets
-                case 'cosmicVibe': ctx.filter = 'hue-rotate(265deg) saturate(1.7) contrast(1.25)'; break;
-                case 'acidVortex': ctx.filter = 'hue-rotate(105deg) saturate(2.1) contrast(1.35)'; break;
-                case 'retroDream': ctx.filter = 'sepia(0.25) saturate(1.3) contrast(1.05) brightness(1.02)'; break;
-                default: ctx.filter = 'none'; break;
-            }
-            ctx.drawImage(ctx.canvas, 0, 0);
-            ctx.filter = 'none';
-        }
-
-        function applyGlobalAntiCopyrightOverride(ctx, w, h, bgM, bgC, outM, outC, isPreview) {
-            const imgData = ctx.getImageData(0, 0, w, h);
-            const data = imgData.data;
-
-            const finalBg = bgM === 'custom' ? bgC : {r:20, g:30, b:45};
-
-            for (let i = 0; i < data.length; i += 4) {
-                let alpha = data[i + 3];
-                
-                // Dynamic Gradient Generators inside Loop Map
-                if (alpha < 10 && bgM !== 'keep') {
-                    let pixelY = Math.floor((i/4) / w);
-                    let ratio = pixelY / h;
-                    
-                    if(bgM === 'gradSunset') {
-                        data[i] = 255 - (ratio * 100); data[i+1] = 90 + (ratio * 30); data[i+2] = 50 + (ratio * 150);
-                    } else if(bgM === 'gradCyber') {
-                        data[i] = 0; data[i+1] = 200 - (ratio * 150); data[i+2] = 255;
-                    } else if(bgM === 'gradMatrix') {
-                        data[i] = 10; data[i+1] = 255 - (ratio * 200); data[i+2] = 10;
-                    } else if(bgM === 'gradAurora') {
-                        data[i] = 50; data[i+1] = 220 - (ratio * 100); data[i+2] = 150 + (ratio * 50);
-                    } else if(bgM === 'gradVapor') {
-                        data[i] = 255; data[i+1] = 150 - (ratio * 50); data[i+2] = 230;
-                    } else if(bgM === 'gradDeep') {
-                        data[i] = 5; data[i+1] = 15; data[i+2] = 50 + (ratio * 70);
-                    } else if(bgM === 'gradFire') {
-                        data[i] = 255; data[i+1] = 60 + (ratio * 140); data[i+2] = 0;
-                    } else if(bgM === 'gradRetrowave') {
-                        data[i] = 20 + Math.floor(ratio*40); data[i+1] = 10; data[i+2] = 40 + Math.floor(ratio * 60);
-                    } else if(bgM === 'gradTokyoPink') {
-                        data[i] = 120 - Math.floor(ratio*80); data[i+1] = 10; data[i+2] = 150;
-                    } else if(bgM === 'gradGoldenHour') {
-                        data[i] = 230; data[i+1] = 170 - Math.floor(ratio*50); data[i+2] = 30;
-                    } else if(bgM === 'gradHyperDrive') {
-                        data[i] = 10; data[i+1] = Math.floor(ratio*100); data[i+2] = 120;
-                    } else if(bgM === 'gradEcto') {
-                        data[i] = Math.floor(ratio*50); data[i+1] = 240; data[i+2] = 20;
-                    } else {
-                        data[i] = finalBg.r; data[i+1] = finalBg.g; data[i+2] = finalBg.b;
-                    }
-                    data[i + 3] = 255;
-                }
-
-                // Inline Pixel Edge Manipulation Rules for Outlines
-                if (outM !== 'keep' && alpha > 200) {
-                    let idx = i / 4;
-                    let cx = idx % w;
-                    let cy = Math.floor(idx / w);
-                    
-                    if (cx > 0 && cx < w - 1 && cy > 0 && cy < h - 1) {
-                        let leftA = data[((cy * w + (cx - 1)) * 4) + 3];
-                        let rightA = data[((cy * w + (cx + 1)) * 4) + 3];
-                        let upA = data[(((cy - 1) * w + cx) * 4) + 3];
-                        let downA = data[(((cy + 1) * w + cx) * 4) + 3];
-                        
-                        if (leftA < 50 || rightA < 50 || upA < 50 || downA < 50) {
-                            if (outM === 'custom') {
-                                data[i] = outC.r; data[i+1] = outC.g; data[i+2] = outC.b;
-                            } else if (outM === 'neonGlow') {
-                                data[i] = 0; data[i+1] = 255; data[i+2] = 255;
-                            } else if (outM === 'rainbow') {
-                                data[i] = (cx * 2) % 255; data[i+1] = (cy * 2) % 255; data[i+2] = 150;
-                            } else if (outM === 'goldGlint') {
-                                data[i] = 212; data[i+1] = 175; data[i+2] = 55;
-                            } else if (outM === 'silverSpark') {
-                                data[i] = 192; data[i+1] = 192; data[i+2] = 192;
-                            } else if (outM === 'cosmicPurple') {
-                                data[i] = 160; data[i+1] = 32; data[i+2] = 240;
-                            } else if (outM === 'radioactiveGreen') {
-                                data[i] = 57; data[i+1] = 255; data[i+2] = 20;
-                            } else if (outM === 'frozenIce') {
-                                data[i] = 137; data[i+1] = 207; data[i+2] = 240;
-                            } else if (outM === 'volcanicRed') {
-                                data[i] = 255; data[i+1] = 69; data[i+2] = 0;
-                            } else if (outM === 'electricTeal') {
-                                data[i] = 0; data[i+1] = 245; data[i+2] = 255;
-                            }
-                        }
-                    }
-                }
-
-                // Basic Noise Seed Operations
-                if (!isPreview && techNoise.checked) {
-                    let randNoise = (Math.random() - 0.5) * 3;
-                    data[i] = Math.min(255, Math.max(0, data[i] + randNoise));
-                    data[i+1] = Math.min(255, Math.max(0, data[i+1] + randNoise));
-                    data[i+2] = Math.min(255, Math.max(0, data[i+2] + randNoise));
-                }
-            }
-            ctx.putImageData(imgData, 0, 0);
-        }
-
-        function applyAdvancedIceGlitchFilter(ctx, w, h, bgM, bgC, outM, outC) {
-            applyFilterToContext(ctx, 'monochromeBlue');
-            applyGlobalAntiCopyrightOverride(ctx, w, h, bgM, bgC, outM, outC, false);
-        }
-
-        function applyHandDrawnPencilArtFilter(ctx, w, h, bgM, bgC, outM, outC) {
-            applyFilterToContext(ctx, 'grayscale');
-            applyGlobalAntiCopyrightOverride(ctx, w, h, bgM, bgC, outM, outC, false);
         }
 
         // --- Bulk HD Compressor Core Mechanism ---
@@ -1010,6 +815,7 @@
             bulkCompressFiles = files.filter(f => f.type.startsWith('image/'));
             if(bulkCompressFiles.length > 0) {
                 runCompressBtn.disabled = false;
+                compDownloadBtn.classList.remove('flex');
                 compDownloadBtn.classList.add('hidden');
                 compProgressContainer.classList.add('hidden');
                 alert(`Loaded ${bulkCompressFiles.length} images. Click 'Run Bulk HD Compression' to start.`);
@@ -1021,6 +827,7 @@
 
             runCompressBtn.disabled = true;
             compProgressContainer.classList.remove('hidden');
+            compDownloadBtn.classList.remove('flex');
             compDownloadBtn.classList.add('hidden');
             
             const targetQuality = parseFloat(qualityRange.value);
@@ -1054,9 +861,15 @@
             }
 
             compStatusText.innerText = "Writing high-density zip chunk stream safely...";
-            compressedArchive.generateAsync({type:"blob"}).then((archiveContent) => {
+            
+            // Generate zip file with fast store method to avoid browser memory freezes
+            compressedArchive.generateAsync({type:"blob", compression: "STORE"}).then((archiveContent) => {
                 compStatusText.innerText = "⚡ Bulk HD Compression Layer Complete!";
+                
+                // Force display settings cleanly removing standard Tailwind conflict classes
                 compDownloadBtn.classList.remove('hidden');
+                compDownloadBtn.classList.add('flex');
+                
                 runCompressBtn.disabled = false;
                 compDownloadBtn.onclick = () => {
                     const downloadAnchor = document.createElement('a');
@@ -1064,6 +877,9 @@
                     downloadAnchor.download = "Optimized_10k_HD_Collection.zip";
                     downloadAnchor.click();
                 };
+            }).catch(err => {
+                compStatusText.innerText = "❌ Error rendering package.";
+                console.error(err);
             });
         });
 
@@ -1091,6 +907,25 @@
                 };
                 reader.onerror = (err) => reject(err);
             });
+        }
+
+        function loadImage(file) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => resolve(img);
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function hexToRgb(hex) {
+            const r = parseInt(hex.slice(1, 3), 16);
+            const g = parseInt(hex.slice(3, 5), 16);
+            const b = parseInt(hex.slice(5, 7), 16);
+            return { r, g, b };
         }
     </script>
 </body>
