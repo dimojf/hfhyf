@@ -326,7 +326,7 @@
                         <option value="mars">Mars Rover (Dusty Red & Desert Orange)</option>
                         <option value="deepSea">Abyssal Deep Sea (Navy & Cyan Shadow)</option>
                         <option value="bubblegum">Bubblegum Pop (Pastel Pink & Baby Blue)</option>
-                        <option value="radioactive text-black">Radioactive Yellow (High Voltage Sulfur)</option>
+                        <option value="radioactive">Radioactive Yellow (High Voltage Sulfur)</option>
                         <option value="zombie">Zombie Apocalypse (Decayed Green & Brown)</option>
                         <option value="candy">Cotton Candy (Sweet Pink Teal Combo)</option>
                         <option value="supernova">Supernova Flare (Blazing Red-Hot Core)</option>
@@ -411,6 +411,12 @@
             </svg>
             <p class="text-lg font-bold text-slate-300">Drag & Drop 10,000+ NFT Image Folders Here</p>
             <p class="text-xs text-slate-500 mt-1 font-mono">Processes up to 6.7GB down to ~600MB instantly inside RAM without server uploads</p>
+        </div>
+
+        <div class="mb-6">
+            <button id="runCompressBtn" class="w-full bg-gradient-to-r from-emerald-500 to-indigo-600 hover:opacity-90 text-white font-extrabold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg disabled:opacity-30 disabled:cursor-not-allowed" disabled>
+                ⚡ Run Bulk HD Compression
+            </button>
         </div>
 
         <div id="compProgressContainer" class="hidden bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4 mb-6">
@@ -969,6 +975,7 @@
         // --- Bulk HD Compressor Core Mechanism ---
         const dropZoneCompressor = document.getElementById('dropZoneCompressor');
         const compressorFileInput = document.getElementById('compressorFileInput');
+        const runCompressBtn = document.getElementById('runCompressBtn');
         const compProgressContainer = document.getElementById('compProgressContainer');
         const compStatusText = document.getElementById('compStatusText');
         const compProgressPercent = document.getElementById('compProgressPercent');
@@ -980,6 +987,8 @@
         const qualityVal = document.getElementById('qualityVal');
         const compressFormatSelect = document.getElementById('compressFormatSelect');
 
+        let bulkCompressFiles = [];
+
         qualityRange.addEventListener('input', (e) => {
             qualityVal.innerText = e.target.value;
         });
@@ -990,17 +999,27 @@
         dropZoneCompressor.addEventListener('drop', (e) => {
             e.preventDefault();
             dropZoneCompressor.classList.remove('border-emerald-500');
-            handleBulkCompressionProcessing(Array.from(e.dataTransfer.files));
+            prepareBulkCompression(Array.from(e.dataTransfer.files));
         });
 
         compressorFileInput.addEventListener('change', (e) => {
-            handleBulkCompressionProcessing(Array.from(e.target.files));
+            prepareBulkCompression(Array.from(e.target.files));
         });
 
-        async function handleBulkCompressionProcessing(files) {
-            const imageFiles = files.filter(f => f.type.startsWith('image/'));
-            if(imageFiles.length === 0) return;
+        function prepareBulkCompression(files) {
+            bulkCompressFiles = files.filter(f => f.type.startsWith('image/'));
+            if(bulkCompressFiles.length > 0) {
+                runCompressBtn.disabled = false;
+                compDownloadBtn.classList.add('hidden');
+                compProgressContainer.classList.add('hidden');
+                alert(`Loaded ${bulkCompressFiles.length} images. Click 'Run Bulk HD Compression' to start.`);
+            }
+        }
 
+        runCompressBtn.addEventListener('click', async () => {
+            if(bulkCompressFiles.length === 0) return;
+
+            runCompressBtn.disabled = true;
             compProgressContainer.classList.remove('hidden');
             compDownloadBtn.classList.add('hidden');
             
@@ -1010,8 +1029,8 @@
             const compressedArchive = new JSZip();
             const startTime = Date.now();
 
-            for(let i=0; i < imageFiles.length; i++) {
-                const currentFile = imageFiles[i];
+            for(let i=0; i < bulkCompressFiles.length; i++) {
+                const currentFile = bulkCompressFiles[i];
                 compStatusText.innerText = `Compressing Target Node Matrix: ${currentFile.name}`;
                 
                 try {
@@ -1022,14 +1041,14 @@
                     console.error("Compression thread faulted out", e);
                 }
 
-                const progress = Math.round(((i + 1) / imageFiles.length) * 100);
+                const progress = Math.round(((i + 1) / bulkCompressFiles.length) * 100);
                 compProgressPercent.innerText = progress + "%";
                 compProgressBar.style.width = progress + "%";
-                compFileCount.innerText = `${i + 1} / ${imageFiles.length} Renders Optimized`;
+                compFileCount.innerText = `${i + 1} / ${bulkCompressFiles.length} Renders Optimized`;
 
                 const elapsed = Date.now() - startTime;
                 const avgTime = elapsed / (i + 1);
-                const remaining = imageFiles.length - (i + 1);
+                const remaining = bulkCompressFiles.length - (i + 1);
                 const etaSeconds = Math.round((avgTime * remaining) / 1000);
                 compEtaText.innerText = `ETA Prediction: ~${etaSeconds}s Remaining`;
             }
@@ -1038,6 +1057,7 @@
             compressedArchive.generateAsync({type:"blob"}).then((archiveContent) => {
                 compStatusText.innerText = "⚡ Bulk HD Compression Layer Complete!";
                 compDownloadBtn.classList.remove('hidden');
+                runCompressBtn.disabled = false;
                 compDownloadBtn.onclick = () => {
                     const downloadAnchor = document.createElement('a');
                     downloadAnchor.href = URL.createObjectURL(archiveContent);
@@ -1045,7 +1065,7 @@
                     downloadAnchor.click();
                 };
             });
-        }
+        });
 
         function executeImageCompression(file, quality, format) {
             return new Promise((resolve, reject) => {
