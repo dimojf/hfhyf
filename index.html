@@ -326,7 +326,7 @@
                         <option value="mars">Mars Rover (Dusty Red & Desert Orange)</option>
                         <option value="deepSea">Abyssal Deep Sea (Navy & Cyan Shadow)</option>
                         <option value="bubblegum">Bubblegum Pop (Pastel Pink & Baby Blue)</option>
-                        <option value="radioactive">Radioactive Yellow (High Voltage Sulfur)</option>
+                        <option value="radioactive text-black">Radioactive Yellow (High Voltage Sulfur)</option>
                         <option value="zombie">Zombie Apocalypse (Decayed Green & Brown)</option>
                         <option value="candy">Cotton Candy (Sweet Pink Teal Combo)</option>
                         <option value="supernova">Supernova Flare (Blazing Red-Hot Core)</option>
@@ -352,10 +352,6 @@
                         <option value="oilCanvas">Glitch Canvas (Simulated Wet Paint Texture)</option>
                         <option value="polaroid">80s Polaroid (Faded Wash & Heavy Matte)</option>
                         <option value="gotham">Gotham Shadow (Desaturated Industrial Vibe)</option>
-                        
-                        <option value="cosmicVibe">Cosmic Interstellar Shifter (Deep Nebula Hues)</option>
-                        <option value="acidVortex">Acidic Vortex Protocol (Algorithmic Signature Erasing)</option>
-                        <option value="retroDream">Retro Dream Pop (Warm Nostalgic Matte Filter)</option>
                     </optgroup>
                 </select>
             </div>
@@ -394,9 +390,9 @@
         <div class="bg-slate-950/40 p-6 rounded-2xl border border-slate-800 mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-xl">
                 <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Target Safe Format</label>
-                <select id="compressorFormatSelect" class="bg-slate-950 text-sm font-bold text-emerald-400 border border-emerald-500/20 px-3 py-2 rounded-lg bg-transparent focus:outline-none focus:border-emerald-500 w-full cursor-pointer">
-                    <option value="image/webp" class="bg-slate-900 text-slate-200">WebP Engine (HD Retention Map)</option>
-                    <option value="image/png" class="bg-slate-900 text-slate-200">PNG Engine (Lossless High Fidelity)</option>
+                <select id="compressFormatSelect" class="bg-slate-950 text-sm font-bold text-emerald-400 border border-emerald-500/20 px-3 py-2 rounded-lg bg-slate-900 focus:outline-none focus:border-emerald-500 cursor-pointer w-full">
+                    <option value="image/webp">WebP Engine (HD Retention Map)</option>
+                    <option value="image/png">PNG Engine (Lossless Transparency)</option>
                 </select>
             </div>
             <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-xl">
@@ -825,7 +821,7 @@
                 case 'amethyst': ctx.filter = 'hue-rotate(270deg) saturate(2.2) contrast(1.2)'; break;
                 case 'platinum': ctx.filter = 'grayscale(0.9) contrast(1.4) brightness(1.2)'; break;
                 case 'diamond': ctx.filter = 'contrast(1.7) brightness(1.15) saturate(0.8)'; break;
-                case 'obsidian': ctx.filter = 'contrast(1.5) brightness(0.4) grayscale(0.22)'; break;
+                case 'obsidian': ctx.filter = 'contrast(1.5) brightness(0.4) grayscale(0.2)'; break;
                 case 'rosegold': ctx.filter = 'sepia(0.4) hue-rotate(330deg) saturate(1.7) contrast(1.1)'; break;
                 case 'pearlDrop': ctx.filter = 'saturate(0.7) brightness(1.1) contrast(0.95)'; break;
                 case 'sunset': ctx.filter = 'hue-rotate(340deg) saturate(1.5)'; break;
@@ -982,7 +978,7 @@
         const compDownloadBtn = document.getElementById('compDownloadBtn');
         const qualityRange = document.getElementById('qualityRange');
         const qualityVal = document.getElementById('qualityVal');
-        const compressorFormatSelect = document.getElementById('compressorFormatSelect');
+        const compressFormatSelect = document.getElementById('compressFormatSelect');
 
         qualityRange.addEventListener('input', (e) => {
             qualityVal.innerText = e.target.value;
@@ -1009,9 +1005,8 @@
             compDownloadBtn.classList.add('hidden');
             
             const targetQuality = parseFloat(qualityRange.value);
-            const targetMimeType = compressorFormatSelect.value;
-            const extension = targetMimeType === 'image/png' ? '.png' : '.webp';
-            
+            const chosenFormat = compressFormatSelect.value;
+            const fileExtension = chosenFormat === 'image/png' ? '.png' : '.webp';
             const compressedArchive = new JSZip();
             const startTime = Date.now();
 
@@ -1020,8 +1015,8 @@
                 compStatusText.innerText = `Compressing Target Node Matrix: ${currentFile.name}`;
                 
                 try {
-                    const compressedBlob = await executeImageCompression(currentFile, targetMimeType, targetQuality);
-                    const cleanName = currentFile.name.replace(/\.[^/.]+$/, "") + extension;
+                    const compressedBlob = await executeImageCompression(currentFile, targetQuality, chosenFormat);
+                    const cleanName = currentFile.name.replace(/\.[^/.]+$/, "") + fileExtension;
                     compressedArchive.file(cleanName, compressedBlob);
                 } catch(e) {
                     console.error("Compression thread faulted out", e);
@@ -1052,7 +1047,7 @@
             });
         }
 
-        function executeImageCompression(file, mimeType, quality) {
+        function executeImageCompression(file, quality, format) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
@@ -1070,7 +1065,7 @@
                         parsingCanvas.toBlob((blob) => {
                             if (blob) resolve(blob);
                             else reject(new Error('Image Engine Canvas compression failed'));
-                        }, mimeType, mimeType === 'image/png' ? undefined : quality);
+                        }, format, quality);
                     };
                     tempImg.onerror = (err) => reject(err);
                 };
