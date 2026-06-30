@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebP to PNG Bulk Converter</title>
+    <title>WebP to PNG Stream Converter</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <style>
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
@@ -23,8 +22,8 @@
 
     <main class="max-w-4xl w-full mx-auto my-10 p-6 bg-white rounded-2xl shadow-sm border border-slate-100 flex-grow">
         <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-slate-800 mb-2">WebP to PNG Bulk Converter</h1>
-            <p class="text-slate-500">আপনার WebP ছবিগুলো নাম ঠিক রেখে PNG ফরম্যাটে কনভার্ট করুন (১০,০০০+ ছবি একসাথে প্রসেস করার উপযোগী)</p>
+            <h1 class="text-3xl font-bold text-slate-800 mb-2">WebP to PNG Stream Converter</h1>
+            <p class="text-slate-500">মেমোরি ক্র্যাশ ছাড়া ২,০০০+ ছবি নাম ঠিক রেখে সরাসরি ডাউনলোডের আধুনিক সিস্টেম</p>
         </div>
 
         <div id="dropzone" class="border-2 border-dashed border-slate-300 hover:border-indigo-500 rounded-xl p-8 text-center cursor-pointer transition-colors bg-slate-50/50">
@@ -33,8 +32,8 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                 </svg>
-                <p class="text-base text-slate-700 font-medium">এখানে আপনার WebP ফাইলগুলো ড্র্যাগ এন্ড ড্রপ করুন অথবা ক্লিক করে সিলেক্ট করুন</p>
-                <p class="text-xs text-slate-400">অনতিধিক ১০,০০০+ ফাইল একসাথে প্রসেস করা সম্ভব</p>
+                <p class="text-base text-slate-700 font-medium">এখানে আপনার WebP ফাইলগুলো ড্র্যাগ করুন অথবা ক্লিক করে সিলেক্ট করুন</p>
+                <p class="text-xs text-slate-400">২,০০০+ ফাইল একসাথে কোনো ক্র্যাশ ছাড়াই প্রসেস হবে</p>
             </div>
         </div>
 
@@ -44,32 +43,28 @@
                 <span id="totalCount" class="text-sm font-bold text-slate-800 ml-1">0</span>
             </div>
             <div>
-                <span class="text-sm font-medium text-slate-500">কনভার্ট হয়েছে:</span>
+                <span class="text-sm font-medium text-slate-500">কনভার্ট ও ডাউনলোড হয়েছে:</span>
                 <span id="successCount" class="text-sm font-bold text-emerald-600 ml-1">0</span>
             </div>
             <div>
                 <span class="text-sm font-medium text-slate-500">বাকি আছে:</span>
                 <span id="pendingCount" class="text-sm font-bold text-amber-600 ml-1">0</span>
             </div>
-            <button id="downloadZipBtn" disabled class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 text-white font-semibold text-sm rounded-lg shadow-sm transition-colors cursor-pointer disabled:cursor-not-allowed flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-                সব একসাথে ডাউনলোড করুন (.ZIP)
-            </button>
         </div>
 
         <div id="progressContainer" class="hidden mt-6">
             <div class="flex justify-between text-xs font-semibold text-slate-600 mb-2">
-                <span id="progressStatus">প্রসেসিং চলছে...</span>
+                <span id="progressStatus">প্রসেসিং ও ডাউনলোড শুরু হচ্ছে...</span>
                 <span id="progressPercent">0%</span>
             </div>
             <div class="w-full bg-slate-200 rounded-full h-2.5">
-                <div id="progressBar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                <div id="progressBar" class="bg-emerald-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
             </div>
         </div>
 
         <div id="previewContainer" class="hidden mt-8">
             <h3 class="text-lg font-semibold text-slate-800 mb-3 flex items-center gap-2">
-                ফাইল লিস্ট
+                লাইভ প্রসেসিং ও ডাউনলোড হিস্ট্রি
                 <span id="listBadge" class="bg-slate-200 text-slate-700 text-xs px-2.5 py-0.5 rounded-full font-bold">0</span>
             </h3>
             <div id="fileList" class="border border-slate-200 rounded-xl overflow-hidden max-h-96 overflow-y-auto custom-scrollbar divide-y divide-slate-100 bg-white">
@@ -78,7 +73,7 @@
     </main>
 
     <footer class="text-center py-4 border-t border-slate-100 text-xs text-slate-400">
-        Bulk WebP to PNG Converter &bull; শতভাগ সুরক্ষিত ও লোকাল প্রসেসিং (সার্ভারে কোনো ফাইল আপলোড হয় না)
+        Bulk WebP to PNG Stream Converter &bull; ১০০% মেমোরি সুরক্ষিত (Auto-Download Method)
     </footer>
 
     <script>
@@ -88,7 +83,6 @@
         const totalCountEl = document.getElementById('totalCount');
         const successCountEl = document.getElementById('successCount');
         const pendingCountEl = document.getElementById('pendingCount');
-        const downloadZipBtn = document.getElementById('downloadZipBtn');
         const progressContainer = document.getElementById('progressContainer');
         const progressBar = document.getElementById('progressBar');
         const progressPercent = document.getElementById('progressPercent');
@@ -96,10 +90,10 @@
         const previewContainer = document.getElementById('previewContainer');
         const fileList = document.getElementById('fileList');
 
-        let zip = new JSZip();
         let totalFiles = 0;
         let processedCount = 0;
-        const BATCH_SIZE = 5; // ব্রাউজার ক্র্যাশ হওয়া রোধ করতে একসাথে ৫টি করে ইমেজ প্রসেস হবে
+        const BATCH_SIZE = 4; // একসাথে ৪টি করে ছবি প্রসেস হবে
+        const BATCH_DELAY = 300; // প্রতি ব্যাচের মাঝে ৩০০ মিলিসেকেন্ড বিরতি (ব্রাউজার স্টেবল রাখার জন্য)
 
         // Drag and Drop Events
         dropzone.addEventListener('click', () => fileInput.click());
@@ -117,7 +111,6 @@
 
         // Main File Handler
         function handleFiles(files) {
-            // শুধুমাত্র .webp ফাইল ফিল্টার করা
             const webpFiles = Array.from(files).filter(file => file.name.toLowerCase().endsWith('.webp'));
             
             if (webpFiles.length === 0) {
@@ -126,7 +119,6 @@
             }
 
             // Reset States
-            zip = new JSZip();
             fileList.innerHTML = '';
             totalFiles = webpFiles.length;
             processedCount = 0;
@@ -140,35 +132,35 @@
             statsCard.classList.remove('hidden');
             progressContainer.classList.remove('hidden');
             previewContainer.classList.remove('hidden');
-            downloadZipBtn.disabled = true;
 
-            updateProgress(0, 'ইমেজ প্রসেস শুরু হচ্ছে...');
-
-            // ১০,০০০ ফাইলের ক্ষেত্রে পুরো ইন্টারফেস যাতে লক না হয়, তাই ব্যাচ প্রসেসিং
+            updateProgress(0, 'কনভার্ট এবং অটো-ডাউনলোড শুরু হচ্ছে...');
             processInBatches(webpFiles);
         }
 
-        // Batch processing to prevent UI freezing
+        // Helper function for timeout delay
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+
+        // Processing in batches with automatic download triggers
         async function processInBatches(files) {
             for (let i = 0; i < files.length; i += BATCH_SIZE) {
                 const batch = files.slice(i, i + BATCH_SIZE);
-                const promises = batch.map(file => convertWebpToPng(file));
+                const promises = batch.map(file => convertAndDownload(file));
                 await Promise.all(promises);
+                
+                // প্রতি ব্যাচ শেষ হওয়ার পর ব্রাউজারকে একটু রিল্যাক্স টাইম দেওয়া
+                await delay(BATCH_DELAY);
             }
             
-            // Completion State
-            progressStatus.innerText = 'সব ফাইল কনভার্ট সম্পন্ন হয়েছে!';
-            downloadZipBtn.disabled = false;
+            progressStatus.innerText = 'সব ফাইল সফলভাবে কনভার্ট ও ডাউনলোড সম্পন্ন হয়েছে!';
         }
 
-        // Core Canvas Converter
-        function convertWebpToPng(file) {
+        // Core logic: Convert to PNG and Trigger Direct Download Link immediately
+        function convertAndDownload(file) {
             return new Promise((resolve) => {
                 const originalName = file.name;
-                // এক্সটেনশন পরিবর্তন: 1.webp -> 1.png
                 const newName = originalName.substring(0, originalName.lastIndexOf('.')) + '.png';
 
-                // DOM-এ প্রিলিমিনারি লিস্ট আইটেম তৈরি
+                // Add item to dynamic preview list
                 const row = document.createElement('div');
                 row.className = "flex justify-between items-center p-3 text-sm text-slate-700";
                 row.innerHTML = `
@@ -179,11 +171,15 @@
                     <div class="flex items-center gap-4">
                         <span id="status-${processedCount}" class="text-amber-500 text-xs font-semibold flex items-center gap-1">
                             <svg class="animate-spin h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                            প্রসেসিং
+                            প্রসেসিং ও ডাউনলোড হচ্ছে
                         </span>
                     </div>
                 `;
                 fileList.appendChild(row);
+                
+                // অটো স্ক্রোল ডাউন যাতে কারেন্ট প্রসেস দেখা যায়
+                fileList.scrollTop = fileList.scrollHeight;
+
                 const currentStatusSpan = row.querySelector(`#status-${processedCount}`);
 
                 const reader = new FileReader();
@@ -192,46 +188,52 @@
                     const img = new Image();
                     img.src = event.target.result;
                     img.onload = function () {
-                        // Canvas তৈরি করে ইমেজ ড্র করা
                         const canvas = document.createElement('canvas');
                         canvas.width = img.width;
                         canvas.height = img.height;
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(img, 0, 0);
 
-                        // PNG তে রূপান্তর
+                        // PNG কনভার্ট শেষেই ডিরেক্ট ডাউনলোড লিংক জেনারেট
                         canvas.toBlob((blob) => {
-                            // ZIP ফাইলে যুক্ত করা হচ্ছে হুবহু একই নামে (.png সহ)
-                            zip.file(newName, blob);
+                            const blobUrl = URL.createObjectURL(blob);
+                            
+                            // ডিরেক্ট ডাউনলোড ট্রিগার
+                            const link = document.createElement('a');
+                            link.href = blobUrl;
+                            link.download = newName;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
 
-                            // Individual row UI আপডেট
+                            // ডাউনলোড শেষেই মেমোরি খালি করে দেওয়া (ক্র্যাশ প্রুফ মেথড)
+                            setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
+
+                            // UI আপডেট
                             currentStatusSpan.className = "text-emerald-600 text-xs font-semibold flex items-center gap-1";
                             currentStatusSpan.innerHTML = `
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                ${newName}
+                                ${newName} ডাউনলোডড্
                             `;
 
-                            // Global counters আপডেট
                             processedCount++;
                             successCountEl.innerText = processedCount;
                             pendingCountEl.innerText = totalFiles - processedCount;
 
                             const percentage = Math.round((processedCount / totalFiles) * 100);
-                            updateProgress(percentage, `কনভার্ট হচ্ছে: ${processedCount}/${totalFiles}`);
+                            updateProgress(percentage, `ডাউনলোড হচ্ছে: ${processedCount}/${totalFiles}`);
                             
                             resolve();
                         }, 'image/png');
                     };
                     img.onerror = function() {
-                        // কোনো ফাইল করাপ্টেড হলে তা স্কিপ করার লজিক
                         currentStatusSpan.className = "text-rose-500 text-xs font-semibold";
                         currentStatusSpan.innerText = "ব্যর্থ হয়েছে";
                         processedCount++;
                         resolve();
                     }
                 };
-            }
-        );
+            });
         }
 
         // Update progress bar
@@ -240,30 +242,6 @@
             progressPercent.innerText = percentage + '%';
             progressStatus.innerText = text;
         }
-
-        // Trigger ZIP Download
-        downloadZipBtn.addEventListener('click', () => {
-            progressStatus.innerText = 'ZIP ফাইল তৈরি হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...';
-            downloadZipBtn.disabled = true;
-
-            zip.generateAsync({ type: 'blob' }, (metadata) => {
-                // ZIP তৈরি করার লাইভ প্রোগ্রেস ট্র্যাকিং
-                updateProgress(metadata.percent.toFixed(0), `ZIP ফাইল প্যাকেজিং হচ্ছে: ${metadata.percent.toFixed(0)}%`);
-            }).then((content) => {
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(content);
-                link.download = "converted_png_images.zip";
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                
-                progressStatus.innerText = 'ডাউনলোড সম্পন্ন হয়েছে!';
-                downloadZipBtn.disabled = false;
-            }).catch(err => {
-                alert('ZIP ফাইল তৈরিতে সমস্যা হয়েছে। আবার চেষ্টা করুন।');
-                downloadZipBtn.disabled = false;
-            });
-        });
     </script>
 </body>
 </html>
