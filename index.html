@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testpunks - Ultra Anti-Copyright NFT Studio Pro</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gifshot/0.4.5/gifshot.min.js"></script>
 </head>
@@ -36,7 +36,7 @@
                     </svg>
                 </div>
                 <p class="text-xl font-bold text-slate-300">Batch Upload NFT Folders or Single Images</p>
-                <p class="text-xs text-slate-500 font-mono">Supports PNG, JPG, GIF formats (Universal Ape, Punk & Penguin Engine)</p>
+                <p class="text-xs text-slate-500 font-mono">Supports PNG, JPG, GIF formats (Downloads as JPG)</p>
             </div>
         </div>
 
@@ -148,10 +148,10 @@
                         <span class="text-xs text-slate-400">Background Mode:</span>
                         <select id="bgMode" class="bg-slate-900 text-xs text-slate-200 rounded-md p-1.5 border border-slate-800 focus:outline-none focus:border-pink-500 w-48">
                             <option value="keep">Keep Original / Transparent</option>
-                            <option value="custom">Custom Solid Color</option>
-                            <option value="solidLimeGreen">Solid: Vibrant Lime Green</option>
+                            <option value="solidLime">Solid: Vibrant Lime Green</option>
                             <option value="solidChartreuse">Solid: Green / Chartreuse Yellow</option>
                             <option value="solidFluorescent">Solid: Fluorescent Green</option>
+                            <option value="custom">Custom Solid Color</option>
                             <option value="random">Dynamic Random Per Image</option>
                             <option value="gradSunset">Gradient: Solana Sunset</option>
                             <option value="gradCyber">Gradient: Cyberpunk Neon</option>
@@ -179,7 +179,7 @@
 
         <div class="bg-slate-950/40 p-6 rounded-2xl border border-slate-800 mb-8">
             <h3 class="text-sm font-bold text-emerald-400 tracking-wider uppercase mb-4 flex items-center gap-2">
-                <span>🛡️</span> Multi-Tech Anti-Copyright Arsenal (All Options Maintained + Upgraded)
+                <span>🛡️</span> Multi-Tech Anti-Copyright Arsenal
             </h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <label class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800/60 cursor-pointer select-none">
@@ -527,38 +527,6 @@
             }
         });
 
-        // New Helper to correctly draw background BEHIND the character without changing a single character pixel
-        function fillBackground(ctx, w, h, bgM, bgC) {
-            if (bgM === 'keep') return;
-            
-            if (bgM === 'custom') {
-                ctx.fillStyle = `rgb(${bgC.r}, ${bgC.g}, ${bgC.b})`;
-            } else if (bgM === 'solidLimeGreen') {
-                ctx.fillStyle = '#32CD32'; 
-            } else if (bgM === 'solidChartreuse') {
-                ctx.fillStyle = '#DFFF00';
-            } else if (bgM === 'solidFluorescent') {
-                ctx.fillStyle = '#08FF08';
-            } else if (bgM.startsWith('grad')) {
-                let grad = ctx.createLinearGradient(0, 0, 0, h);
-                if(bgM === 'gradSunset') { grad.addColorStop(0, 'rgb(255,90,50)'); grad.addColorStop(1, 'rgb(155,120,200)'); }
-                else if(bgM === 'gradCyber') { grad.addColorStop(0, 'rgb(0,200,255)'); grad.addColorStop(1, 'rgb(0,50,255)'); }
-                else if(bgM === 'gradMatrix') { grad.addColorStop(0, 'rgb(10,255,10)'); grad.addColorStop(1, 'rgb(10,55,10)'); }
-                else if(bgM === 'gradAurora') { grad.addColorStop(0, 'rgb(50,220,150)'); grad.addColorStop(1, 'rgb(50,120,200)'); }
-                else if(bgM === 'gradVapor') { grad.addColorStop(0, 'rgb(255,150,230)'); grad.addColorStop(1, 'rgb(255,100,230)'); }
-                else if(bgM === 'gradDeep') { grad.addColorStop(0, 'rgb(5,15,50)'); grad.addColorStop(1, 'rgb(5,15,120)'); }
-                else if(bgM === 'gradFire') { grad.addColorStop(0, 'rgb(255,60,0)'); grad.addColorStop(1, 'rgb(255,200,0)'); }
-                else if(bgM === 'gradRetrowave') { grad.addColorStop(0, 'rgb(20,10,40)'); grad.addColorStop(1, 'rgb(60,10,100)'); }
-                else if(bgM === 'gradTokyoPink') { grad.addColorStop(0, 'rgb(120,10,150)'); grad.addColorStop(1, 'rgb(40,10,150)'); }
-                else if(bgM === 'gradGoldenHour') { grad.addColorStop(0, 'rgb(230,170,30)'); grad.addColorStop(1, 'rgb(230,120,30)'); }
-                else if(bgM === 'gradHyperDrive') { grad.addColorStop(0, 'rgb(10,0,120)'); grad.addColorStop(1, 'rgb(10,100,120)'); }
-                else if(bgM === 'gradEcto') { grad.addColorStop(0, 'rgb(0,240,20)'); grad.addColorStop(1, 'rgb(50,240,20)'); }
-                else { grad.addColorStop(0, 'rgb(20,30,45)'); grad.addColorStop(1, 'rgb(20,30,45)'); }
-                ctx.fillStyle = grad;
-            }
-            ctx.fillRect(0, 0, w, h);
-        }
-
         function pixelizeContextStructure(ctx, w, h, sizeSetting) {
             if(sizeSetting === 'none') return;
             const size = parseInt(sizeSetting);
@@ -586,11 +554,20 @@
                     let nx = x;
                     let ny = y;
 
-                    if (mode === 'microShift') nx = x + Math.sin(y * 0.5) * (factor * 0.2);
-                    else if (mode === 'sinusoidal') { nx = x + Math.sin(y / 10) * factor; ny = y + Math.cos(x / 10) * (factor * 0.5); }
-                    else if (mode === 'asymmetric') { let q = (x > w/2 ? 1 : -1) * (y > h/2 ? 1 : -1); nx = x + q * (factor * 0.4); }
-                    else if (mode === 'vectorWrap') nx = x + Math.tan(y / 100) * (factor * 0.1);
-                    else if (mode === 'deepQuantum') { nx = x + Math.sin(x * y) * (factor * 0.15); ny = y + Math.cos(x + y) * (factor * 0.15); }
+                    if (mode === 'microShift') {
+                        nx = x + Math.sin(y * 0.5) * (factor * 0.2);
+                    } else if (mode === 'sinusoidal') {
+                        nx = x + Math.sin(y / 10) * factor;
+                        ny = y + Math.cos(x / 10) * (factor * 0.5);
+                    } else if (mode === 'asymmetric') {
+                        let q = (x > w/2 ? 1 : -1) * (y > h/2 ? 1 : -1);
+                        nx = x + q * (factor * 0.4);
+                    } else if (mode === 'vectorWrap') {
+                        nx = x + Math.tan(y / 100) * (factor * 0.1);
+                    } else if (mode === 'deepQuantum') {
+                        nx = x + Math.sin(x * y) * (factor * 0.15);
+                        ny = y + Math.cos(x + y) * (factor * 0.15);
+                    }
 
                     nx = Math.max(0, Math.min(w - 1, Math.round(nx)));
                     ny = Math.max(0, Math.min(h - 1, Math.round(ny)));
@@ -616,8 +593,11 @@
                     interval: 0.1,
                     numFrames: 10
                 }, function (obj) {
-                    if (!obj.error) resolve(obj.savedImages);
-                    else resolve([]);
+                    if (!obj.error) {
+                        resolve(obj.savedImages);
+                    } else {
+                        resolve([]);
+                    }
                 });
             });
         }
@@ -634,6 +614,7 @@
             const currentBgMode = bgMode.value;
             const targetBgColor = hexToRgb(bgColor.value);
             const pixelSetting = pixelSizeSelect.value;
+            
             const remapMode = bypassRemapSelect.value;
             const remapFactor = remapIntensity.value;
 
@@ -643,14 +624,20 @@
                 
                 let renderW = item.img.width;
                 let renderH = item.img.height;
-                if(shouldResize) { renderW = 872; renderH = 1280; }
+                if(shouldResize) {
+                    renderW = 872;
+                    renderH = 1280;
+                }
                 
                 previewCanvas.width = renderW;
                 previewCanvas.height = renderH;
                 pCtx.clearRect(0, 0, renderW, renderH);
                 
                 pCtx.save();
-                if (shouldFlip) { pCtx.translate(renderW, 0); pCtx.scale(-1, 1); }
+                if (shouldFlip) {
+                    pCtx.translate(renderW, 0);
+                    pCtx.scale(-1, 1);
+                }
 
                 if(shouldResize) {
                     const scale = Math.max(872 / item.img.width, 1280 / item.img.height);
@@ -663,21 +650,21 @@
                 pCtx.restore();
 
                 if (selectedFilter === 'monoBlueGlitch') {
-                    applyAdvancedIceGlitchFilter(pCtx, renderW, renderH, currentOutlineMode, targetOutlineColor);
+                    applyAdvancedIceGlitchFilter(pCtx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
                 } else if (selectedFilter === 'handDrawnPencil') {
-                    applyHandDrawnPencilArtFilter(pCtx, renderW, renderH, currentOutlineMode, targetOutlineColor);
+                    applyHandDrawnPencilArtFilter(pCtx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
                 } else {
                     applyFilterToContext(pCtx, selectedFilter);
-                    applyGlobalAntiCopyrightOverride(pCtx, renderW, renderH, currentOutlineMode, targetOutlineColor, true);
+                    applyGlobalAntiCopyrightOverride(pCtx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, true);
                 }
 
-                if (remapMode !== 'none') applyStructuralRemapBypass(pCtx, renderW, renderH, remapMode, remapFactor);
-                if (pixelSetting !== 'none') pixelizeContextStructure(pCtx, renderW, renderH, pixelSetting);
+                if (remapMode !== 'none') {
+                    applyStructuralRemapBypass(pCtx, renderW, renderH, remapMode, remapFactor);
+                }
 
-                // Add Background neatly behind the fully processed character
-                pCtx.globalCompositeOperation = 'destination-over';
-                fillBackground(pCtx, renderW, renderH, currentBgMode, targetBgColor);
-                pCtx.globalCompositeOperation = 'source-over';
+                if(pixelSetting !== 'none') {
+                    pixelizeContextStructure(pCtx, renderW, renderH, pixelSetting);
+                }
 
                 pCtx.filter = 'none';
                 const div = document.createElement('div');
@@ -685,9 +672,9 @@
                 const previewImgTag = document.createElement('img');
                 
                 if (item.isGIF) {
-                    previewImgTag.src = item.file ? URL.createObjectURL(item.file) : previewCanvas.toDataURL('image/png');
+                    previewImgTag.src = item.file ? URL.createObjectURL(item.file) : previewCanvas.toDataURL('image/jpeg');
                 } else {
-                    previewImgTag.src = previewCanvas.toDataURL('image/png');
+                    previewImgTag.src = previewCanvas.toDataURL('image/jpeg');
                 }
                 
                 previewImgTag.className = 'w-full h-32 object-contain rounded-lg mb-2 bg-slate-900';
@@ -712,6 +699,7 @@
             const currentBgMode = bgMode.value;
             const targetBgColor = hexToRgb(bgColor.value);
             const pixelSetting = pixelSizeSelect.value;
+            
             const remapMode = bypassRemapSelect.value;
             const remapFactor = remapIntensity.value;
 
@@ -731,7 +719,10 @@
                     renderH = img.height;
                 }
                 
-                if(shouldResize) { renderW = 872; renderH = 1280; }
+                if(shouldResize) {
+                    renderW = 872;
+                    renderH = 1280;
+                }
 
                 if (file.type === 'image/gif') {
                     const frames = await extractGifFrames(file, renderW, renderH, shouldResize);
@@ -744,25 +735,29 @@
                         ctx.clearRect(0, 0, renderW, renderH);
 
                         ctx.save();
-                        if (shouldFlip) { ctx.translate(renderW, 0); ctx.scale(-1, 1); }
+                        if (shouldFlip) {
+                            ctx.translate(renderW, 0);
+                            ctx.scale(-1, 1);
+                        }
                         ctx.drawImage(frameImg, 0, 0, renderW, renderH);
                         ctx.restore();
 
                         if (selectedFilter === 'monoBlueGlitch') {
-                            applyAdvancedIceGlitchFilter(ctx, renderW, renderH, currentOutlineMode, targetOutlineColor);
+                            applyAdvancedIceGlitchFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
                         } else if (selectedFilter === 'handDrawnPencil') {
-                            applyHandDrawnPencilArtFilter(ctx, renderW, renderH, currentOutlineMode, targetOutlineColor);
+                            applyHandDrawnPencilArtFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
                         } else {
                             applyFilterToContext(ctx, selectedFilter);
-                            applyGlobalAntiCopyrightOverride(ctx, renderW, renderH, currentOutlineMode, targetOutlineColor, false);
+                            applyGlobalAntiCopyrightOverride(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, false);
                         }
 
-                        if (remapMode !== 'none') applyStructuralRemapBypass(ctx, renderW, renderH, remapMode, remapFactor);
-                        if (pixelSetting !== 'none') pixelizeContextStructure(ctx, renderW, renderH, pixelSetting);
+                        if (remapMode !== 'none') {
+                            applyStructuralRemapBypass(ctx, renderW, renderH, remapMode, remapFactor);
+                        }
 
-                        ctx.globalCompositeOperation = 'destination-over';
-                        fillBackground(ctx, renderW, renderH, currentBgMode, targetBgColor);
-                        ctx.globalCompositeOperation = 'source-over';
+                        if(pixelSetting !== 'none') {
+                            pixelizeContextStructure(ctx, renderW, renderH, pixelSetting);
+                        }
 
                         if (hashRandCheck.checked) {
                             const d = ctx.getImageData(0, 0, 1, 1);
@@ -770,7 +765,7 @@
                             ctx.putImageData(d, 0, 0);
                         }
 
-                        processedFrames.push(canvas.toDataURL('image/jpeg', 0.85)); 
+                        processedFrames.push(canvas.toDataURL('image/jpeg', 0.80)); 
                     }
 
                     const gifBlob = await new Promise((resolve) => {
@@ -783,8 +778,11 @@
                             sampleInterval: 10,
                             quality: 10
                         }, function (obj) {
-                            if (!obj.error) fetch(obj.image).then(res => res.blob()).then(resolve);
-                            else resolve(null);
+                            if (!obj.error) {
+                                fetch(obj.image).then(res => res.blob()).then(resolve);
+                            } else {
+                                resolve(null);
+                            }
                         });
                     });
 
@@ -799,7 +797,10 @@
                     ctx.clearRect(0, 0, renderW, renderH);
 
                     ctx.save();
-                    if (shouldFlip) { ctx.translate(renderW, 0); ctx.scale(-1, 1); }
+                    if (shouldFlip) {
+                        ctx.translate(renderW, 0);
+                        ctx.scale(-1, 1);
+                    }
 
                     if(shouldResize) {
                         const scale = Math.max(872 / img.width, 1280 / img.height);
@@ -812,20 +813,21 @@
                     ctx.restore();
 
                     if (selectedFilter === 'monoBlueGlitch') {
-                        applyAdvancedIceGlitchFilter(ctx, renderW, renderH, currentOutlineMode, targetOutlineColor);
+                        applyAdvancedIceGlitchFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
                     } else if (selectedFilter === 'handDrawnPencil') {
-                        applyHandDrawnPencilArtFilter(ctx, renderW, renderH, currentOutlineMode, targetOutlineColor);
+                        applyHandDrawnPencilArtFilter(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor);
                     } else {
                         applyFilterToContext(ctx, selectedFilter);
-                        applyGlobalAntiCopyrightOverride(ctx, renderW, renderH, currentOutlineMode, targetOutlineColor, false);
+                        applyGlobalAntiCopyrightOverride(ctx, renderW, renderH, currentBgMode, targetBgColor, currentOutlineMode, targetOutlineColor, false);
                     }
 
-                    if (remapMode !== 'none') applyStructuralRemapBypass(ctx, renderW, renderH, remapMode, remapFactor);
-                    if (pixelSetting !== 'none') pixelizeContextStructure(ctx, renderW, renderH, pixelSetting);
+                    if (remapMode !== 'none') {
+                        applyStructuralRemapBypass(ctx, renderW, renderH, remapMode, remapFactor);
+                    }
 
-                    ctx.globalCompositeOperation = 'destination-over';
-                    fillBackground(ctx, renderW, renderH, currentBgMode, targetBgColor);
-                    ctx.globalCompositeOperation = 'source-over';
+                    if(pixelSetting !== 'none') {
+                        pixelizeContextStructure(ctx, renderW, renderH, pixelSetting);
+                    }
 
                     if (hashRandCheck.checked) {
                         const d = ctx.getImageData(0, 0, 1, 1);
@@ -833,8 +835,7 @@
                         ctx.putImageData(d, 0, 0);
                     }
 
-                    // WebP পরিবর্তন করে JPG ডাউনলোড করা হচ্ছে
-                    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.95)); 
+                    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.85)); // webp to jpg compression logic mapped
                     processedImages.push({ blob, name: file.name.replace(/\.[^/.]+$/, "") + ".jpg" });
                 }
 
@@ -848,7 +849,9 @@
 
         function generateZipArchive(images) {
             const zip = new JSZip();
-            images.forEach(item => { zip.file(item.name, item.blob); });
+            images.forEach(item => {
+                zip.file(item.name, item.blob);
+            });
             zip.generateAsync({ type: "blob" }).then(content => {
                 statusText.innerText = `⚡ Processing Complete! 100% of Collection Protected and Encrypted.`;
                 downloadBtn.classList.remove('hidden');
@@ -865,13 +868,21 @@
         function loadImage(file) {
             return new Promise((resolve) => {
                 const reader = new FileReader();
-                reader.onload = (e) => { const img = new Image(); img.onload = () => resolve(img); img.src = e.target.result; };
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => resolve(img);
+                    img.src = e.target.result;
+                };
                 reader.readAsDataURL(file);
             });
         }
 
         function loadImageFromSrc(src) {
-            return new Promise((resolve) => { const img = new Image(); img.onload = () => resolve(img); img.src = src; });
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.src = src;
+            });
         }
 
         function hexToRgb(hex) {
@@ -944,6 +955,7 @@
                 case 'oilCanvas': ctx.filter = 'contrast(1.1) saturate(1.2) blur(0.3px)'; break;
                 case 'polaroid': ctx.filter = 'contrast(0.95) saturate(0.8) sepia(0.15) brightness(1.02)'; break;
                 case 'gotham': ctx.filter = 'grayscale(0.4) contrast(1.2) brightness(0.9)'; break;
+                
                 case 'cosmicVibe': ctx.filter = 'hue-rotate(265deg) saturate(1.7) contrast(1.25)'; break;
                 case 'acidVortex': ctx.filter = 'hue-rotate(105deg) saturate(2.1) contrast(1.35)'; break;
                 case 'retroDream': ctx.filter = 'sepia(0.25) saturate(1.3) contrast(1.05) brightness(1.02)'; break;
@@ -953,18 +965,95 @@
             ctx.filter = 'none';
         }
 
-        // Updated function to ONLY handle Outline & Noise (Background is handled perfectly by fillBackground independently)
-        function applyGlobalAntiCopyrightOverride(ctx, w, h, outM, outC, isPreview) {
+        function applyGlobalAntiCopyrightOverride(ctx, w, h, bgM, bgC, outM, outC, isPreview) {
             const imgData = ctx.getImageData(0, 0, w, h);
             const data = imgData.data;
 
+            const finalBg = bgM === 'custom' ? bgC : {r:20, g:30, b:45};
+            
+            // Advance Background Detector for Solid & Transparent NFTs protecting core body pixels
+            const bgRefR = data[0], bgRefG = data[1], bgRefB = data[2];
+            const isBg = new Uint8Array(w * h);
+            
+            let stackX = new Int32Array(w * h);
+            let stackY = new Int32Array(w * h);
+            let stackPtr = 0;
+
+            for (let x = 0; x < w; x++) {
+                stackX[stackPtr] = x; stackY[stackPtr] = 0; stackPtr++;
+                stackX[stackPtr] = x; stackY[stackPtr] = h - 1; stackPtr++;
+            }
+            for (let y = 1; y < h - 1; y++) {
+                stackX[stackPtr] = 0; stackY[stackPtr] = y; stackPtr++;
+                stackX[stackPtr] = w - 1; stackY[stackPtr] = y; stackPtr++;
+            }
+
+            while (stackPtr > 0) {
+                stackPtr--;
+                let cx = stackX[stackPtr];
+                let cy = stackY[stackPtr];
+                
+                if (cx < 0 || cx >= w || cy < 0 || cy >= h) continue;
+                let idx = cy * w + cx;
+                if (isBg[idx]) continue;
+
+                let p = idx * 4;
+                if (data[p + 3] < 50 || (Math.abs(data[p] - bgRefR) <= 30 && Math.abs(data[p + 1] - bgRefG) <= 30 && Math.abs(data[p + 2] - bgRefB) <= 30)) {
+                    isBg[idx] = 1;
+                    stackX[stackPtr] = cx + 1; stackY[stackPtr] = cy; stackPtr++;
+                    stackX[stackPtr] = cx - 1; stackY[stackPtr] = cy; stackPtr++;
+                    stackX[stackPtr] = cx; stackY[stackPtr] = cy + 1; stackPtr++;
+                    stackX[stackPtr] = cx; stackY[stackPtr] = cy - 1; stackPtr++;
+                }
+            }
+
             for (let i = 0; i < data.length; i += 4) {
                 let alpha = data[i + 3];
+                let vIdx = i / 4;
+                
+                if (isBg[vIdx] && bgM !== 'keep') {
+                    let pixelY = Math.floor(vIdx / w);
+                    let ratio = pixelY / h;
+                    
+                    if (bgM === 'solidLime') {
+                        data[i] = 57; data[i+1] = 255; data[i+2] = 20; 
+                    } else if (bgM === 'solidChartreuse') {
+                        data[i] = 223; data[i+1] = 255; data[i+2] = 0; 
+                    } else if (bgM === 'solidFluorescent') {
+                        data[i] = 8; data[i+1] = 255; data[i+2] = 8; 
+                    } else if(bgM === 'gradSunset') {
+                        data[i] = 255 - (ratio * 100); data[i+1] = 90 + (ratio * 30); data[i+2] = 50 + (ratio * 150);
+                    } else if(bgM === 'gradCyber') {
+                        data[i] = 0; data[i+1] = 200 - (ratio * 150); data[i+2] = 255;
+                    } else if(bgM === 'gradMatrix') {
+                        data[i] = 10; data[i+1] = 255 - (ratio * 200); data[i+2] = 10;
+                    } else if(bgM === 'gradAurora') {
+                        data[i] = 50; data[i+1] = 220 - (ratio * 100); data[i+2] = 150 + (ratio * 50);
+                    } else if(bgM === 'gradVapor') {
+                        data[i] = 255; data[i+1] = 150 - (ratio * 50); data[i+2] = 230;
+                    } else if(bgM === 'gradDeep') {
+                        data[i] = 5; data[i+1] = 15; data[i+2] = 50 + (ratio * 70);
+                    } else if(bgM === 'gradFire') {
+                        data[i] = 255; data[i+1] = 60 + (ratio * 140); data[i+2] = 0;
+                    } else if(bgM === 'gradRetrowave') {
+                        data[i] = 20 + Math.floor(ratio*40); data[i+1] = 10; data[i+2] = 40 + Math.floor(ratio * 60);
+                    } else if(bgM === 'gradTokyoPink') {
+                        data[i] = 120 - Math.floor(ratio*80); data[i+1] = 10; data[i+2] = 150;
+                    } else if(bgM === 'gradGoldenHour') {
+                        data[i] = 230; data[i+1] = 170 - Math.floor(ratio*50); data[i+2] = 30;
+                    } else if(bgM === 'gradHyperDrive') {
+                        data[i] = 10; data[i+1] = Math.floor(ratio*100); data[i+2] = 120;
+                    } else if(bgM === 'gradEcto') {
+                        data[i] = Math.floor(ratio*50); data[i+1] = 240; data[i+2] = 20;
+                    } else {
+                        data[i] = finalBg.r; data[i+1] = finalBg.g; data[i+2] = finalBg.b;
+                    }
+                    data[i + 3] = 255;
+                }
 
-                if (outM !== 'keep' && alpha > 200) {
-                    let idx = i / 4;
-                    let cx = idx % w;
-                    let cy = Math.floor(idx / w);
+                if (outM !== 'keep' && alpha > 200 && !isBg[vIdx]) {
+                    let cx = vIdx % w;
+                    let cy = Math.floor(vIdx / w);
                     
                     if (cx > 0 && cx < w - 1 && cy > 0 && cy < h - 1) {
                         let leftA = data[((cy * w + (cx - 1)) * 4) + 3];
@@ -972,23 +1061,33 @@
                         let upA = data[(((cy - 1) * w + cx) * 4) + 3];
                         let downA = data[(((cy + 1) * w + cx) * 4) + 3];
                         
-                        if (leftA < 50 || rightA < 50 || upA < 50 || downA < 50) {
+                        if (leftA < 50 || rightA < 50 || upA < 50 || downA < 50 || isBg[(cy * w + (cx - 1))] || isBg[(cy * w + (cx + 1))] || isBg[((cy - 1) * w + cx)] || isBg[((cy + 1) * w + cx)]) {
                             if (outM === 'custom') {
                                 data[i] = outC.r; data[i+1] = outC.g; data[i+2] = outC.b;
-                            } else if (outM === 'neonGlow') { data[i] = 0; data[i+1] = 255; data[i+2] = 255; }
-                            else if (outM === 'rainbow') { data[i] = (cx * 2) % 255; data[i+1] = (cy * 2) % 255; data[i+2] = 150; }
-                            else if (outM === 'goldGlint') { data[i] = 212; data[i+1] = 175; data[i+2] = 55; }
-                            else if (outM === 'silverSpark') { data[i] = 192; data[i+1] = 192; data[i+2] = 192; }
-                            else if (outM === 'cosmicPurple') { data[i] = 160; data[i+1] = 32; data[i+2] = 240; }
-                            else if (outM === 'radioactiveGreen') { data[i] = 57; data[i+1] = 255; data[i+2] = 20; }
-                            else if (outM === 'frozenIce') { data[i] = 137; data[i+1] = 207; data[i+2] = 240; }
-                            else if (outM === 'volcanicRed') { data[i] = 255; data[i+1] = 69; data[i+2] = 0; }
-                            else if (outM === 'electricTeal') { data[i] = 0; data[i+1] = 245; data[i+2] = 255; }
+                            } else if (outM === 'neonGlow') {
+                                data[i] = 0; data[i+1] = 255; data[i+2] = 255;
+                            } else if (outM === 'rainbow') {
+                                data[i] = (cx * 2) % 255; data[i+1] = (cy * 2) % 255; data[i+2] = 150;
+                            } else if (outM === 'goldGlint') {
+                                data[i] = 212; data[i+1] = 175; data[i+2] = 55;
+                            } else if (outM === 'silverSpark') {
+                                data[i] = 192; data[i+1] = 192; data[i+2] = 192;
+                            } else if (outM === 'cosmicPurple') {
+                                data[i] = 160; data[i+1] = 32; data[i+2] = 240;
+                            } else if (outM === 'radioactiveGreen') {
+                                data[i] = 57; data[i+1] = 255; data[i+2] = 20;
+                            } else if (outM === 'frozenIce') {
+                                data[i] = 137; data[i+1] = 207; data[i+2] = 240;
+                            } else if (outM === 'volcanicRed') {
+                                data[i] = 255; data[i+1] = 69; data[i+2] = 0;
+                            } else if (outM === 'electricTeal') {
+                                data[i] = 0; data[i+1] = 245; data[i+2] = 255;
+                            }
                         }
                     }
                 }
 
-                if (!isPreview && techNoise && techNoise.checked) {
+                if (!isPreview && techNoise.checked) {
                     let randNoise = (Math.random() - 0.5) * 3;
                     data[i] = Math.min(255, Math.max(0, data[i] + randNoise));
                     data[i+1] = Math.min(255, Math.max(0, data[i+1] + randNoise));
@@ -998,14 +1097,14 @@
             ctx.putImageData(imgData, 0, 0);
         }
 
-        function applyAdvancedIceGlitchFilter(ctx, w, h, outM, outC) {
+        function applyAdvancedIceGlitchFilter(ctx, w, h, bgM, bgC, outM, outC) {
             applyFilterToContext(ctx, 'monochromeBlue');
-            applyGlobalAntiCopyrightOverride(ctx, w, h, outM, outC, false);
+            applyGlobalAntiCopyrightOverride(ctx, w, h, bgM, bgC, outM, outC, false);
         }
 
-        function applyHandDrawnPencilArtFilter(ctx, w, h, outM, outC) {
+        function applyHandDrawnPencilArtFilter(ctx, w, h, bgM, bgC, outM, outC) {
             applyFilterToContext(ctx, 'grayscale');
-            applyGlobalAntiCopyrightOverride(ctx, w, h, outM, outC, false);
+            applyGlobalAntiCopyrightOverride(ctx, w, h, bgM, bgC, outM, outC, false);
         }
 
         const dropZoneCompressor = document.getElementById('dropZoneCompressor');
@@ -1020,13 +1119,22 @@
         const qualityRange = document.getElementById('qualityRange');
         const qualityVal = document.getElementById('qualityVal');
 
-        qualityRange.addEventListener('input', (e) => { qualityVal.innerText = e.target.value; });
+        qualityRange.addEventListener('input', (e) => {
+            qualityVal.innerText = e.target.value;
+        });
 
         dropZoneCompressor.addEventListener('click', () => compressorFileInput.click());
         dropZoneCompressor.addEventListener('dragover', (e) => { e.preventDefault(); dropZoneCompressor.classList.add('border-emerald-500'); });
         dropZoneCompressor.addEventListener('dragleave', () => dropZoneCompressor.classList.remove('border-emerald-500'));
-        dropZoneCompressor.addEventListener('drop', (e) => { e.preventDefault(); dropZoneCompressor.classList.remove('border-emerald-500'); handleBulkCompressionProcessing(Array.from(e.dataTransfer.files)); });
-        compressorFileInput.addEventListener('change', (e) => { handleBulkCompressionProcessing(Array.from(e.target.files)); });
+        dropZoneCompressor.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZoneCompressor.classList.remove('border-emerald-500');
+            handleBulkCompressionProcessing(Array.from(e.dataTransfer.files));
+        });
+
+        compressorFileInput.addEventListener('change', (e) => {
+            handleBulkCompressionProcessing(Array.from(e.target.files));
+        });
 
         async function handleBulkCompressionProcessing(files) {
             const imageFiles = files.filter(f => f.type.startsWith('image/'));
@@ -1047,7 +1155,9 @@
                     if (currentFile.type === 'image/gif') {
                         const frames = await extractGifFrames(currentFile, 400, 400, false);
                         const processedFrames = [];
-                        for(let f of frames) { processedFrames.push(f); }
+                        for(let f of frames) {
+                            processedFrames.push(f);
+                        }
                         const compressedGifBlob = await new Promise((resolve) => {
                             gifshot.createGIF({
                                 images: processedFrames,
@@ -1057,18 +1167,22 @@
                                 sampleInterval: 15,
                                 quality: 10
                             }, function(obj) {
-                                if(!obj.error) fetch(obj.image).then(res => res.blob()).then(resolve);
-                                else resolve(currentFile);
+                                if(!obj.error) {
+                                    fetch(obj.image).then(res => res.blob()).then(resolve);
+                                } else {
+                                    resolve(currentFile);
+                                }
                             });
                         });
                         compressedArchive.file(currentFile.name, compressedGifBlob);
                     } else {
                         const compressedBlob = await executeWebPCompression(currentFile, targetQuality);
-                        // Ensure bulk downloaded formats are JPGs too
                         const cleanName = currentFile.name.replace(/\.[^/.]+$/, "") + ".jpg";
                         compressedArchive.file(cleanName, compressedBlob);
                     }
-                } catch(e) { console.error("Compression thread faulted out", e); }
+                } catch(e) {
+                    console.error("Compression thread faulted out", e);
+                }
 
                 const progress = Math.round(((i + 1) / imageFiles.length) * 100);
                 compProgressPercent.innerText = progress + "%";
